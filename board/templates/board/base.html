@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+CoteWithMe!!!
+<a href="{% url 'login' %}">
+    <span class="glyphicon glyphicon-lock">login</span></a>
+
+<a href="{% url 'signup' %}">
+    <span class="glyphicon glyphicon-user">signup</span></a>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
