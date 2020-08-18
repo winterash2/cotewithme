@@ -6,11 +6,14 @@
 </head>
 <body>
 CoteWithMe!!!
-<a href="{% url 'login' %}">
-    <span class="glyphicon glyphicon-lock">login</span></a>
+테스트 계정 : test/testtessttest
 
-<a href="{% url 'signup' %}">
-    <span class="glyphicon glyphicon-user">signup</span></a>
+{% if user.is_authenticated %}
+    <a href="{% url 'logout' %}"><span class="glyphicon glyphicon-user">logout</span></a>
+{% else %}
+    <a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user">signup</span></a>
+    <a href="{% url 'login' %}"><span class="glyphicon glyphicon-lock">login</span></a>
+{% endif %}
 
 {% block content %}
 {% endblock %}
