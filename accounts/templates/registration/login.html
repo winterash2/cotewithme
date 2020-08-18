@@ -1,11 +1,15 @@
-{% extends "board/base.html" %}
-
-{% block content %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
 {% if form.errors %}
 <p>이름과 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
 {% endif %}
 
+Coding Test With Me!
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
     <table class="table table-bordered table-hover">
@@ -19,5 +23,6 @@
     <input type="submit" value="login" class="btn btn-primary btn" />
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
-
-{% endblock %}
+<a href="{% url 'signup' %}" class="top-menu"><span class="glyphicon glyphicon-user">signup</span></a>
+</body>
+</html>
