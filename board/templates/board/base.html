@@ -1,19 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" type="text/css">
+    <!-- my -->
+    <link rel="Stylesheet" href="{% static 'css/board.css' %}">
 </head>
 <body>
-CoteWithMe!!!
-테스트 계정 : test/testtessttest
 
-{% if user.is_authenticated %}
-    <a href="{% url 'logout' %}"><span class="glyphicon glyphicon-user">logout</span></a>
-{% else %}
-    <a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user">signup</span></a>
-    <a href="{% url 'login' %}"><span class="glyphicon glyphicon-lock">login</span></a>
-{% endif %}
+<div class="page-header">
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="top-menu"><span class="glyphicon glyphicon-user">logout</span></a>
+    {% else %}
+        <a href="{% url 'signup' %}" class="top-menu"><span class="glyphicon glyphicon-user">signup</span></a>
+        <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock">login</span></a>
+    {% endif %}
+
+    <h1><a href="/">CoTeWithMe!!!</a></h1>
+    <h1>테스트 계정 : test/testtessttest</h1>
+</div>
+
+<div class="wrapper">
+  <div class="div1">1</div>
+  <div class="div2">2</div>
+  <div class="div3">3</div>
+  <div class="div4">4</div>
+</div>
 
 {% block content %}
 {% endblock %}
