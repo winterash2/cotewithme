@@ -1,0 +1,20 @@
+{% extends 'board/base.html' %}
+
+{% block team_select_area %}
+{% endblock %}
+
+{% block chat_area %}
+{% endblock %}
+
+{% block problem_code_area %}
+    <h1>
+        <a class="btn btn-primary btn" href="{% url 'team_create' %}"><span class="glyphicon glyphicon-plus"> 팀 생성</span></a>
+    </h1>
+    <h1>
+        <a class="btn btn-primary btn" href="{% url 'team_join' %}"><span class="glyphicon glyphicon-plus"> 팀 참가</span></a>
+    </h1>
+
+{% endblock %}
+
+{% block teammate_area %}
+{% endblock %}

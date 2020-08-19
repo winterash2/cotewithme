@@ -1,0 +1,22 @@
+{% extends 'board/base.html' %}
+
+{% block team_select_area %}
+{% endblock %}
+
+{% block chat_area %}
+{% endblock %}
+
+{% block problem_code_area %}
+    <h1>새 팀 참가</h1>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        <table>
+            {{ team_form.as_table }}
+        </table>
+        <button type="submit" class="save btn btn-primary">참가</button>
+    </form>
+
+{% endblock %}
+
+{% block teammate_area %}
+{% endblock %}

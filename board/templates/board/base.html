@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -27,13 +28,23 @@
 </div>
 
 <div class="wrapper">
-  <div class="div1">1</div>
-  <div class="div2">2</div>
-  <div class="div3">3</div>
-  <div class="div4">4</div>
+  <div class="div1">
+      {% block team_select_area %}
+      {% endblock %}
+  </div>
+  <div class="div1">
+      {% block chat_area %}
+      {% endblock %}
+  </div>
+  <div class="div1">
+      {% block problem_code_area %}
+      {% endblock %}
+  </div>
+  <div class="div1">
+      {% block teammate_area %}
+      {% endblock %}
+  </div>
 </div>
 
-{% block content %}
-{% endblock %}
 </body>
 </html>
