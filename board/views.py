@@ -6,14 +6,17 @@ from django.utils import timezone
 
 
 def main_page(request):
-    if( request.user.is_authenticated == True):
+    if request.user.is_authenticated == True:
         return redirect('team_select')
     else:
         return redirect('login')
 
 
 def team_select(request):
-    return render(request, 'board/team_select.html', {})
+    joined_team_list = JoinedTeam.objects.filter(user_no__exact=request.user)
+    print('joined_teams len=', len(joined_team_list))
+    joined_teams = [t.team_no for t in joined_team_list]
+    return render(request, 'board/team_select.html', {'joined_teams': joined_teams})
 
 
 def team_create(request):
@@ -52,4 +55,13 @@ def team_join(request):
         team_form = TeamForm()
     return render(request, 'board/team_join.html', {'team_form': team_form})
 
+
+def team_home(request, team_name):
+    check_user_is_joined = JoinedTeam.objects.filter(user_no=request.user, team_no__team_name__exact=team_name)
+    if len(check_user_is_joined) == 1:
+        this_team = check_user_is_joined[0].team_no
+        print(this_team.team_name)
+        return render(request, 'board/team_home.html', {'this_team': this_team})
+    else:
+        return redirect('main_page')
 
