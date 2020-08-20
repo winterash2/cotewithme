@@ -7,7 +7,27 @@
 {% endblock %}
 
 {% block problem_code_area %}
+
     <h1>{{ this_team.team_name }}</h1>
+    <a class="btn btn-primary btn" href="{% url 'post_new' team_name=this_team.team_name %}">
+        새 글(게시판)</a>
+
+    <table border="1">
+    <th>
+        <td>제목</td>
+        <td>내용</td>
+        <td>게시일</td>
+    </th>
+    {% for post in posts %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.content }}</td>
+        <td>{{ post.created_date.date }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
 {% endblock %}
 
 {% block teammate_area %}

@@ -14,12 +14,15 @@ class JoinedTeam(models.Model):
     team_no = models.ForeignKey('Team', on_delete=models.CASCADE)
 
 
+def min_length_5_validator(value):
+    if len(value) < 3:
+        raise forms.ValidationError("5글자 이상 입력해주세요.")
 class Post(models.Model):
     team_no = models.ForeignKey('Team', on_delete=models.CASCADE)
-    title = models.CharField(max_length=150)
+    title = models.CharField(max_length=150, validators=[min_length_5_validator])
     content = models.TextField()
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    created_date = timezone.now()
+    created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(default=timezone.now)
 
 

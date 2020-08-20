@@ -1,5 +1,5 @@
 from django import forms
-from .models import Team, JoinedTeam
+from .models import *
 from django.utils import timezone
 
 
@@ -18,6 +18,12 @@ class TeamForm(forms.ModelForm):
         fields = ('team_name', 'created_date')
 class CreateTeamForm(forms.Form):
     team_name = forms.CharField(validators=[check_same_team])
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'content', )
 
 # class JoinedTeam(models.Model):
 #     user_no = models.ForeignKey('auth.User', on_delete=models.CASCADE)
