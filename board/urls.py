@@ -10,7 +10,8 @@ urlpatterns = [
     path('team_select/', views.team_select, name='team_select'),
     path('team_create/', views.team_create, name='team_create'),
     path('team_join/', views.team_join, name='team_join'),
-    path('team_leave/<str:team_name_delete>', views.team_leave, name='team_leave'),
+    path('team_leave/<str:team_name_leave>', views.team_leave, name='team_leave'),
+    path('team/delete/<str:team_name_delete>', views.team_delete, name='team_delete'),
     path('team/<str:team_name>/', views.team_home, name='team_home'),
     # post 관련
     path('team/<str:team_name>/post_new/', views.post_new, name='post_new'),

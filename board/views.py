@@ -7,6 +7,12 @@ from ast import literal_eval
 # Create your views here.
 
 
+def return_joined_teams(request):
+    joined_team_list = JoinedTeam.objects.filter(user_no__exact=request.user)
+    joined_teams = [t.team_no for t in joined_team_list]
+    return joined_teams
+
+
 def main_page(request):
     if request.user.is_authenticated == True:
         return redirect('team_select')
@@ -16,10 +22,10 @@ def main_page(request):
 
 @login_required
 def team_select(request):
-    joined_team_list = JoinedTeam.objects.filter(user_no__exact=request.user)
-    print('joined_teams len=', len(joined_team_list))
-    joined_teams = [t.team_no for t in joined_team_list]
-    return render(request, 'board/team_select.html', {'joined_teams': joined_teams})
+    joined_teams = return_joined_teams(request)
+    return render(request, 'board/team_select.html', {
+        'joined_teams': joined_teams
+        })
 
 
 @login_required
@@ -28,7 +34,7 @@ def team_create(request):
         create_team_form = CreateTeamForm(request.POST)
         if create_team_form.is_valid():
             team = Team.objects.create(team_name=create_team_form.cleaned_data['team_name'], created_date=timezone.now())
-            print("Create Team Name=", team.team_name, " Created_Date= ", team.created_date)
+            print("Create Team Name=", team.team_name, " Created_Date=", team.created_date)
             join = JoinedTeam()
             join.team_no = team
             join.user_no = request.user
@@ -60,9 +66,15 @@ def team_join(request):
     return render(request, 'board/team_join.html', {'team_form': team_form})
 
 @login_required
-def team_leave(request, team_name_delete):
-    joined_team = JoinedTeam.objects.filter(user_no__exact=request.user, team_no__team_name=team_name_delete)
+def team_leave(request, team_name_leave):
+    joined_team = JoinedTeam.objects.filter(user_no__exact=request.user, team_no__team_name=team_name_leave)
     joined_team.delete()
+    return redirect('main_page')
+
+
+def team_delete(request, team_name_delete):
+    team = Team.objects.filter(team_name__exact=team_name_delete)
+    team.delete()
     return redirect('main_page')
 
 
@@ -73,7 +85,12 @@ def team_home(request, team_name):
     this_team = check_user_is_joined[0].team_no
     posts = Post.objects.filter(team_no__exact=this_team)
     if len(check_user_is_joined) == 1:
-        return render(request, 'board/team_home.html', {'this_team': this_team, 'posts': posts})
+        joined_teams = return_joined_teams(request)
+        return render(request, 'board/team_home.html', {
+            'this_team': this_team, 
+            'posts': posts,
+            'joined_teams':joined_teams
+            })
     else:
         return redirect('main_page')
 

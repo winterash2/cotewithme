@@ -17,7 +17,8 @@
     {% for team in joined_teams %}
         <h2>
             <a href="{% url 'team_home' team_name=team.team_name %}"> {{ team.team_name }}</a>
-            <a class="btn btn-primary btn" href="{% url 'team_leave' team_name_delete=team.team_name %}"><span class="glyphicon glyphicon-remove"> 팀 탈퇴</span></a>
+            <a class="btn btn-primary btn" href="{% url 'team_leave' team_name_leave=team.team_name %}"><span class="glyphicon glyphicon-remove"> 팀 탈퇴</span></a>
+            <a class="btn btn-primary btn" href="{% url 'team_delete' team_name_delete=team.team_name %}"><span class="glyphicon glyphicon-remove"> 팀 삭제</span></a>
         </h2>
     {% endfor %}
 
