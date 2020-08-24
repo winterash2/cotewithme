@@ -125,7 +125,7 @@ def tab_page(request):
     return render(request, 'board/tab-page.html', {})
 
 
-def get_prob_number(request):
+def solving_problem(request):
     num_list = [1000, 19572, 12021]
     if 'q' in request.GET:
         number = request.GET['q']
@@ -166,16 +166,20 @@ def get_prob_number(request):
     for key, value in zip(info_key, info_value):
         problem[key] = value
 
-    input_list = []
-    output_list = []
+    # input_list = []
+    # output_list = []
+    input_list = ''
+    output_list = ''
 
-    for idx, ex in enumerate(soup.select('.col-md-12 .col-md-6 .sampledata')):
+    for idx, ex in enumerate(soup.select('.sampledata')):
         cnt = math.floor(idx / 2) + 1
 
         if idx % 2 == 0:
-            input_list.append(ex.text)
+            input_list= input_list + str(ex.text) + '\n'
+            # input_list.append(ex.text)
         else:
-            output_list.append(ex.text)
+            output_list= output_list + str(ex.text) + '\n'
+            # output_list.append(ex.text)
 
     problem['입력예시'] = input_list
     problem['출력예시'] = output_list
@@ -184,4 +188,4 @@ def get_prob_number(request):
         problem['비슷한문제'] = similar_problem
 
 
-    return render(request, 'board/show_problem.html', {'problem': problem})
+    return render(request, 'board/problem_solving.html', {'problem': problem})

@@ -21,10 +21,10 @@
         <h1 class="logo_h1"><a href="/">CoTeWithMe!!!</a></h1>
     </div>
     <div class="col-sm-4" style="background-color: brown">
-        <!-- <form action="/prob-num/" method="get">
+        <form action="/prob-num/" method="get">
             <input type="text" name="q" value="문제 번호를 입력하세요" onfocus="this.value=''">
             <input type="submit" value="확인">
-        </form> -->
+        </form>
     </div>
     <div class="col-sm-4" style="background-color: chartreuse">
         {% if user.is_authenticated %}
@@ -37,7 +37,7 @@
 </div>
 
 
-<div class="wrapper_base">
+<div class="wrapper_team">
   <div class="div1">
       {% block team_select_area %}
       {% endblock %}
@@ -47,11 +47,11 @@
       {% endfor %}
   </table>
   </div>
-  <!-- <div class="div1">
+  <div class="div1">
       {% block chat_area %}
       {% endblock %}
       <iframe src="http://localhost:8000/chat" width="296px" height="100%"></iframe>
-  </div> -->
+  </div>
   <div class="div1">
       {% block problem_code_area %}
       {% endblock %}

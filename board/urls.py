@@ -17,7 +17,7 @@ urlpatterns = [
     path('team/<str:team_name>/post_new/', views.post_new, name='post_new'),
 
     # todo : renaming
-    path('prob-num/', views.get_prob_number, name='get_prob_number'),
+    path('prob-num/', views.solving_problem, name='get_prob_number'),
 
     path('tab-page/', views.tab_page, name='tab_page'),
 ]
