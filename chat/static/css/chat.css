@@ -1,0 +1,11 @@
+.wrapper > div{
+  #background-color: orange;
+  border: 0px black solid;
+}
+
+.wrapper {
+  display: grid;
+  height: 100vh;
+  grid-gap: 2px;
+  grid-template-rows: 10% 90%
+}
