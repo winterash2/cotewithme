@@ -9,6 +9,15 @@
   font-size: 24pt;
   text-decoration: none;
 }
+
+.logo_h1 {
+    color: #555555;
+    font-size: 20px;
+}
+.col-sm-4 {
+    height: 50px;
+}
+
 .top-menu, .top-menu:hover, .top-menu:visited{
   color: white;
   font-size: 15pt;
@@ -31,7 +40,58 @@
   grid-gap: 2px;
   grid-template-columns: 50px 300px 1fr 300px;
 }
+.key {
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 23px;
+}
 
+.main {
+    min-width: 320px;
+    max-width: 800px;
+    padding: 50px;
+    margin: 0 auto;
+    background: #ffffff;
+}
+
+.tab_section {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+}
+
+/* 라디오 버튼 숨김 */
+.tab_input {
+    display: none;
+}
+
+/* 라디오 버튼에 해당하는 제목들 tab이름 */
+.tab_label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #bbb;
+    border: 1px solid transparent;
+}
+/* tab이름 마우스 갖다대면 손가락으로 바뀜, 색깔 바뀜 */
+label:hover {
+    color: #2e9cdf;
+    cursor: pointer;
+}
+
+input:checked + label {
+    color: #555;
+    border: 1px solid #ddd;
+    border-top: 1px solid #ffffff;
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+    display: block;
+}
 .select_team{
   font-size: 10px;
 }
