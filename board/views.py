@@ -7,7 +7,7 @@ from ast import literal_eval
 # Create your views here.
 
 
-def return_joined_teams(request):
+def get_joined_teams(request):
     joined_team_list = JoinedTeam.objects.filter(user_no__exact=request.user)
     joined_teams = [t.team_no for t in joined_team_list]
     return joined_teams
@@ -22,7 +22,7 @@ def main_page(request):
 
 @login_required
 def team_select(request):
-    joined_teams = return_joined_teams(request)
+    joined_teams = get_joined_teams(request)
     return render(request, 'board/team_select.html', {
         'joined_teams': joined_teams
         })
@@ -85,7 +85,7 @@ def team_home(request, team_name):
     this_team = check_user_is_joined[0].team_no
     posts = Post.objects.filter(team_no__exact=this_team)
     if len(check_user_is_joined) == 1:
-        joined_teams = return_joined_teams(request)
+        joined_teams = get_joined_teams(request)
         return render(request, 'board/team_home.html', {
             'this_team': this_team, 
             'posts': posts,
