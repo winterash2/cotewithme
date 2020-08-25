@@ -8,13 +8,7 @@ from django.http import HttpResponse
 import requests
 import math
 from bs4 import BeautifulSoup
-
-
-def get_joined_teams(request):
-    joined_team_list = JoinedTeam.objects.filter(user_no__exact=request.user)
-    joined_teams = [t.team_no for t in joined_team_list]
-    return joined_teams
-
+from .views_function import *
 
 def main_page(request):
     if request.user.is_authenticated == True:
@@ -69,22 +63,22 @@ def team_join(request):
     return render(request, 'board/team_join.html', {'team_form': team_form})
 
 @login_required
-def team_leave(request, team_name_leave):
-    joined_team = JoinedTeam.objects.filter(user_no__exact=request.user, team_no__team_name=team_name_leave)
+def team_leave(request, team_id):
+    joined_team = JoinedTeam.objects.filter(user_no__exact=request.user, team_no__exact=team_id)
     joined_team.delete()
     return redirect('main_page')
 
 
-def team_delete(request, team_name_delete):
-    team = Team.objects.filter(team_name__exact=team_name_delete)
+def team_delete(request, team_id):
+    team = Team.objects.filter(id=team_id)
     team.delete()
     return redirect('main_page')
 
 
 @login_required
-def team_home(request, team_name):
+def team_home(request, team_id):
     check_user_is_joined = JoinedTeam.objects.filter(user_no__exact=request.user,
-                                                     team_no__team_name__exact=team_name)
+                                                     team_no__exact=team_id)
     this_team = check_user_is_joined[0].team_no
     posts = Post.objects.filter(team_no__exact=this_team)
     if len(check_user_is_joined) == 1:
@@ -98,12 +92,12 @@ def team_home(request, team_name):
         return redirect('main_page')
 
 
-def post_new(request, team_name):
+def post_new(request, team_id):
     if request.method == "POST":
         post_form = PostForm(request.POST)
         if post_form.is_valid():
             check_user_is_joined = JoinedTeam.objects.filter(user_no__exact=request.user,
-                                                             team_no__team_name__exact=team_name)
+                                                             team_no__exact=team_id)
             this_team = check_user_is_joined[0].team_no
             post = post_form.save(commit=False)
             print("title=", post.title, " content=", post.content)
@@ -121,71 +115,26 @@ def post_new(request, team_name):
 
 # todo : yura
 def tab_page(request):
-
     return render(request, 'board/tab-page.html', {})
 
 
-def solving_problem(request):
-    num_list = [1000, 19572, 12021]
-    if 'q' in request.GET:
-        number = request.GET['q']
-
-    else:
-        message = 'plz enter the problem number'
-        return HttpResponse(message)
-    url = 'http://boj.kr/' + str(number)
-    html = requests.get(url).text
-    soup = BeautifulSoup(html, 'html.parser')
-    problem = {}
-    similar_problem = []
-    info_key = []
-    info_value = []
-    problem['문제번호'] = number
-    for tag in soup.select('.col-md-12'):
-        for title in tag.select('#problem_title'):
-            problem['문제제목'] = title.text
-
-        for prob in tag.select('#problem_description p'):
-            problem['문제'] = prob.text
-
-        for in_put in tag.select('#input p'):
-            problem['입력'] = in_put.text
-
-        for output in tag.select('#output p'):
-            problem['출력'] = output.text
-
-        for key in soup.select('.col-md-12 .table th'):
-            info_key.append(key.text.replace(' ',''))
-
-        for value in soup.select('.col-md-12 .table td'):
-            info_value.append(value.text.replace(' ', ''))
-
-        for similar_prob in tag.select('#problem_association li'):
-            similar_problem.append(similar_prob.text)
-
-    for key, value in zip(info_key, info_value):
-        problem[key] = value
-
-    # input_list = []
-    # output_list = []
-    input_list = ''
-    output_list = ''
-
-    for idx, ex in enumerate(soup.select('.sampledata')):
-        cnt = math.floor(idx / 2) + 1
-
-        if idx % 2 == 0:
-            input_list= input_list + str(ex.text) + '\n'
-            # input_list.append(ex.text)
-        else:
-            output_list= output_list + str(ex.text) + '\n'
-            # output_list.append(ex.text)
-
-    problem['입력예시'] = input_list
-    problem['출력예시'] = output_list
-
-    if len(similar_problem) != 0:
-        problem['비슷한문제'] = similar_problem
+def get_this_team_from_team_id(team_id):
+    this_team = Team.objects.get(id=team_id)
+    return this_team
 
 
-    return render(request, 'board/problem_solving.html', {'problem': problem})
+def redirect_solving_problem(request, team_id):
+    problem_number = request.GET['problem_number']
+    return redirect('solving_problem', team_id, problem_number)
+
+
+def solving_problem(request, team_id, problem_number):
+    problem = get_problem_from_boj(problem_number)
+    joined_teams = get_joined_teams(request)
+    this_team = get_this_team_from_team_id(team_id)
+
+    return render(request, 'board/problem_solving.html', {
+        'this_team':this_team,
+        'problem': problem,
+        'joined_teams':joined_teams,
+        })

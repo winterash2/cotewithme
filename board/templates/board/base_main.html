@@ -42,7 +42,7 @@
         {% endblock %}
         <table>
             {% for team in joined_teams %}
-                <tr><a class="team_button" href="{% url 'team_home' team_name=team.team_name %}"> {{ team.team_name }}</a></tr>
+                <tr><a class="team_button" href="{% url 'team_home' team_id=team.id %}"> {{ team.team_name }}</a></tr>
             {% endfor %}
         </table>
     </div>

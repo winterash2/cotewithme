@@ -6,7 +6,7 @@
 {% block problem_code_area %}
 
     <h1>{{ this_team.team_name }}</h1>
-    <a class="btn btn-primary btn" href="{% url 'post_new' team_name=this_team.team_name %}">
+    <a class="btn btn-primary btn" href="{% url 'post_new' team_id=this_team.id %}">
         새 글(게시판)</a>
 
     <table border="1">

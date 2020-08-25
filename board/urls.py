@@ -10,14 +10,14 @@ urlpatterns = [
     path('team_select/', views.team_select, name='team_select'),
     path('team_create/', views.team_create, name='team_create'),
     path('team_join/', views.team_join, name='team_join'),
-    path('team_leave/<str:team_name_leave>', views.team_leave, name='team_leave'),
-    path('team/delete/<str:team_name_delete>', views.team_delete, name='team_delete'),
-    path('team/<str:team_name>/', views.team_home, name='team_home'),
+    path('team_leave/<int:team_id>', views.team_leave, name='team_leave'),
+    path('team/delete/<int:team_id>', views.team_delete, name='team_delete'),
+    path('team/<int:team_id>/', views.team_home, name='team_home'),
     # post 관련
-    path('team/<str:team_name>/post_new/', views.post_new, name='post_new'),
-
-    # todo : renaming
-    path('prob-num/', views.solving_problem, name='get_prob_number'),
+    path('team/<int:team_id>/post_new/', views.post_new, name='post_new'),
+    # solving problem page
+    path('team/<int:team_id>/problem/', views.redirect_solving_problem, name='redirect_solving_problem'),
+    path('team/<int:team_id>/problem/<int:problem_number>/', views.solving_problem, name='solving_problem'),
 
     path('tab-page/', views.tab_page, name='tab_page'),
 ]
