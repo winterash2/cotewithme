@@ -21,10 +21,9 @@
         <h1 class="logo_h1"><a href="/">CoTeWithMe!!!</a></h1>
     </div>
     <div class="col-sm-4" style="background-color: brown">
-        <!-- <form action="/prob-num/" method="get">
-            <input type="text" name="q" value="문제 번호를 입력하세요" onfocus="this.value=''">
-            <input type="submit" value="확인">
-        </form> -->
+
+{% block enter_problem_number_area %}
+{% endblock %}
     </div>
     <div class="col-sm-4" style="background-color: chartreuse">
         {% if user.is_authenticated %}
@@ -38,28 +37,27 @@
 
 
 <div class="wrapper_base">
-  <div class="div1">
-      {% block team_select_area %}
-      {% endblock %}
-  <table>
-      {% for team in joined_teams %}
-          <tr><a class="team_button" href="{% url 'team_home' team_name=team.team_name %}"> {{ team.team_name }}</a></tr>
-      {% endfor %}
-  </table>
-  </div>
-  <!-- <div class="div1">
-      {% block chat_area %}
-      {% endblock %}
-      <iframe src="http://localhost:8000/chat" width="296px" height="100%"></iframe>
-  </div> -->
-  <div class="div1">
-      {% block problem_code_area %}
-      {% endblock %}
-  </div>
-  <!-- <div class="div1">
-      {% block teammate_area %}
-      {% endblock %}
-  </div> -->
+    <div class="div1">
+        {% block team_select_area %}
+        {% endblock %}
+        <table>
+            {% for team in joined_teams %}
+                <tr><a class="team_button" href="{% url 'team_home' team_name=team.team_name %}"> {{ team.team_name }}</a></tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="div2">
+        {% block chat_area %}
+        {% endblock %}
+    </div>
+    <div class="div3">
+        {% block problem_code_area %}
+        {% endblock %}
+    </div>
+    <div class="div4">
+        {% block teammate_area %}
+        {% endblock %}
+    </div>
 </div>
 
 </body>
