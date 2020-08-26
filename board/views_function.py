@@ -56,3 +56,10 @@ def get_problem_from_boj(problem_number):
     if len(similar_problem) != 0:
         problem['비슷한문제'] = similar_problem
     return problem
+
+
+def get_teammates(team_id):
+    joined_team = JoinedTeam.objects.filter(team_no__exact=team_id)
+    teammates = [joined.user_no for joined in joined_team]
+    return teammates
+

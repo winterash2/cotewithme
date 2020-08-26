@@ -33,8 +33,6 @@ def team_create(request):
         if create_team_form.is_valid():
             team = Team.objects.create(
                 team_name=create_team_form.cleaned_data['team_name'], created_date=timezone.now())
-            print("Create Team Name=", team.team_name,
-                  " Created_Date=", team.created_date)
             join = JoinedTeam()
             join.team_no = team
             join.user_no = request.user
@@ -51,7 +49,6 @@ def team_join(request):
         team_form = TeamForm(request.POST)
         team = team_form.save(commit=False)
         selected_team = Team.objects.filter(team_name__exact=team.team_name)
-        print("type=", type(selected_team), "len=", len(selected_team))
         if len(selected_team) == 1:
             selected_team = selected_team[0]
             check_joined = JoinedTeam.objects.filter(
@@ -83,16 +80,19 @@ def team_delete(request, team_id):
 
 @login_required
 def team_home(request, team_id):
-    check_user_is_joined = JoinedTeam.objects.filter(user_no__exact=request.user,
-                                                     team_no__exact=team_id)
+    check_user_is_joined = JoinedTeam.objects.filter(
+        user_no__exact=request.user, team_no__exact=team_id)
     this_team = check_user_is_joined[0].team_no
+    teammates = get_teammates(team_id)
+
     posts = Post.objects.filter(team_no__exact=this_team)
     if len(check_user_is_joined) == 1:
         joined_teams = get_joined_teams(request)
         return render(request, 'board/team_home.html', {
             'this_team': this_team,
             'posts': posts,
-            'joined_teams': joined_teams
+            'joined_teams': joined_teams,
+            'teammates': teammates,
         })
     else:
         return redirect('main_page')
@@ -102,11 +102,10 @@ def post_new(request, team_id):
     if request.method == "POST":
         post_form = PostForm(request.POST)
         if post_form.is_valid():
-            check_user_is_joined = JoinedTeam.objects.filter(user_no__exact=request.user,
-                                                             team_no__exact=team_id)
+            check_user_is_joined = JoinedTeam.objects.filter(
+                user_no__exact=request.user, team_no__exact=team_id)
             this_team = check_user_is_joined[0].team_no
             post = post_form.save(commit=False)
-            print("title=", post.title, " content=", post.content)
             post.team_no = this_team
             post.author = request.user
             post.created_date = timezone.now()
@@ -135,7 +134,8 @@ def solving_problem(request, team_id, problem_number):
     joined_teams = get_joined_teams(request)
     this_team = get_this_team_from_team_id(team_id)
     comment_problem_form = CommentProblemForm()
-    comments_problem = CommentProblem.objects.filter(team_no__exact=this_team, problem__exact=problem_number)
+    comments_problem = CommentProblem.objects.filter(
+        team_no__exact=this_team, problem__exact=problem_number)
 
     if request.method == "GET":
         pass
@@ -150,8 +150,34 @@ def solving_problem(request, team_id, problem_number):
             comment_problem.save()
     return render(request, 'board/problem_solving.html', {
         'this_team': this_team,
-        'problem': problem,
         'joined_teams': joined_teams,
+        'problem': problem,
         'comment_problem_form': comment_problem_form,
         'comments_problem': comments_problem,
+    })
+
+
+def code_view(request, team_id, problem_number):
+    this_team = get_this_team_from_team_id(team_id)
+    joined_teams = get_joined_teams(request)
+    if request.method == 'POST':
+        code_form = CodeForm(request.POST)
+        if code_form.is_valid():
+            code = code_form.save(commit=False)
+            code.code_no = problem_number
+            code.user_no = request.user
+            code.save()
+        codes = Code.objects.filter(code_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
+    else:
+        codes = Code.objects.filter(code_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
+        if not codes:
+            code_form = CodeForm()
+        else:
+            code = codes[0]
+            code_form = CodeForm(instance=code)
+    return render(request, 'board/code_view.html', {
+        'this_team': this_team,
+        'joined_teams': joined_teams,
+        'code_form': code_form,
+        'codes': codes,
     })

@@ -34,3 +34,9 @@ class CommentProblemForm(forms.ModelForm):
     class Meta:
         model = CommentProblem
         fields = ('content', )
+
+
+class CodeForm(forms.ModelForm):
+    class Meta:
+        model = Code
+        fields = ("content","success", "display", )

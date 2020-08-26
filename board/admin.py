@@ -17,3 +17,4 @@ from .models import *
 admin.site.register(Post)
 admin.site.register(Team)
 admin.site.register(JoinedTeam)
+admin.site.register(Code)

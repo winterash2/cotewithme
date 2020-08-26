@@ -28,4 +28,10 @@
 {% endblock %}
 
 {% block teammate_area %}
+    {% for teammate in teammates %}
+    <table>
+        <tr>{{teammate.username}}</tr>
+        <tr> 이름: {{teammate.first_name}} {{teammate.last_name}}</tr>
+    </table>
+    {% endfor %}
 {% endblock %}
