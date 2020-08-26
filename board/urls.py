@@ -18,6 +18,4 @@ urlpatterns = [
     # solving problem page
     path('team/<int:team_id>/problem/', views.redirect_solving_problem, name='redirect_solving_problem'),
     path('team/<int:team_id>/problem/<int:problem_number>/', views.solving_problem, name='solving_problem'),
-
-    path('tab-page/', views.tab_page, name='tab_page'),
 ]

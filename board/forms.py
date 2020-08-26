@@ -12,10 +12,14 @@ def check_same_team(name):
     teams = Team.objects.filter(team_name__exact=name)
     if len(teams) != 0:
         raise forms.ValidationError("중복되는 팀이 있습니다.")
+
+
 class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
         fields = ('team_name', 'created_date')
+
+
 class CreateTeamForm(forms.Form):
     team_name = forms.CharField(validators=[check_same_team])
 
@@ -25,6 +29,8 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'content', )
 
-# class JoinedTeam(models.Model):
-#     user_no = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-#     team_no = models.ForeignKey('Team', on_delete=models.CASCADE)
+
+class CommentProblemForm(forms.ModelForm):
+    class Meta:
+        model = CommentProblem
+        fields = ('content', )

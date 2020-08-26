@@ -70,15 +70,16 @@
     </div>
   </section>
 </div>
-<!--<div class="col-md-12">-->
-<!--    <section id="limit" style="display:none;">-->
-<!--        <div class="headline">-->
-<!--            <h2>제한</h2>-->
-<!--        </div>-->
-<!--        <div id="problem_limit" style="font-size:medium; line-height:30px;">-->
-<!--        </div>-->
-<!--    </section>-->
-<!--</div>-->
+
+<!-- <div class="col-md-12">
+   <section id="limit" style="display:none;">
+       <div class="headline">
+           <h2>제한</h2>
+       </div>
+       <div id="problem_limit" style="font-size:medium; line-height:30px;">
+       </div>
+   </section>
+</div> -->
 
 <div class="col-md-12">
   <div class="row">
@@ -115,5 +116,23 @@
     </ul>
   </section>
 </div>
+
+<form method="POST">
+  {% csrf_token %}
+  <table>
+    {{comment_problem_form.as_table}}
+  </table>
+  <button type="submit" class="save btn btn-primary">댓글 작성</button>
+</form>
+
+{% for comment in comments_problem %}
+  <div class="comment">
+    <div class="date">{{ comment.created_date }}</div>
+    <strong>{{ comment.author }}</strong>
+    <p>{{ comment.content|linebreaks }}</p>
+  </div>
+{% empty %}
+  <p>No comments here yet :(</p>
+{% endfor %}
 
 {% endblock %}
