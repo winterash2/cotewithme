@@ -63,3 +63,13 @@ def get_teammates(team_id):
     teammates = [joined.user_no for joined in joined_team]
     return teammates
 
+
+def get_this_team_from_team_id(team_id):
+    this_team = Team.objects.get(id=team_id)
+    return this_team
+
+
+def get_codes_wanted(codes_string):
+    codes_number_list = codes_string.split('&')
+    codes_wanted = Code.objects.filter(id__in=codes_number_list)
+    return codes_wanted

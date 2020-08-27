@@ -119,23 +119,21 @@ def post_new(request, team_id):
     return render(request, 'board/post_new.html', {'post_form': post_form})
 
 
-def get_this_team_from_team_id(team_id):
-    this_team = Team.objects.get(id=team_id)
-    return this_team
-
-
-def redirect_solving_problem(request, team_id):
+def redirect_problem_home(request, team_id):
     problem_number = request.GET['problem_number']
-    return redirect('solving_problem', team_id, problem_number)
+    return redirect('problem_home', team_id, problem_number)
 
 
-def solving_problem(request, team_id, problem_number):
+def problem_home(request, team_id, problem_number):
     problem = get_problem_from_boj(problem_number)
     joined_teams = get_joined_teams(request)
     this_team = get_this_team_from_team_id(team_id)
     comment_problem_form = CommentProblemForm()
     comments_problem = CommentProblem.objects.filter(
         team_no__exact=this_team, problem__exact=problem_number)
+    teammates = get_teammates(team_id)
+    codes_teammate = Code.objects.filter(
+        problem_no__exact=problem_number, user_no__in=teammates, display__exact=True).order_by('-created_date')
 
     if request.method == "GET":
         pass
@@ -148,12 +146,54 @@ def solving_problem(request, team_id, problem_number):
             comment_problem.author = request.user
             comment_problem.created_date = timezone.now()
             comment_problem.save()
-    return render(request, 'board/problem_solving.html', {
+    return render(request, 'board/problem_home.html', {
         'this_team': this_team,
         'joined_teams': joined_teams,
         'problem': problem,
         'comment_problem_form': comment_problem_form,
         'comments_problem': comments_problem,
+        'codes_teammate': codes_teammate,
+    })
+
+
+def problem_with_code(request, team_id, problem_number, codes_string):
+    # 지금 팀 가져오기
+    this_team = get_this_team_from_team_id(team_id)
+    # 참여해 있는 팀들 가져오기
+    joined_teams = get_joined_teams(request)
+    # 백준에서 문제 가져오기
+    problem = get_problem_from_boj(problem_number)
+    # 화면에 띄울 코드들 가져오기
+    codes_wanted = get_codes_wanted(codes_string)
+    # 문제 댓글들 가져오기
+    comments_problem = CommentProblem.objects.filter(
+        team_no__exact=this_team, problem__exact=problem_number)
+    # 팀원들 가져오기
+    teammates = get_teammates(team_id)
+    # 팀원들 코드들 가져오기
+    codes_teammate = Code.objects.filter(
+        problem_no__exact=problem_number, user_no__in=teammates, display__exact=True).order_by('-created_date')
+
+    if request.method == 'POST':
+        comment_problem_form = CommentProblemForm(request.POST)
+        if comment_problem_form.is_valid():
+            comment_problem = comment_problem_form.save(commit=False)
+            comment_problem.problem = problem_number
+            comment_problem.team_no = this_team
+            comment_problem.author = request.user
+            comment_problem.created_date = timezone.now()
+            comment_problem.save()
+    else:
+        # 문제 댓글 입력할 때 쓸 댓글폼 가져오기
+        comment_problem_form = CommentProblemForm()
+    return render(request, 'board/problem_with_code.html', {
+        'this_team': this_team,
+        'joined_teams': joined_teams,
+        'problem': problem,
+        'codes_wanted': codes_wanted,
+        'comment_problem_form': comment_problem_form,
+        'comments_problem': comments_problem,
+        'codes_teammate': codes_teammate,
     })
 
 
@@ -167,9 +207,11 @@ def code_view(request, team_id, problem_number):
             code.code_no = problem_number
             code.user_no = request.user
             code.save()
-        codes = Code.objects.filter(code_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
+        codes = Code.objects.filter(
+            code_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
     else:
-        codes = Code.objects.filter(code_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
+        codes = Code.objects.filter(
+            code_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
         if not codes:
             code_form = CodeForm()
         else:
@@ -180,4 +222,14 @@ def code_view(request, team_id, problem_number):
         'joined_teams': joined_teams,
         'code_form': code_form,
         'codes': codes,
+    })
+
+
+def tab(request):
+    this_team = get_this_team_from_team_id(1)
+    joined_teams = get_joined_teams(request)
+
+    return render(request, 'board/tab.html', {
+        'joined_teams': joined_teams,
+        'this_team': this_team,
     })

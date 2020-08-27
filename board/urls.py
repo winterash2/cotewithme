@@ -16,7 +16,11 @@ urlpatterns = [
     # post 관련
     path('team/<int:team_id>/post_new/', views.post_new, name='post_new'),
     # solving problem page
-    path('team/<int:team_id>/problem/', views.redirect_solving_problem, name='redirect_solving_problem'),
-    path('team/<int:team_id>/problem/<int:problem_number>/', views.solving_problem, name='solving_problem'),
+    path('team/<int:team_id>/problem/', views.redirect_problem_home, name='redirect_problem_home'),
+    path('team/<int:team_id>/problem/<int:problem_number>/', views.problem_home, name='problem_home'),
+    path('team/<int:team_id>/problem/<int:problem_number>/code/<str:codes_string>/', views.problem_with_code, name='problem_with_code'),
+
     path('team/<int:team_id>/problem/<int:problem_number>/code_view', views.code_view, name='code_view'),
+
+    path('tab/', views.tab, name='tab'),
 ]

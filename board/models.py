@@ -38,7 +38,7 @@ class CommentProblem(models.Model):
 
 
 class Code(models.Model):
-    code_no = models.IntegerField()
+    problem_no = models.IntegerField()
     user_no = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     content = models.TextField()
     success = models.BooleanField(default=False)

@@ -1,7 +1,7 @@
 {% extends 'board/base_main.html' %}
 
 {% block enter_problem_number_area %}
-    <form action="{% url 'redirect_solving_problem' team_id=this_team.id %}" method="get">
+    <form action="{% url 'redirect_problem_home' team_id=this_team.id %}" method="get">
         <input type="text" name='problem_number' value="문제 번호를 입력하세요" onfocus="this.value=''">
         <input type="submit" value="확인">
     </form>
