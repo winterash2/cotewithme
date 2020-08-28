@@ -99,6 +99,7 @@ def team_home(request, team_id):
 
 
 def post_new(request, team_id):
+    this_team = get_this_team_from_team_id(team_id)
     if request.method == "POST":
         post_form = PostForm(request.POST)
         if post_form.is_valid():
@@ -113,10 +114,16 @@ def post_new(request, team_id):
             post.save()
             return redirect('team_home', this_team.id)
         else:
-            return render(request, 'board/post_new.html', {'post_form': post_form})
+            return render(request, 'board/post_new.html', {
+                'post_form': post_form,
+                'this_team': this_team,
+            })
     else:
         post_form = PostForm()
-    return render(request, 'board/post_new.html', {'post_form': post_form})
+    return render(request, 'board/post_new.html', {
+        'post_form': post_form,
+        'this_team': this_team,
+    })
 
 
 def redirect_problem_home(request, team_id):
