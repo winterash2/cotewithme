@@ -1,131 +1,60 @@
-{% extends 'board/base.html' %}
-{% block content %}
+{% extends 'board/base_team.html' %}
 
-    <div class="col-md-12">
-        <div id="result_log"></div>
-    </div>
+{% block team_select_area %}
+{% endblock %}
 
-    <div class="col-md-12">
-        <div class="page-header">
-            <h1>
-                <span class="printable">{{ problem.문제번호 }} - </span>
-                <span id="problem_title">{{ problem.문제제목 }}</span>
+{% block problem_code_area %}
 
-            </h1>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="table-responsive">
-            <table class="table" id="problem-info">
-                <thead>
-                    <tr>
-                        <th style="width:16%;">시간 제한</th>
-                        <th style="width:16%;">메모리 제한</th>
-                        <th style="width:17%;">제출</th>
-                        <th style="width:17%;">정답</th>
-                        <th style="width:17%;">맞은 사람</th>
-                        <th style="width:17%;">정답 비율</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ problem.시간제한 }}</td>
-                        <td>{{ problem.메모리제한 }}</td>
-                        <td>{{ problem.제출 }}</td>
-                        <td>{{ problem.정답 }}</td>
-                        <td>{{ problem.맞은사람 }}</td>
-                        <td>{{ problem.정답비율 }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <section id="description">
-            <div class="headline">
-                <h2>문제</h2>
-            </div>
-            <div id="problem_description" style="font-size:medium; line-height:30px;">
-                <p>{{ problem.문제 }}</p>
-            </div>
-        </section>
-    </div>
-    <div class="col-md-12">
-        <section id="input">
-            <div class="headline">
-                <h2>입력</h2>
-            </div>
-            <div id="problem_input" style="font-size:medium; line-height:30px;">
-                <p>{{ problem.입력 }}</p>
-            </div>
-        </section>
-    </div>
-    <div class="col-md-12">
-        <section id="output">
-            <div class="headline">
-                <h2>출력</h2>
-            </div>
-            <div id="problem_output" style="font-size:medium; line-height:30px;">
-                <p>{{ problem.출력 }}</p>
-            </div>
-        </section>
-    </div>
-    <!--<div class="col-md-12">-->
-    <!--    <section id="limit" style="display:none;">-->
-    <!--        <div class="headline">-->
-    <!--            <h2>제한</h2>-->
-    <!--        </div>-->
-    <!--        <div id="problem_limit" style="font-size:medium; line-height:30px;">-->
-    <!--        </div>-->
-    <!--    </section>-->
-    <!--</div>-->
-
-
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                <section id="sampleinput1">
-                    <div class="headline">
-                        <h2>입력 예시</h2>
-                    </div>
-
-                    <pre class="sampledata" id="sample-input-1">
-                        {% for prob in problem.입력예시 %}
-                            {{ prob }}
-                        {% endfor %}
-                    </pre>
-
-                </section>
-            </div>
-            <div class="col-md-6">
-                <section id="sampleoutput1">
-                    <div class="headline">
-                        <h2>출력 예시</h2>
-                    </div>
-                    <pre class="sampledata" id="sample-output-1">
-                         {% for prob in problem.출력예시 %}
-                            {{ prob }}
-                        {% endfor %}
-                    </pre>
-                </section>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-md-12">
-        <section id="problem_association">
-            <div class="headline">
-                <h2>비슷한 문제</h2>
-            </div>
-            <ul>
-                 {% for prob in problem.비슷한문제 %}
-                    <li>
-                        {{ prob }}
-                    </li>
-                {% endfor %}
-            </ul>
-        </section>
-    </div>
+<div id="css_tabs">
+  <!-- 라디오 버튼 -->
+  <input id="tab1" type="radio" name="tab" checked="checked" />
+  <input id="tab2" type="radio" name="tab" />
+  <input id="tab3" type="radio" name="tab" />
+  <input id="tab4" type="radio" name="tab" />
+  <input id="tab5" type="radio" name="tab" />
+  <input id="tab6" type="radio" name="tab" />
+  <!-- 라벨 : 화면에 표시되는 탭 제목 -->
+  <label for="tab1">Tab 1</label>
+  <label for="tab2">Tab 2</label>
+  <label for="tab3">Tab 3</label>
+  <label for="tab4">Tab 4</label>
+  <label for="tab5">Tab 5</label>
+  <label for="tab6">Tab 6</label>
+  <!-- 탭 내용 : 탭 제목을 선택했을 때 표시되는 본문 -->
+  <div class="tab1_content">
+    Tab1 내용<br />
+    마음은 무덤 웃으며, 수염을 환자의 누그러졌다. 벌써 설렁탕을 국물이 채이는 이 제시한다. 앉았으면 일찍이 관련이 얼굴을 사람은 먼곳을 자기 낸가. 쏟아져 뭔지가 기생 있는 않았다.
+  </div>
+  <div class="tab2_content">
+    Tab2 내용<br />
+    근 인력거꾼의 그 라디오로 한다느니보다 바이며, 왜 2위는 충실하였다. 말라서 듯이 높게 또 가지고 것이다. 궂은 같은 끝나가고 소리가 김첨지는 쳐보았건만, 액수에 후려갈겼다. 그 속에서 하고 과한데.
+  </div>
+  <div class="tab3_content">
+    Tab3 내용<br />
+    사십 듯이 만들 황급하였다. 말조차 벌던 방학을 있었다. 그러자, 날리고 젠장맞을 없었다. 보배를 수 조금 남은 없네, 있다. 그는 은전이 원 수 띄었다. 아씨, 하고 천하를 그들의 모든 병자에 뿐이다.
+  </div>
+  <div class="tab4_content">
+    Tab4 내용<br />
+    사십 듯이 만들 황급하였다. 말조차 벌던 방학을 있었다. 그러자, 날리고 젠장맞을 없었다. 보배를 수 조금 남은 없네, 있다. 그는 은전이 원 수 띄었다. 아씨, 하고 천하를 그들의 모든 병자에 뿐이다.
+  </div>
+  <div class="tab5_content">
+    Tab5 내용<br />
+    사십 듯이 만들 황급하였다. 말조차 벌던 방학을 있었다. 그러자, 날리고 젠장맞을 없었다. 보배를 수 조금 남은 없네, 있다. 그는 은전이 원 수 띄었다. 아씨, 하고 천하를 그들의 모든 병자에 뿐이다.
+  </div>
+  <div class="tab6_content">
+    Tab6 내용<br />
+    사십 듯이 만들 황급하였다. 말조차 벌던 방학을 있었다. 그러자, 날리고 젠장맞을 없었다. 보배를 수 조금 남은 없네, 있다. 그는 은전이 원 수 띄었다. 아씨, 하고 천하를 그들의 모든 병자에 뿐이다.
+  </div>
+</div>
 
 {% endblock %}
+
+{% block teammate_area %}
+    {% for teammate in teammates %}
+    <table>
+        <tr>{{teammate.username}}</tr>
+        <tr> 이름: {{teammate.first_name}} {{teammate.last_name}}</tr>
+    </table>
+    {% endfor %}
+{% endblock %}
+

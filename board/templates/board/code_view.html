@@ -1,0 +1,25 @@
+{% extends 'board/base_team.html' %} 
+
+{% block problem_code_area %}
+
+<form method="POST">
+  {% csrf_token %}
+  <table>
+    {{code_form.as_table}}
+  </table>
+  <button type='submit' class='save btn btn-primary'>등록</button>
+  {% for code in codes %}
+    {% comment %} <a href='{% url 'code' %}' {% endcomment %}
+  {% endfor %}
+</form>
+
+{% endblock %}
+
+{% block teammate_area %}
+    {% for teammate in teammates %}
+    <table>
+        <tr>{{teammate.username}}</tr>
+        <tr> 이름: {{teammate.first_name}} {{teammate.last_name}}</tr>
+    </table>
+    {% endfor %}
+{% endblock %}

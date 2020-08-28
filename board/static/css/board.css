@@ -1,102 +1,104 @@
-.page-header{
+.page-header {
   background-color: #ff9400;
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 5px 0px 20px 40px;
 }
-.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active{
+.page-header h1,
+.page-header h1 a,
+.page-header h1 a:visited,
+.page-header h1 a:active {
   color: #ffffff;
   font-size: 24pt;
   text-decoration: none;
 }
 
 .logo_h1 {
-    color: #555555;
-    font-size: 20px;
+  color: #555555;
+  font-size: 20px;
 }
 .col-sm-4 {
-    height: 50px;
+  height: 50px;
 }
 
-.top-menu, .top-menu:hover, .top-menu:visited{
+.top-menu,
+.top-menu:hover,
+.top-menu:visited {
   color: white;
   font-size: 15pt;
   margin-right: 20px;
   float: right;
 }
 
-.wrapper > div{
-  #background-color: orange;
-  border: 1px black solid;
-}
-
-.wrapper > div:nth-child(odd){
-  #background-color: indianred;
-}
-
-.wrapper{
+.wrapper_base {
   display: grid;
   height: 85vh;
   grid-gap: 2px;
   grid-template-columns: 50px 300px 1fr 300px;
 }
+
+.wrapper_base > div {
+  /* background-color: orange; */
+  border: 1px black solid;
+}
+
 .key {
   font-family: "Nanum Gothic", sans-serif;
   font-size: 23px;
 }
 
 .main {
-    min-width: 320px;
-    max-width: 800px;
-    padding: 50px;
-    margin: 0 auto;
-    background: #ffffff;
+  min-width: 320px;
+  max-width: 800px;
+  padding: 50px;
+  margin: 0 auto;
+  background: #ffffff;
 }
 
 .tab_section {
-    display: none;
-    padding: 20px 0 0;
-    border-top: 1px solid #ddd;
+  display: none;
+  padding: 20px 0 0;
+  border-top: 1px solid #ddd;
 }
 
 /* 라디오 버튼 숨김 */
 .tab_input {
-    display: none;
+  display: none;
 }
 
 /* 라디오 버튼에 해당하는 제목들 tab이름 */
 .tab_label {
-    display: inline-block;
-    margin: 0 0 -1px;
-    padding: 15px 25px;
-    font-weight: 600;
-    text-align: center;
-    color: #bbb;
-    border: 1px solid transparent;
+  display: inline-block;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #bbb;
+  border: 1px solid transparent;
 }
 /* tab이름 마우스 갖다대면 손가락으로 바뀜, 색깔 바뀜 */
 label:hover {
-    color: #2e9cdf;
-    cursor: pointer;
+  color: #2e9cdf;
+  cursor: pointer;
 }
 
 input:checked + label {
-    color: #555;
-    border: 1px solid #ddd;
-    border-top: 1px solid #ffffff;
+  color: #555;
+  border: 1px solid #ddd;
+  border-top: 1px solid #ffffff;
 }
 
 #tab1:checked ~ #content1,
 #tab2:checked ~ #content2,
 #tab3:checked ~ #content3,
 #tab4:checked ~ #content4 {
-    display: block;
+  display: block;
 }
-.select_team{
+.select_team {
   font-size: 10px;
 }
 
-.team_button{
+.team_button {
   display: inline-block;
   background-color: aqua;
   width: 48px;
@@ -107,6 +109,7 @@ input:checked + label {
   padding: 0px 0px;
 }
 
-.my_layout{
+.my_layout {
   display: inline-block;
 }
+

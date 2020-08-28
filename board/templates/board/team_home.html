@@ -1,15 +1,12 @@
-{% extends 'board/base.html' %}
+{% extends 'board/base_team.html' %}
 
 {% block team_select_area %}
-{% endblock %}
-
-{% block chat_area %}
 {% endblock %}
 
 {% block problem_code_area %}
 
     <h1>{{ this_team.team_name }}</h1>
-    <a class="btn btn-primary btn" href="{% url 'post_new' team_name=this_team.team_name %}">
+    <a class="btn btn-primary btn" href="{% url 'post_new' team_id=this_team.id %}">
         새 글(게시판)</a>
 
     <table border="1">
@@ -31,4 +28,10 @@
 {% endblock %}
 
 {% block teammate_area %}
+    {% for teammate in teammates %}
+    <table>
+        <tr>{{teammate.username}}</tr>
+        <tr> 이름: {{teammate.first_name}} {{teammate.last_name}}</tr>
+    </table>
+    {% endfor %}
 {% endblock %}

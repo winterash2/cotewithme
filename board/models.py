@@ -17,9 +17,12 @@ class JoinedTeam(models.Model):
 def min_length_5_validator(value):
     if len(value) < 3:
         raise forms.ValidationError("5글자 이상 입력해주세요.")
+
+
 class Post(models.Model):
     team_no = models.ForeignKey('Team', on_delete=models.CASCADE)
-    title = models.CharField(max_length=150, validators=[min_length_5_validator])
+    title = models.CharField(max_length=150, validators=[
+                             min_length_5_validator])
     content = models.TextField()
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     created_date = models.DateTimeField(default=timezone.now)
@@ -31,15 +34,16 @@ class CommentProblem(models.Model):
     team_no = models.ForeignKey('Team', on_delete=models.CASCADE)
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     content = models.TextField(max_length=300)
-    created_date = timezone.now()
+    created_date = models.DateTimeField(default=timezone.now)
 
 
 class Code(models.Model):
-    code_no = models.IntegerField()
+    problem_no = models.IntegerField()
     user_no = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     content = models.TextField()
     success = models.BooleanField(default=False)
     display = models.BooleanField(default=True)
+    created_date = models.DateTimeField(default=timezone.now)
 
 
 class CommentCode(models.Model):
@@ -47,7 +51,7 @@ class CommentCode(models.Model):
     team_no = models.ForeignKey('Team', on_delete=models.CASCADE)
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     content = models.TextField()
-    created_date = timezone.now()
+    created_date = models.DateTimeField(default=timezone.now)
 
 
 class ChatChannel(models.Model):
@@ -56,8 +60,8 @@ class ChatChannel(models.Model):
 
 
 class Chat(models.Model):
-    chat_channel_no = models.ForeignKey('ChatChannel', on_delete=models.CASCADE)
+    chat_channel_no = models.ForeignKey(
+        'ChatChannel', on_delete=models.CASCADE)
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     content = models.TextField()
-    created_date = timezone.now()
-
+    created_date = models.DateTimeField(default=timezone.now)
