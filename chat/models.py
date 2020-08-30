@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class ChatChannel(models.Model):
     team_no = models.ForeignKey('board.Team', on_delete=models.CASCADE)
-    problem_no = models.IntegerField()
+    chat_channel_name = models.TextField(max_length=20)
 
 
 class Chat(models.Model):
