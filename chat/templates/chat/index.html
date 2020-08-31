@@ -25,6 +25,7 @@
           {% for channel in chat_channel_list %}
             <li>
               <a href="{% url 'chat_room' this_team.id channel.chat_channel_name %}">{{channel.chat_channel_name}}</a>
+              <a href="{% url 'chat_room_delete' this_team.id channel.chat_channel_name %}">채팅방 삭제</a>
             </li>
           {% endfor %}
         {% endif %}
