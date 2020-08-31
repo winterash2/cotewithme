@@ -23,7 +23,7 @@ def chat_home(request, team_id):
 
 def chat_room(request, team_id, room_name):
     this_team = get_this_team_from_team_id(team_id)
-    room_name = this_team.team_name + room_name
+    room_name_json = this_team.team_name + room_name
     if request.method == "POST":
         chat_channel_form = ChatChannelForm(request.POST)
         if chat_channel_form.is_valid():
@@ -40,8 +40,16 @@ def chat_room(request, team_id, room_name):
     chat_channel_form = ChatChannelForm()
     chat_channel_list = ChatChannel.objects.filter(team_no=this_team)
     return render(request, 'chat/room.html', {
-        'room_name_json': mark_safe(json.dumps(room_name)),
+        'room_name_json': mark_safe(json.dumps(room_name_json)),
+        'room_name': room_name,
         'this_team': this_team,
         'chat_channel_form': chat_channel_form,
         'chat_channel_list': chat_channel_list,
     })
+
+
+def chat_room_delete(request, team_id, room_name):
+    chat_channel_delete = ChatChannel.objects.get(
+        team_no=team_id, chat_channel_name=room_name)
+    chat_channel_delete.delete()
+    return redirect('chat_home', team_id)
