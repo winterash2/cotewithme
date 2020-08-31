@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 from django.utils import timezone
@@ -74,6 +74,7 @@ def team_leave(request, team_id):
     return redirect('main_page')
 
 
+@login_required
 def team_delete(request, team_id):
     team = Team.objects.filter(id=team_id)
     team.delete()
@@ -81,7 +82,6 @@ def team_delete(request, team_id):
 
 
 @login_required
-# TODO ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 def team_home(request, team_id):
     check_user_is_joined = JoinedTeam.objects.filter(
         user_no__exact=request.user, team_no__exact=team_id)
@@ -92,7 +92,7 @@ def team_home(request, team_id):
 
         # 게시판 pagination
         posts = Post.objects.filter(
-            team_no__exact=this_team, created_date__lte=timezone.now()).order_by('created_date')
+            team_no__exact=this_team, created_date__lte=timezone.now()).order_by('-created_date')
         paginator = Paginator(posts, 2)
         page = request.GET.get('page')
 
@@ -136,20 +136,19 @@ def team_home(request, team_id):
             'teammates': teammates,
             'codes_my': codes_my,
             'codes_teammates': codes_teammates,
-
         })
     else:
         return redirect('main_page')
 
 
+@login_required
 def post_new(request, team_id):
+    joined_teams = get_joined_teams(request)
     this_team = get_this_team_from_team_id(team_id)
+    teammates = get_teammates(request, team_id)
     if request.method == "POST":
         post_form = PostForm(request.POST)
         if post_form.is_valid():
-            check_user_is_joined = JoinedTeam.objects.filter(
-                user_no__exact=request.user, team_no__exact=team_id)
-            this_team = check_user_is_joined[0].team_no
             post = post_form.save(commit=False)
             post.team_no = this_team
             post.author = request.user
@@ -159,26 +158,85 @@ def post_new(request, team_id):
             return redirect('team_home', this_team.id)
         else:
             return render(request, 'board/post_new.html', {
+                'joined_teams': joined_teams,
                 'post_form': post_form,
                 'this_team': this_team,
+                'teammates': teammates,
             })
     else:
         post_form = PostForm()
     return render(request, 'board/post_new.html', {
+        'joined_teams': joined_teams,
         'post_form': post_form,
         'this_team': this_team,
+        'teammates': teammates,
     })
 
 
+@login_required
+def post_detail(request, team_id, post_id):
+    joined_teams = get_joined_teams(request)
+    this_team = get_this_team_from_team_id(team_id)
+    teammates = get_teammates(request, team_id)
+    post = get_object_or_404(Post, id=post_id)
+    return render(request, 'board/post_detail.html', {
+        'joined_teams': joined_teams,
+        'this_team': this_team,
+        'teammates': teammates,
+        'post': post,
+    })
+
+
+@login_required
+def post_edit(request, team_id, post_id):
+    joined_teams = get_joined_teams(request)
+    this_team = get_this_team_from_team_id(team_id)
+    teammates = get_teammates(request, team_id)
+    if request.method == 'GET':
+        post = Post.objects.get(id=post_id)
+        post_form = PostForm(instance=post)
+    elif request.method == "POST":
+        post_form = PostForm(request.POST)
+        if post_form.is_valid():
+            post = Post.objects.get(id=post_id)
+            post.title = post_form.cleaned_data['title']
+            post.content = post_form.cleaned_data['content']
+            post.save()
+            return redirect('post_detail', this_team.id, post_id)
+        else:
+            return render(request, 'board/post_edit.html', {
+                'joined_teams': joined_teams,
+                'post_form': post_form,
+                'this_team': this_team,
+                'teammates': teammates,
+            })
+    return render(request, 'board/post_edit.html', {
+        'joined_teams': joined_teams,
+        'post_form': post_form,
+        'this_team': this_team,
+        'teammates': teammates,
+    })
+
+
+@login_required
+def post_delete(request, team_id, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    post.delete()
+    return redirect('team_home', team_id)
+
+
+@login_required
 def redirect_problem_home(request, team_id):
     problem_number = request.GET['problem_number']
     return redirect('problem_home', team_id, problem_number)
 
 
+@login_required
 def problem_home(request, team_id, problem_number):
     return redirect('problem_with_code', team_id, problem_number, '0')
 
 
+@login_required
 def problem_with_code(request, team_id, problem_number, codes_string):
     # 지금 팀 가져오기
     this_team = get_this_team_from_team_id(team_id)
@@ -246,6 +304,7 @@ def problem_with_code(request, team_id, problem_number, codes_string):
     })
 
 
+@login_required
 def problem_with_code_add(request, team_id, problem_number, codes_string, code_number_add):
     codes_number_list = codes_string.split('&')
     if len(codes_number_list) >= 9:

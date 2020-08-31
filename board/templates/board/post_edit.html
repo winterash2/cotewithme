@@ -3,8 +3,8 @@
 {% block problem_code_area %}
     <table>
         <form method="post" class="post-form">
-            {% csrf_token %}
             <td>
+                {% csrf_token %}
                 {{ post_form.as_table }}
             </td>
             <td>
@@ -12,4 +12,5 @@
             </td>
         </form>
     </table>
+
 {% endblock %}
