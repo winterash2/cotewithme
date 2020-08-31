@@ -263,7 +263,6 @@ def problem_with_code(request, team_id, problem_number, codes_string):
     })
 
 
-
 def problem_with_code_add(request, team_id, problem_number, codes_string, code_number_add):
     codes_number_list = codes_string.split('&')
     if len(codes_number_list) >= 9:
@@ -272,7 +271,7 @@ def problem_with_code_add(request, team_id, problem_number, codes_string, code_n
         codes_number_list.append(str(code_number_add))
         codes_number_list = set(codes_number_list)
         codes_number_list = list(codes_number_list)
-        print("codes_number_list = ",codes_number_list)
+        print("codes_number_list = ", codes_number_list)
         codes_string = '' + codes_number_list[0]
         codes_number_list = codes_number_list[1:]
         for code_number in codes_number_list:

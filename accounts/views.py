@@ -12,7 +12,7 @@ def signup(request):
         # 모델폼의 유효성 검증이 valid할 경우, DB에 저장
         if signup_form.is_valid():
             signup_form.save()
-        return render(request, 'registration/signup_success.html', {})
+            return render(request, 'registration/signup_success.html', {})
     # HTTP Method가 GET 인 경우
     else:
         signup_form = CreateUserForm()
