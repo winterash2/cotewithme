@@ -30,7 +30,7 @@
                 <a href="?page={{ posts.previous_page_number }}">previous</a>
             {% endif %}
             <span class="current">
-                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}
             </span>
             {% if posts.has_next %}
                 <a href="?page={{ posts.next_page_number }}">next</a>
@@ -64,7 +64,7 @@
                         <a href="?codes_my_page={{ codes_my.previous_page_number }}">previous</a>
                     {% endif %}
                     <span class="current">
-                        Page {{ codes_my.number }} of {{ codes_my.codes_my_paginator.num_pages }}.
+                        Page {{ codes_my.number }} of {{ codes_my.paginator.num_pages }}
                     </span>
                     {% if codes_my.has_next %}
                         <a href="?codes_my_page={{ codes_my.next_page_number }}">next</a>
@@ -101,7 +101,7 @@
                         <a href="?codes_teammates_page={{ codes_teammates.previous_page_number }}">previous</a>
                     {% endif %}
                     <span class="current">
-                        Page {{ codes_teammates.number }} of {{ codes_teammates.codes_teammates_paginator.num_pages }}.
+                        Page {{ codes_teammates.number }} of {{ codes_teammates.paginator.num_pages }}
                     </span>
                     {% if codes_teammates.has_next %}
                         <a href="?codes_my_page={{ codes_teammates.next_page_number }}">next</a>
