@@ -88,9 +88,13 @@ def team_home(request, team_id):
     if len(check_user_is_joined) == 1:
         this_team = check_user_is_joined[0].team_no
         teammates = get_teammates(request, team_id)
+        joined_teams = get_joined_teams(request)
+
+        # 게시판 pagination
         posts = Post.objects.filter(team_no__exact=this_team, created_date__lte=timezone.now()).order_by('created_date')
         paginator = Paginator(posts, 2)
         page = request.GET.get('page')
+
         try:
             posts = paginator.page(page)
         except PageNotAnInteger:
@@ -98,11 +102,32 @@ def team_home(request, team_id):
         except EmptyPage:
             posts = paginator.page(paginator.num_pages)
 
-        joined_teams = get_joined_teams(request)
+        # 내가 푼 코드 pagination
         codes_my = Code.objects.filter(
             user_no__exact=request.user).order_by('-created_date')
+        codes_my_paginator = Paginator(codes_my,2)
+        codes_my_page = request.GET.get('codes_my_page')
+        try:
+            codes_my = codes_my_paginator.page(codes_my_page)
+        except PageNotAnInteger:
+            codes_my = codes_my_paginator.page(1)
+        except EmptyPage:
+            codes_my = codes_my_paginator.page(codes_my_paginator.num_pages)
+
+        # 팀원이 푼 코드 pagination
         codes_teammates = Code.objects.filter(
             user_no__in=teammates).order_by('-created_date')
+        codes_teammates_paginator = Paginator(codes_teammates, 2)
+        codes_teammates_page = request.GET.get('codes_teammates_page')
+        try:
+            codes_teammates = codes_teammates_paginator.page(codes_teammates_page)
+        except PageNotAnInteger:
+            codes_teammates = codes_teammates_paginator.page(1)
+        except EmptyPage:
+            codes_teammates = codes_teammates_paginator.page(codes_teammates_paginator.num_pages)
+
+
+
         return render(request, 'board/team_home.html', {
             'this_team': this_team,
             'posts': posts,
