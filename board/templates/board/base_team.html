@@ -1,8 +1,9 @@
 {% extends 'board/base_main.html' %}
 
 {% block enter_problem_number_area %}
-    <form action="{% url 'redirect_problem_home' team_id=this_team.id %}" method="get">
-        <input type="text" name='problem_number' value="문제 번호를 입력하세요" onfocus="this.value=''">
+    <form style="display: flex; padding:7px 0px 0px 0px;
+            justify-content: center;" action="{% url 'redirect_problem_home' team_id=this_team.id %}" method="get">
+        <input style="width:460px; padding: 0.50rem 1rem;"type="text" name='problem_number' value="문제 번호를 입력하세요" onfocus="this.value=''">
         <input type="submit" value="확인">
     </form>
 {% endblock %}

@@ -1,0 +1,37 @@
+body {
+    color: #aaa;
+    background-color: #272b30;
+}
+
+.jumbotron {
+    background-color: #3a3f44;
+}
+
+.jumbotron > h1 {
+    font-size: 40px;
+}
+
+.sign-in {
+    max-width: 500px;
+    padding: 40px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #272b30;
+    border: 1px solid #e5e5e5;
+}
+
+.sign-up {
+    max-width: 670px;
+    padding: 40px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #272b30;
+    border: 1px solid #e5e5e5;
+}
+
+.btn {
+    border-color: rgba(0, 0, 0, 0.6);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+  background-image: linear-gradient(#484e55, #3a3f44 60%, #313539);
+}
