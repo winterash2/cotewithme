@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>CTWM MAIN</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" type="text/css">
+    <!-- my -->
+    <link rel="Stylesheet" href="{% static 'css/board.css' %}">
+    <link rel="Stylesheet" href="{% static 'css/tab.css' %}">
+    <link rel="shortcut icon" href="{% static '/favicon_io/favicon.ico' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
-    <h1>회원 가입이 완료되었습니다!</h1>
-    <a href="{% url 'main_page' %}" class="button button-primary">메인 페이지로</a>
-</form>
+    <h1 style="text-align: center">회원가입이 완료되었습니다!</h1>
+    <div>
+        <button style="float: right; margin-right: 50%;"><a href="{% url 'main_page' %}" class="button button-default" >메인 페이지로</a></button>
+    </div>
 
 </body>
+
+
+
 </html>
