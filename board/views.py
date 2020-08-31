@@ -266,13 +266,18 @@ def problem_with_code(request, team_id, problem_number, codes_string):
 
 def problem_with_code_add(request, team_id, problem_number, codes_string, code_number_add):
     codes_number_list = codes_string.split('&')
-    while len(codes_number_list) >= 8:
-        codes_number_list.pop(0)
-    codes_number_list.append(str(code_number_add))
-    print("codes_number_list = ",codes_number_list)
-    codes_string = ''.join(codes_number_list)
-    print("codes_string = ",codes_string)
-    return redirect('problem_with_code', team_id, problem_number, codes_string)
+    if len(codes_number_list) >= 9:
+        return redirect('problem_with_code', team_id, problem_number, codes_string)
+    else:
+        codes_number_list.append(str(code_number_add))
+        codes_number_list = set(codes_number_list)
+        codes_number_list = list(codes_number_list)
+        print("codes_number_list = ",codes_number_list)
+        codes_string = '' + codes_number_list[0]
+        codes_number_list = codes_number_list[1:]
+        for code_number in codes_number_list:
+            codes_string = codes_string + "&" + str(code_number)
+        return redirect('problem_with_code', team_id, problem_number, codes_string)
 
 
 def code_view(request, team_id, problem_number):
