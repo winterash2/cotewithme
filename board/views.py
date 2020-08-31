@@ -135,6 +135,8 @@ def problem_home(request, team_id, problem_number):
     problem = get_problem_from_boj(problem_number)
     joined_teams = get_joined_teams(request)
     this_team = get_this_team_from_team_id(team_id)
+
+    # comment
     comment_problem_form = CommentProblemForm()
     comments_problem = CommentProblem.objects.filter(
         team_no__exact=this_team, problem__exact=problem_number)
@@ -142,9 +144,19 @@ def problem_home(request, team_id, problem_number):
     codes_teammate = Code.objects.filter(
         problem_no__exact=problem_number, user_no__in=teammates, display__exact=True).order_by('-created_date')
 
+    # code
+    codes = Code.objects.filter(
+        problem_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
+    if not codes:
+        print("plz in")
+        code_form = CodeForm()
+    else:
+        code = codes[0]
+        code_form = CodeForm(instance=code)
     if request.method == "GET":
         pass
-    elif request.method == 'POST':
+
+    elif request.method == 'POST' and 'comment' in request.POST:  # submit의 name에 따라 분류
         comment_problem_form = CommentProblemForm(request.POST)
         if comment_problem_form.is_valid():
             comment_problem = comment_problem_form.save(commit=False)
@@ -153,6 +165,19 @@ def problem_home(request, team_id, problem_number):
             comment_problem.author = request.user
             comment_problem.created_date = timezone.now()
             comment_problem.save()
+
+    elif request.method == 'POST' and 'my_code' in request.POST:
+        code_form = CodeForm(request.POST)
+        if code_form.is_valid():
+            code = code_form.save(commit=False)
+            code.problem_no = problem_number
+            code.created_date = timezone.now()
+            code.user_no = request.user
+            code.success = False
+            code.display = True
+            code.save()
+
+
     return render(request, 'board/problem_home.html', {
         'this_team': this_team,
         'joined_teams': joined_teams,
@@ -160,6 +185,8 @@ def problem_home(request, team_id, problem_number):
         'comment_problem_form': comment_problem_form,
         'comments_problem': comments_problem,
         'codes_teammate': codes_teammate,
+        'code_form': code_form,
+        'codes': codes
     })
 
 

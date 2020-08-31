@@ -147,8 +147,22 @@
   
 
   <div class="tab2_content">
-    Tab2 내용<br />
-    근 인력거꾼의 그 라디오로 한다느니보다 바이며, 왜 2위는 충실하였다. 말라서 듯이 높게 또 가지고 것이다. 궂은 같은 끝나가고 소리가 김첨지는 쳐보았건만, 액수에 후려갈겼다. 그 속에서 하고 과한데.
+{#    {% if codes %}#}
+{#        {{ codes.first }}#}
+{#    {% else %}#}
+{#        <form method="POST">#}
+{#            {% csrf_token %}#}
+{#            {{ code_form.as_p }}#}
+{#            <button type="submit" name="my_code" class="save btn-primary">코드 작성</button>#}
+{#        </form>#}
+{#    {% endif %}#}
+    <form method="POST">
+        {% csrf_token %}
+        {{ code_form.as_p }}
+        <!-- view에서 CodeForm(instance=code[0]해줌 -->
+        <button type="submit" name="my_code" class="save btn-primary">코드 작성</button>
+    </form>
+    <button>수정</button>
   </div>
 </div>
 
