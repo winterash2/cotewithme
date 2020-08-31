@@ -15,6 +15,14 @@ def get_chat_channel_list_form_team_id(team_id):
     return ChatChannel.objects.filter(team_no_id__exact=team_id)
 
 
+def chat_main_page(request):
+    user_name = str(request.user.username)
+    return render(request, 'chat/chat_main_page.html', {
+        'room_name_json': mark_safe(json.dumps("main_page")),
+        'user_name_json':  mark_safe(json.dumps(user_name)),
+    })
+
+
 def chat_home(request, team_id):
     chat_channel_list = get_chat_channel_list_form_team_id(team_id)
     return redirect('chat_room', team_id, 'home')
@@ -22,6 +30,7 @@ def chat_home(request, team_id):
 
 
 def chat_room(request, team_id, room_name):
+    user_name = str(request.user.username)
     this_team = get_this_team_from_team_id(team_id)
     room_name_json = this_team.team_name + room_name
     if request.method == "POST":
@@ -39,8 +48,9 @@ def chat_room(request, team_id, room_name):
                 chat_channel.save()
     chat_channel_form = ChatChannelForm()
     chat_channel_list = ChatChannel.objects.filter(team_no=this_team)
-    return render(request, 'chat/room.html', {
+    return render(request, 'chat/chat_room.html', {
         'room_name_json': mark_safe(json.dumps(room_name_json)),
+        'user_name_json':  mark_safe(json.dumps(user_name)),
         'room_name': room_name,
         'this_team': this_team,
         'chat_channel_form': chat_channel_form,
