@@ -82,17 +82,22 @@ def team_delete(request, team_id):
 def team_home(request, team_id):
     check_user_is_joined = JoinedTeam.objects.filter(
         user_no__exact=request.user, team_no__exact=team_id)
-    this_team = check_user_is_joined[0].team_no
-    teammates = get_teammates(team_id)
-
-    posts = Post.objects.filter(team_no__exact=this_team)
     if len(check_user_is_joined) == 1:
+        this_team = check_user_is_joined[0].team_no
+        teammates = get_teammates(request, team_id)
+        posts = Post.objects.filter(team_no__exact=this_team)
         joined_teams = get_joined_teams(request)
+        codes_my = Code.objects.filter(
+            user_no__exact=request.user).order_by('-created_date')
+        codes_teammates = Code.objects.filter(
+            user_no__in=teammates).order_by('-created_date')
         return render(request, 'board/team_home.html', {
             'this_team': this_team,
             'posts': posts,
             'joined_teams': joined_teams,
             'teammates': teammates,
+            'codes_my': codes_my,
+            'codes_teammates': codes_teammates,
         })
     else:
         return redirect('main_page')
@@ -138,7 +143,7 @@ def problem_home(request, team_id, problem_number):
     comment_problem_form = CommentProblemForm()
     comments_problem = CommentProblem.objects.filter(
         team_no__exact=this_team, problem__exact=problem_number)
-    teammates = get_teammates(team_id)
+    teammates = get_teammates(request, team_id)
     codes_teammate = Code.objects.filter(
         problem_no__exact=problem_number, user_no__in=teammates, display__exact=True).order_by('-created_date')
 
@@ -176,7 +181,7 @@ def problem_with_code(request, team_id, problem_number, codes_string):
     comments_problem = CommentProblem.objects.filter(
         team_no__exact=this_team, problem__exact=problem_number)
     # 팀원들 가져오기
-    teammates = get_teammates(team_id)
+    teammates = get_teammates(request, team_id)
     # 팀원들 코드들 가져오기
     codes_teammate = Code.objects.filter(
         problem_no__exact=problem_number, user_no__in=teammates, display__exact=True).order_by('-created_date')

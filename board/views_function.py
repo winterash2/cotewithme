@@ -58,9 +58,9 @@ def get_problem_from_boj(problem_number):
     return problem
 
 
-def get_teammates(team_id):
+def get_teammates(request, team_id):
     joined_team = JoinedTeam.objects.filter(team_no__exact=team_id)
-    teammates = [joined.user_no for joined in joined_team]
+    teammates = [joined.user_no for joined in joined_team if not joined.user_no == request.user]
     return teammates
 
 
