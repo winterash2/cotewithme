@@ -19,6 +19,7 @@ urlpatterns = [
     path('team/<int:team_id>/problem/', views.redirect_problem_home, name='redirect_problem_home'),
     path('team/<int:team_id>/problem/<int:problem_number>/', views.problem_home, name='problem_home'),
     path('team/<int:team_id>/problem/<int:problem_number>/code/<str:codes_string>/', views.problem_with_code, name='problem_with_code'),
+    path('team/<int:team_id>/problem/<int:problem_number>/code/<str:codes_string>/code_add/<str:code_number_add>', views.problem_with_code_add, name='problem_with_code_add'),
 
     path('team/<int:team_id>/problem/<int:problem_number>/code_view', views.code_view, name='code_view'),
 

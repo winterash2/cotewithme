@@ -58,9 +58,9 @@ def get_problem_from_boj(problem_number):
     return problem
 
 
-def get_teammates(team_id):
+def get_teammates(request, team_id):
     joined_team = JoinedTeam.objects.filter(team_no__exact=team_id)
-    teammates = [joined.user_no for joined in joined_team]
+    teammates = [joined.user_no for joined in joined_team if not joined.user_no == request.user]
     return teammates
 
 
@@ -71,5 +71,30 @@ def get_this_team_from_team_id(team_id):
 
 def get_codes_wanted(codes_string):
     codes_number_list = codes_string.split('&')
-    codes_wanted = Code.objects.filter(id__in=codes_number_list)
-    return codes_wanted
+    for code_number in codes_number_list:
+        if code_number == '0':
+            codes_number_list.remove('0')
+    if codes_number_list:
+        codes_wanted = Code.objects.filter(id__in=codes_number_list)
+        return codes_wanted
+    else:
+        return None
+
+
+def get_my_code_form(request, problem_number):
+    codes = Code.objects.filter(
+        problem_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
+    if not codes:
+        code_form = CodeForm()
+    else:
+        code = codes[0]
+        code_form = CodeForm(instance=code)
+    return code_form
+
+
+def get_code_my(request, problem_number):
+    code_my = Code.objects.get(problem_no=problem_number, user_no=request.user)
+    if code_my:
+        return code_my
+    else:
+        return None

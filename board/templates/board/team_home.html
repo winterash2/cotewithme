@@ -10,25 +10,107 @@
         새 글(게시판)</a>
 
     <table class="table table-hover">
+    <th>
+        <td>제목</td>
+        <td>내용</td>
+        <td>게시일</td>
+    </th>
+    {% for post in posts %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.content }}</td>
+        <td>{{ post.created_date.date }}</td>
+    </tr>
+    {% endfor %}
+    <div class="pagination">
+        <span class="step_links">
+            {% if posts.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ posts.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+            </span>
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">next</a>
+                <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    </table>
+
+    <h3>내가 최근에 푼 문제</h3>
+    <table border="1">
         <thead>
             <tr>
-                <th></th>
-                <th>제목</th>
-                <th>내용</th>
-                <th>게시일</th>
+                <th>문제 번호</th>
+                <th>한 줄 코멘트</th>
+                <th>작성일</th>
             </tr>
         </thead>
         <tbody>
-            {% for post in posts %}
+            {% for code in codes_my %}
             <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.content }}</td>
-                <td>{{ post.created_date.date }}</td>
+                <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
+                <td>{{code.one_line_comment}}</td>
+                <td>{{code.created_date}}</td>
             </tr>
             {% endfor %}
+            <div class="pagination">
+                <span class="step_links">
+                    {% if codes_my.has_previous %}
+                        <a href="?codes_my_page=1">&laquo; first</a>
+                        <a href="?codes_my_page={{ codes_my.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="current">
+                        Page {{ codes_my.number }} of {{ codes_my.paginator.num_pages }}
+                    </span>
+                    {% if codes_my.has_next %}
+                        <a href="?codes_my_page={{ codes_my.next_page_number }}">next</a>
+                        <a href="?codes_my_page={{ codes_my.codes_my_paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
         </tbody>
-    </table>
+    </table> <!-- class code_my-->
+
+    <h3>팀원들이 최근에 푼 문제</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>문제 번호</th>
+                <th>작성자</th>
+                <th>한 줄 코멘트</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for code in codes_teammates %}
+            <tr>
+                <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
+                <td>{{code.user_no.username }}</td>
+                <td>{{code.one_line_comment}}</td>
+                <td>{{code.created_date}}</td>
+            </tr>
+            {% endfor %}
+            <div class="pagination">
+                <span class="step_links">
+                    {% if codes_teammates.has_previous %}
+                        <a href="?codes_teammates_page=1">&laquo; first</a>
+                        <a href="?codes_teammates_page={{ codes_teammates.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="current">
+                        Page {{ codes_teammates.number }} of {{ codes_teammates.paginator.num_pages }}
+                    </span>
+                    {% if codes_teammates.has_next %}
+                        <a href="?codes_my_page={{ codes_teammates.next_page_number }}">next</a>
+                        <a href="?codes_my_page={{ codes_teammates.codes_teammates_paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </tbody>
+    </table> <!-- class code_my-->
 
 {% endblock %}
 

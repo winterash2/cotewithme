@@ -3,11 +3,11 @@
 {% block problem_code_area %}
 
 <div id="css_tabs">
-  <input id="tab0" type="radio" name="tab" checked="checked" />
+  <input class="tab" id="tab0" type="radio" name="tab" checked="checked" />
   <label for="tab0">문제</label>
 
-  <input id="tab2" type="radio" name="tab" />
-  <label for="tab2">Tab 2</label>
+  <input class="tab" id="tab10" type="radio" name="tab" />
+  <label for="tab10">내 코드</label>
 
   <div class="tab0_content">
     <div class="col-md-12">
@@ -130,7 +130,7 @@
       <table>
         {{comment_problem_form.as_table}}
       </table>
-      <button type="submit" class="save btn btn-primary">댓글 작성</button>
+      <button type="submit" name="comment" class="save btn btn-primary">댓글 작성</button>
     </form>
 
     {% for comment in comments_problem %}
@@ -146,9 +146,15 @@
 
   
 
-  <div class="tab2_content">
-    Tab2 내용<br />
-    근 인력거꾼의 그 라디오로 한다느니보다 바이며, 왜 2위는 충실하였다. 말라서 듯이 높게 또 가지고 것이다. 궂은 같은 끝나가고 소리가 김첨지는 쳐보았건만, 액수에 후려갈겼다. 그 속에서 하고 과한데.
+  <div class="tab10_content">
+    <form method="POST">
+      {% csrf_token %}
+      <table>
+        {{ code_form.as_table }}
+        <!-- view에서 CodeForm(instance=code[0]해줌 -->
+      </table>
+      <button type="submit" name="code" class="save btn btn-primary">코드 작성</button>
+    </form>
   </div>
 </div>
 

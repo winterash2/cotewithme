@@ -8,6 +8,8 @@ from django.http import HttpResponse
 import requests
 import math
 from bs4 import BeautifulSoup
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 from .views_function import *
 
 
@@ -79,20 +81,61 @@ def team_delete(request, team_id):
 
 
 @login_required
+# TODO ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 def team_home(request, team_id):
     check_user_is_joined = JoinedTeam.objects.filter(
         user_no__exact=request.user, team_no__exact=team_id)
-    this_team = check_user_is_joined[0].team_no
-    teammates = get_teammates(team_id)
-
-    posts = Post.objects.filter(team_no__exact=this_team)
     if len(check_user_is_joined) == 1:
+        this_team = check_user_is_joined[0].team_no
+        teammates = get_teammates(request, team_id)
         joined_teams = get_joined_teams(request)
+
+        # 게시판 pagination
+        posts = Post.objects.filter(team_no__exact=this_team, created_date__lte=timezone.now()).order_by('created_date')
+        paginator = Paginator(posts, 2)
+        page = request.GET.get('page')
+
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
+        # 내가 푼 코드 pagination
+        codes_my = Code.objects.filter(
+            user_no__exact=request.user).order_by('-created_date')
+        codes_my_paginator = Paginator(codes_my,2)
+        codes_my_page = request.GET.get('codes_my_page')
+        try:
+            codes_my = codes_my_paginator.page(codes_my_page)
+        except PageNotAnInteger:
+            codes_my = codes_my_paginator.page(1)
+        except EmptyPage:
+            codes_my = codes_my_paginator.page(codes_my_paginator.num_pages)
+
+        # 팀원이 푼 코드 pagination
+        codes_teammates = Code.objects.filter(
+            user_no__in=teammates).order_by('-created_date')
+        codes_teammates_paginator = Paginator(codes_teammates, 2)
+        codes_teammates_page = request.GET.get('codes_teammates_page')
+        try:
+            codes_teammates = codes_teammates_paginator.page(codes_teammates_page)
+        except PageNotAnInteger:
+            codes_teammates = codes_teammates_paginator.page(1)
+        except EmptyPage:
+            codes_teammates = codes_teammates_paginator.page(codes_teammates_paginator.num_pages)
+
+
+
         return render(request, 'board/team_home.html', {
             'this_team': this_team,
             'posts': posts,
             'joined_teams': joined_teams,
             'teammates': teammates,
+            'codes_my': codes_my,
+            'codes_teammates': codes_teammates,
+
         })
     else:
         return redirect('main_page')
@@ -132,19 +175,33 @@ def redirect_problem_home(request, team_id):
 
 
 def problem_home(request, team_id, problem_number):
+    return redirect('problem_with_code', team_id, problem_number, '0')
+
     problem = get_problem_from_boj(problem_number)
     joined_teams = get_joined_teams(request)
     this_team = get_this_team_from_team_id(team_id)
+
+    # comment
     comment_problem_form = CommentProblemForm()
     comments_problem = CommentProblem.objects.filter(
         team_no__exact=this_team, problem__exact=problem_number)
-    teammates = get_teammates(team_id)
+    teammates = get_teammates(request, team_id)
     codes_teammate = Code.objects.filter(
         problem_no__exact=problem_number, user_no__in=teammates, display__exact=True).order_by('-created_date')
 
+    # code
+    codes = Code.objects.filter(
+        problem_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
+    if not codes:
+        code_form = CodeForm()
+    else:
+        code = codes[0]
+        code_form = CodeForm(instance=code)
+    print("-"*100)
     if request.method == "GET":
         pass
-    elif request.method == 'POST':
+    elif request.method == 'POST' and 'comment' in request.POST:  # submit의 name에 따라 분류
+        print("comment")
         comment_problem_form = CommentProblemForm(request.POST)
         if comment_problem_form.is_valid():
             comment_problem = comment_problem_form.save(commit=False)
@@ -153,6 +210,18 @@ def problem_home(request, team_id, problem_number):
             comment_problem.author = request.user
             comment_problem.created_date = timezone.now()
             comment_problem.save()
+    elif request.method == 'POST' and 'code' in request.POST:
+        print("code")
+        code_form = CodeForm(request.POST)
+        if code_form.is_valid():
+            code = code_form.save(commit=False)
+            code.problem_no = problem_number
+            code.created_date = timezone.now()
+            code.user_no = request.user
+            code.success = False
+            code.display = True
+            code.save()
+
     return render(request, 'board/problem_home.html', {
         'this_team': this_team,
         'joined_teams': joined_teams,
@@ -160,6 +229,8 @@ def problem_home(request, team_id, problem_number):
         'comment_problem_form': comment_problem_form,
         'comments_problem': comments_problem,
         'codes_teammate': codes_teammate,
+        'code_form': code_form,
+        'codes': codes
     })
 
 
@@ -170,18 +241,24 @@ def problem_with_code(request, team_id, problem_number, codes_string):
     joined_teams = get_joined_teams(request)
     # 백준에서 문제 가져오기
     problem = get_problem_from_boj(problem_number)
-    # 화면에 띄울 코드들 가져오기
-    codes_wanted = get_codes_wanted(codes_string)
     # 문제 댓글들 가져오기
     comments_problem = CommentProblem.objects.filter(
         team_no__exact=this_team, problem__exact=problem_number)
+    # 내가 작성했던 혹은 새 코드폼 가져오기
+    code_form = get_my_code_form(request, problem_number)
+    if not code_form:
+        code_form = CodeForm()
+    # 화면에 띄울 코드들 가져오기
+    codes_wanted = get_codes_wanted(codes_string)
     # 팀원들 가져오기
-    teammates = get_teammates(team_id)
+    teammates = get_teammates(request, team_id)
     # 팀원들 코드들 가져오기
     codes_teammate = Code.objects.filter(
         problem_no__exact=problem_number, user_no__in=teammates, display__exact=True).order_by('-created_date')
-
-    if request.method == 'POST':
+    if request.method == 'GET':
+        # 내가 작성했던 혹은 새 코드폼 가져오기
+        code_form = get_my_code_form(request, problem_number)
+    elif request.method == 'POST' and 'comment' in request.POST:
         comment_problem_form = CommentProblemForm(request.POST)
         if comment_problem_form.is_valid():
             comment_problem = comment_problem_form.save(commit=False)
@@ -190,18 +267,54 @@ def problem_with_code(request, team_id, problem_number, codes_string):
             comment_problem.author = request.user
             comment_problem.created_date = timezone.now()
             comment_problem.save()
-    else:
+    elif request.method == 'POST' and 'code' in request.POST:
+        code_form = CodeForm(request.POST)
+        if code_form.is_valid():
+            code = code_form.save(commit=False)
+            try:
+                code_my = Code.objects.get(
+                    problem_no=problem_number, user_no=request.user)
+            except:
+                code.problem_no = problem_number
+                code.created_date = timezone.now()
+                code.user_no = request.user
+                code.save()
+            else:
+                code_my.one_line_comment = code.one_line_comment
+                code_my.content = code.content
+                code_my.success = code.success
+                code_my.display = code.display
+                code_my.created_date = code.created_date
+                code_my.save()
         # 문제 댓글 입력할 때 쓸 댓글폼 가져오기
-        comment_problem_form = CommentProblemForm()
+    comment_problem_form = CommentProblemForm()
     return render(request, 'board/problem_with_code.html', {
         'this_team': this_team,
         'joined_teams': joined_teams,
         'problem': problem,
-        'codes_wanted': codes_wanted,
-        'comment_problem_form': comment_problem_form,
         'comments_problem': comments_problem,
+        'comment_problem_form': comment_problem_form,
+        'code_form': code_form,
         'codes_teammate': codes_teammate,
+        'codes_wanted': codes_wanted,
+        'codes_string': codes_string,
     })
+
+
+def problem_with_code_add(request, team_id, problem_number, codes_string, code_number_add):
+    codes_number_list = codes_string.split('&')
+    if len(codes_number_list) >= 9:
+        return redirect('problem_with_code', team_id, problem_number, codes_string)
+    else:
+        codes_number_list.append(str(code_number_add))
+        codes_number_list = set(codes_number_list)
+        codes_number_list = list(codes_number_list)
+        print("codes_number_list = ", codes_number_list)
+        codes_string = '' + codes_number_list[0]
+        codes_number_list = codes_number_list[1:]
+        for code_number in codes_number_list:
+            codes_string = codes_string + "&" + str(code_number)
+        return redirect('problem_with_code', team_id, problem_number, codes_string)
 
 
 def code_view(request, team_id, problem_number):
