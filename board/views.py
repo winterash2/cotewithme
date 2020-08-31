@@ -153,7 +153,6 @@ def problem_home(request, team_id, problem_number):
     codes = Code.objects.filter(
         problem_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
     if not codes:
-        print("plz in")
         code_form = CodeForm()
     else:
         code = codes[0]
@@ -171,7 +170,7 @@ def problem_home(request, team_id, problem_number):
             comment_problem.created_date = timezone.now()
             comment_problem.save()
 
-    elif request.method == 'POST' and 'my_code' in request.POST:
+    elif request.method == 'POST' and 'code' in request.POST:
         code_form = CodeForm(request.POST)
         if code_form.is_valid():
             code = code_form.save(commit=False)

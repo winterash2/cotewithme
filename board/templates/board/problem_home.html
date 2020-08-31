@@ -147,22 +147,11 @@
   
 
   <div class="tab2_content">
-{#    {% if codes %}#}
-{#        {{ codes.first }}#}
-{#    {% else %}#}
-{#        <form method="POST">#}
-{#            {% csrf_token %}#}
-{#            {{ code_form.as_p }}#}
-{#            <button type="submit" name="my_code" class="save btn-primary">코드 작성</button>#}
-{#        </form>#}
-{#    {% endif %}#}
     <form method="POST">
         {% csrf_token %}
         {{ code_form.as_p }}
-        <!-- view에서 CodeForm(instance=code[0]해줌 -->
-        <button type="submit" name="my_code" class="save btn-primary">코드 작성</button>
+        <button type="submit" name="code" class="save btn-primary">코드 작성</button>
     </form>
-    <button>수정</button>
   </div>
 </div>
 
