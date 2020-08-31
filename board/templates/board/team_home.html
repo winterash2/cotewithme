@@ -53,7 +53,7 @@
             {% for code in codes_my %}
             <tr>
                 <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
-                <td>한 줄 코멘트 만들면 넣을 것</td>
+                <td>{{code.one_line_comment}}</td>
                 <td>{{code.created_date}}</td>
             </tr>
             {% endfor %}
@@ -90,7 +90,7 @@
             <tr>
                 <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
                 <td>{{code.user_no.username }}</td>
-                <td>한 줄 코멘트 만들면 넣을 것</td>
+                <td>{{code.one_line_comment}}</td>
                 <td>{{code.created_date}}</td>
             </tr>
             {% endfor %}
