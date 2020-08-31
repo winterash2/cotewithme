@@ -147,15 +147,6 @@
   
 
   <div class="tab2_content">
-{#    {% if codes %}#}
-{#        {{ codes.first }}#}
-{#    {% else %}#}
-{#        <form method="POST">#}
-{#            {% csrf_token %}#}
-{#            {{ code_form.as_p }}#}
-{#            <button type="submit" name="my_code" class="save btn-primary">코드 작성</button>#}
-{#        </form>#}
-{#    {% endif %}#}
     <form method="POST">
       <table>
       {% csrf_token %}
