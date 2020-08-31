@@ -234,7 +234,8 @@ def problem_with_code(request, team_id, problem_number, codes_string):
         if code_form.is_valid():
             code = code_form.save(commit=False)
             try:
-                code_my = Code.objects.get(problem_no=problem_number, user_no=request.user)
+                code_my = Code.objects.get(
+                    problem_no=problem_number, user_no=request.user)
             except:
                 code.problem_no = problem_number
                 code.created_date = timezone.now()
@@ -258,7 +259,20 @@ def problem_with_code(request, team_id, problem_number, codes_string):
         'code_form': code_form,
         'codes_teammate': codes_teammate,
         'codes_wanted': codes_wanted,
+        'codes_string': codes_string,
     })
+
+
+
+def problem_with_code_add(request, team_id, problem_number, codes_string, code_number_add):
+    codes_number_list = codes_string.split('&')
+    while len(codes_number_list) >= 8:
+        codes_number_list.pop(0)
+    codes_number_list.append(str(code_number_add))
+    print("codes_number_list = ",codes_number_list)
+    codes_string = ''.join(codes_number_list)
+    print("codes_string = ",codes_string)
+    return redirect('problem_with_code', team_id, problem_number, codes_string)
 
 
 def code_view(request, team_id, problem_number):

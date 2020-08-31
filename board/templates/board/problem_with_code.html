@@ -183,7 +183,7 @@
     <table>
       <tr>{{ code.user_no.username }}</tr>
       <tr>{{ code.created_date }}</tr>
-      <tr><a type=button href='{% url 'problem_home' team_id=this_team.id problem_number=problem.문제번호 %}'>코드 확인</a></tr>
+      <tr><a type=button href="{% url 'problem_with_code_add' team_id=this_team.id problem_number=problem.문제번호 codes_string=codes_string code_number_add=code.id %}">코드 확인</a></tr>
     </table>
   {% endfor %}
 {% endblock %}
