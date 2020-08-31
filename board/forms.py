@@ -39,4 +39,4 @@ class CommentProblemForm(forms.ModelForm):
 class CodeForm(forms.ModelForm):
     class Meta:
         model = Code
-        fields = ("content", "success", "display", )
+        fields = ("one_line_comment", "content", "success", "display", )
