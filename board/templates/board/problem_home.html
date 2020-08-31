@@ -6,8 +6,8 @@
   <input class="tab" id="tab0" type="radio" name="tab" checked="checked" />
   <label for="tab0">문제</label>
 
-  <input class="tab" id="tab2" type="radio" name="tab" />
-  <label for="tab2">Tab 2</label>
+  <input class="tab" id="tab10" type="radio" name="tab" />
+  <label for="tab10">내 코드</label>
 
   <div class="tab0_content">
     <div class="col-md-12">
@@ -130,7 +130,7 @@
       <table>
         {{comment_problem_form.as_table}}
       </table>
-      <button type="submit" class="save btn btn-primary">댓글 작성</button>
+      <button type="submit" name="comment" class="save btn btn-primary">댓글 작성</button>
     </form>
 
     {% for comment in comments_problem %}
@@ -146,15 +146,15 @@
 
   
 
-  <div class="tab2_content">
+  <div class="tab10_content">
     <form method="POST">
-      <table>
       {% csrf_token %}
-          {{ code_form.as_table }}
-          <!-- view에서 CodeForm(instance=code[0]해줌 -->
+      <table>
+        {{ code_form.as_table }}
+        <!-- view에서 CodeForm(instance=code[0]해줌 -->
       </table>
+      <button type="submit" name="code" class="save btn btn-primary">코드 작성</button>
     </form>
-    <button type="submit" name="my_code" class="save btn-primary">코드 작성</button>
   </div>
 </div>
 

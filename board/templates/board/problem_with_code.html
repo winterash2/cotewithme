@@ -3,11 +3,14 @@
 {% block problem_code_area %}
 
 <div id="css_tabs">
-  <input id="tab0" type="radio" name="tab" checked="checked" />
+  <input class="tab" id="tab0" type="radio" name="tab" checked="checked" />
   <label for="tab0">문제</label>
 
+  <input class="tab" id="tab10" type="radio" name="tab" />
+  <label for="tab10">내 코드</label>
+
   {% for code in codes_wanted %}
-    <input id="tab{{forloop.counter}}" type="radio" name="tab" />
+    <input class="tab" id="tab{{forloop.counter}}" type="radio" name="tab" />
     <label for="tab{{forloop.counter}}">{{code.user_no.username}}</label>
   {% endfor %}
 
@@ -132,7 +135,7 @@
       <table>
         {{comment_problem_form.as_table}}
       </table>
-      <button type="submit" class="save btn btn-primary">댓글 작성</button>
+      <button type="submit" name="comment" class="save btn btn-primary">댓글 작성</button>
     </form>
 
     {% for comment in comments_problem %}
@@ -144,6 +147,17 @@
     {% empty %}
       <p>No comments here yet :(</p>
     {% endfor %}
+  </div>
+
+  <div class="tab10_content">
+    <form method="POST">
+      <table>
+      {% csrf_token %}
+          {{ code_form.as_table }}
+          <!-- view에서 CodeForm(instance=code[0]해줌 -->
+      </table>
+      <button type="submit" name="code" class="save btn-primary">코드 작성</button>
+    </form>
   </div>
 
   {% for code in codes_wanted %}

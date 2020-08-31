@@ -137,6 +137,8 @@ def redirect_problem_home(request, team_id):
 
 
 def problem_home(request, team_id, problem_number):
+    return redirect('problem_with_code', team_id, problem_number, '0')
+
     problem = get_problem_from_boj(problem_number)
     joined_teams = get_joined_teams(request)
     this_team = get_this_team_from_team_id(team_id)
@@ -157,10 +159,11 @@ def problem_home(request, team_id, problem_number):
     else:
         code = codes[0]
         code_form = CodeForm(instance=code)
+    print("-"*100)
     if request.method == "GET":
         pass
-
     elif request.method == 'POST' and 'comment' in request.POST:  # submit의 name에 따라 분류
+        print("comment")
         comment_problem_form = CommentProblemForm(request.POST)
         if comment_problem_form.is_valid():
             comment_problem = comment_problem_form.save(commit=False)
@@ -169,8 +172,8 @@ def problem_home(request, team_id, problem_number):
             comment_problem.author = request.user
             comment_problem.created_date = timezone.now()
             comment_problem.save()
-
     elif request.method == 'POST' and 'code' in request.POST:
+        print("code")
         code_form = CodeForm(request.POST)
         if code_form.is_valid():
             code = code_form.save(commit=False)
@@ -200,18 +203,24 @@ def problem_with_code(request, team_id, problem_number, codes_string):
     joined_teams = get_joined_teams(request)
     # 백준에서 문제 가져오기
     problem = get_problem_from_boj(problem_number)
-    # 화면에 띄울 코드들 가져오기
-    codes_wanted = get_codes_wanted(codes_string)
     # 문제 댓글들 가져오기
     comments_problem = CommentProblem.objects.filter(
         team_no__exact=this_team, problem__exact=problem_number)
+    # 내가 작성했던 혹은 새 코드폼 가져오기
+    code_form = get_my_code_form(request, problem_number)
+    if not code_form:
+        code_form = CodeForm()
+    # 화면에 띄울 코드들 가져오기
+    codes_wanted = get_codes_wanted(codes_string)
     # 팀원들 가져오기
     teammates = get_teammates(request, team_id)
     # 팀원들 코드들 가져오기
     codes_teammate = Code.objects.filter(
         problem_no__exact=problem_number, user_no__in=teammates, display__exact=True).order_by('-created_date')
-
-    if request.method == 'POST':
+    if request.method == 'GET':
+        # 내가 작성했던 혹은 새 코드폼 가져오기
+        code_form = get_my_code_form(request, problem_number)
+    elif request.method == 'POST' and 'comment' in request.POST:
         comment_problem_form = CommentProblemForm(request.POST)
         if comment_problem_form.is_valid():
             comment_problem = comment_problem_form.save(commit=False)
@@ -220,17 +229,35 @@ def problem_with_code(request, team_id, problem_number, codes_string):
             comment_problem.author = request.user
             comment_problem.created_date = timezone.now()
             comment_problem.save()
-    else:
+    elif request.method == 'POST' and 'code' in request.POST:
+        code_form = CodeForm(request.POST)
+        if code_form.is_valid():
+            code = code_form.save(commit=False)
+            try:
+                code_my = Code.objects.get(problem_no=problem_number, user_no=request.user)
+            except:
+                code.problem_no = problem_number
+                code.created_date = timezone.now()
+                code.user_no = request.user
+                code.save()
+            else:
+                code_my.one_line_comment = code.one_line_comment
+                code_my.content = code.content
+                code_my.success = code.success
+                code_my.display = code.display
+                code_my.created_date = code.created_date
+                code_my.save()
         # 문제 댓글 입력할 때 쓸 댓글폼 가져오기
-        comment_problem_form = CommentProblemForm()
+    comment_problem_form = CommentProblemForm()
     return render(request, 'board/problem_with_code.html', {
         'this_team': this_team,
         'joined_teams': joined_teams,
         'problem': problem,
-        'codes_wanted': codes_wanted,
-        'comment_problem_form': comment_problem_form,
         'comments_problem': comments_problem,
+        'comment_problem_form': comment_problem_form,
+        'code_form': code_form,
         'codes_teammate': codes_teammate,
+        'codes_wanted': codes_wanted,
     })
 
 
