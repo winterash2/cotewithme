@@ -157,12 +157,13 @@
 {#        </form>#}
 {#    {% endif %}#}
     <form method="POST">
-        {% csrf_token %}
-        {{ code_form.as_p }}
-        <!-- view에서 CodeForm(instance=code[0]해줌 -->
-        <button type="submit" name="my_code" class="save btn-primary">코드 작성</button>
+      <table>
+      {% csrf_token %}
+          {{ code_form.as_table }}
+          <!-- view에서 CodeForm(instance=code[0]해줌 -->
+      </table>
     </form>
-    <button>수정</button>
+    <button type="submit" name="my_code" class="save btn-primary">코드 작성</button>
   </div>
 </div>
 

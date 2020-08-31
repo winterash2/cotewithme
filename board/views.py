@@ -182,7 +182,6 @@ def problem_home(request, team_id, problem_number):
             code.display = True
             code.save()
 
-
     return render(request, 'board/problem_home.html', {
         'this_team': this_team,
         'joined_teams': joined_teams,

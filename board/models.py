@@ -43,6 +43,7 @@ class CommentProblem(models.Model):
 class Code(models.Model):
     problem_no = models.IntegerField()
     user_no = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    one_line_comment = models.TextField(max_length=50)
     content = models.TextField()
     success = models.BooleanField(default=False)
     display = models.BooleanField(default=True)
