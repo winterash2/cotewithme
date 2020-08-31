@@ -81,7 +81,6 @@ def team_delete(request, team_id):
 
 
 @login_required
-# TODO ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 def team_home(request, team_id):
     check_user_is_joined = JoinedTeam.objects.filter(
         user_no__exact=request.user, team_no__exact=team_id)
@@ -94,7 +93,6 @@ def team_home(request, team_id):
         posts = Post.objects.filter(team_no__exact=this_team, created_date__lte=timezone.now()).order_by('created_date')
         paginator = Paginator(posts, 2)
         page = request.GET.get('page')
-
         try:
             posts = paginator.page(page)
         except PageNotAnInteger:
@@ -135,6 +133,7 @@ def team_home(request, team_id):
             'teammates': teammates,
             'codes_my': codes_my,
             'codes_teammates': codes_teammates,
+            'user':request.user,
 
         })
     else:
