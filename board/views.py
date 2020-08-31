@@ -8,6 +8,8 @@ from django.http import HttpResponse
 import requests
 import math
 from bs4 import BeautifulSoup
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
 from .views_function import *
 
 
@@ -79,13 +81,23 @@ def team_delete(request, team_id):
 
 
 @login_required
+# TODO ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 def team_home(request, team_id):
     check_user_is_joined = JoinedTeam.objects.filter(
         user_no__exact=request.user, team_no__exact=team_id)
     if len(check_user_is_joined) == 1:
         this_team = check_user_is_joined[0].team_no
         teammates = get_teammates(request, team_id)
-        posts = Post.objects.filter(team_no__exact=this_team)
+        posts = Post.objects.filter(team_no__exact=this_team, created_date__lte=timezone.now()).order_by('created_date')
+        paginator = Paginator(posts, 2)
+        page = request.GET.get('page')
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+
         joined_teams = get_joined_teams(request)
         codes_my = Code.objects.filter(
             user_no__exact=request.user).order_by('-created_date')
@@ -98,6 +110,7 @@ def team_home(request, team_id):
             'teammates': teammates,
             'codes_my': codes_my,
             'codes_teammates': codes_teammates,
+
         })
     else:
         return redirect('main_page')
