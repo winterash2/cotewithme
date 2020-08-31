@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>CTWM MAIN</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- Optional theme -->
@@ -17,16 +17,17 @@
 </head>
 <body>
 
-<div class="row">
-    <div class="col-sm-4" style="background-color: aquamarine">
-        <h1 class="logo_h1"><a href="/">CoTeWithMe!!!</a></h1>
+<div class="wrapper_top">
+    <div class="col-sm-12" id="main_1">
+        <a class="logo_h1" href="/">CoteWithME</a>
     </div>
-    <div class="col-sm-4" style="background-color: brown">
 
-{% block enter_problem_number_area %}
-{% endblock %}
+    <div class="col-sm-12" id="main_2">
+        {% block enter_problem_number_area %}
+        {% endblock %}
     </div>
-    <div class="col-sm-4" style="background-color: chartreuse">
+
+    <div class="col-sm-12" id="main_3">
         {% if user.is_authenticated %}
             <a href="{% url 'logout' %}" class="top-menu"><span class="glyphicon glyphicon-user">logout</span></a>
         {% else %}

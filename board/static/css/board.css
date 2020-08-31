@@ -1,5 +1,21 @@
+body {
+    color: #aaa;
+    background-color: #272b30;
+}
+
+.wrapper_top {
+  display: grid;
+  grid-gap: 3px;
+  /*width:1fr;*/
+  grid-template-columns: 27% 46% 27%;
+}
+
+#main_1, #main_2, #main_3 {
+  background-color: #3a3f44;
+}
+
 .page-header {
-  background-color: #ff9400;
+  background-color: #3a3f44;
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 5px 0px 20px 40px;
@@ -10,14 +26,18 @@
 .page-header h1 a:active {
   color: #ffffff;
   font-size: 24pt;
+  font-weight: bolder;
   text-decoration: none;
 }
 
 .logo_h1 {
-  color: #555555;
-  font-size: 20px;
+  color: #fff;
+  font-size: 25px;
+  padding: 0px 0px 0px 10px;
+  /*padding: 0.75rem 1rem calc(54px - 0.75rem - 30px);*/
+  /*margin-right: 0;*/
 }
-.col-sm-4 {
+.col-sm-12 {
   height: 50px;
 }
 
@@ -37,9 +57,20 @@
   grid-template-columns: 50px 300px 1fr 300px;
 }
 
+.div1 {
+  padding:10px 0px
+}
+
 .wrapper_base > div {
   /* background-color: orange; */
   border: 1px black solid;
+}
+
+.wrapper_select {
+  display: grid;
+  padding: 40px 35px 29px 35px;
+  margin: 0 auto 50px;
+  grid-gap: 50px;
 }
 
 .key {
@@ -100,12 +131,17 @@ input:checked + label {
 
 .team_button {
   display: inline-block;
-  background-color: aqua;
+  background-color: #d7d7d7;
   width: 48px;
   height: 48px;
+  border-radius: 50%;
+  text-align:center;
+  line-height:48px;
   word-break: break-all;
   overflow: hidden;
   font-size: 15px;
+  font-weight: bolder;
+  color:black;
   padding: 0px 0px;
 }
 
@@ -113,3 +149,34 @@ input:checked + label {
   display: inline-block;
 }
 
+.btn {
+    border-color: rgba(0, 0, 0, 0.6);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+  background-image: linear-gradient(#484e55, #3a3f44 60%, #313539);
+}
+
+.btn-lg {
+  text-align: center;
+  height:70px;
+  width:400px;
+  line-height: 50px;
+  font-size:25px;
+}
+
+.btn_3, .btn_4 {
+
+}
+
+td {
+  background-color:#3a3f44;
+  border-color: #3a3f44;
+}
+
+.table th {
+  padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid rgba(0, 0, 0, 0.6);
+}

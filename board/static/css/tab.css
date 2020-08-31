@@ -56,7 +56,7 @@
   font-weight: 700;
   border-radius: 3px 3px 0 0;
   background: #eee;
-  color: #777;
+  color: #777777;
   border: 1px solid #ccc;
   border-width: 1px 1px 0;
 }
@@ -90,7 +90,7 @@
 #css_tabs > label[for="tab9"]:hover,
 #css_tabs input:nth-of-type(10):checked ~ label:nth-of-type(10), 
 #css_tabs > label[for="tab10"]:hover {
-  background: tomato;
+  background: #272b30;
   color: #fff;
 }
 

@@ -1,29 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>CTWM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" type="text/css">
+    <link rel="Stylesheet" href="{% static 'css/accounts.css' %}">
 </head>
 <body>
 {% if form.errors %}
 <p>이름과 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
 {% endif %}
 
-Coding Test With Me!
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <table class="table table-bordered table-hover">
-        <tr>
-            <td>{{ form.username.label_tag }}</td><td>{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td>{{ form.password.label_tag }}</td><td>{{ form.password }}</td>
-        </tr>
-    </table>
-    <input type="submit" value="로그인" class="btn btn-primary btn" />
-    <button onclick = 'location.href = "{% url 'signup' %}"' class="btn btn-primary btn"><span class="glyphicon glyphicon-user">회원가입</span></button>
-{#    <input type="hidden" name="next" value="{{ next }}" />#}
-</form>
-{#    <a href="{% url 'signup' %}" class="top-menu" ><span class="glyphicon glyphicon-user">signup</span></a>#}
+<div class="jumbotron text-center">
+    <h1>Coding Test With Me!</h1>
+</div>
+
+</div>
+<div class="container_login">
+            <form class="sign-in" method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <table class="table table-bordered table-hover text-center" >
+                    <tr>
+                        <td>{{ form.username.label_tag }}</td><td>{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.password.label_tag }}</td><td>{{ form.password }}</td>
+                    </tr>
+                </table>
+                <input type="submit" value="로그인" class="btn btn-primary btn" />
+                <button onclick = 'location.href = "{% url 'signup' %}"' class="btn btn-primary btn" ><span class="glyphicon glyphicon-user">회원가입</span></button>
+            {#    <input type="hidden" name="next" value="{{ next }}" />#}
+            </form>
+            {#    <a href="{% url 'signup' %}" class="top-menu" ><span class="glyphicon glyphicon-user">signup</span></a>#}
+</div>
+
 </body>
 </html>
