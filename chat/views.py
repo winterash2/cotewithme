@@ -5,8 +5,6 @@ from .models import *
 from board.models import Team
 from chat.forms import ChatChannelForm
 
-# Create your views here.
-
 
 def get_this_team_from_team_id(team_id):
     this_team = Team.objects.get(id=team_id)

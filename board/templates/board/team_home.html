@@ -25,6 +25,48 @@
     {% endfor %}
     </table>
 
+    <h3>내가 최근에 푼 문제</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>문제 번호</th>
+                <th>한 줄 코멘트</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for code in codes_my %}
+            <tr>
+                <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
+                <td>한 줄 코멘트 만들면 넣을 것</td>
+                <td>{{code.created_date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> <!-- class code_my-->
+    
+    <h3>팀원들이 최근에 푼 문제</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>문제 번호</th>
+                <th>작성자</th>
+                <th>한 줄 코멘트</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for code in codes_teammates %}
+            <tr>
+                <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
+                <td>{{code.user_no.username }}</td>
+                <td>한 줄 코멘트 만들면 넣을 것</td>
+                <td>{{code.created_date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> <!-- class code_my-->
+
 {% endblock %}
 
 {% block teammate_area %}
