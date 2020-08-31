@@ -10,19 +10,23 @@
         새 글(게시판)</a>
 
     <table class="table table-hover">
-    <th>
-        <td>제목</td>
-        <td>내용</td>
-        <td>게시일</td>
-    </th>
-    {% for post in posts %}
-    <tr>
-        <td>{{ forloop.counter }}</td>
-        <td>{{ post.title }}</td>
-        <td>{{ post.content }}</td>
-        <td>{{ post.created_date.date }}</td>
-    </tr>
-    {% endfor %}
+    <thead>
+        <tr>
+            <td>제목</td>
+            <td>내용</td>
+            <td>게시일</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.content }}</td>
+                <td>{{ post.created_date.date }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
     <div class="pagination">
         <span class="step_links">
             {% if posts.has_previous %}
