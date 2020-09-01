@@ -1,10 +1,6 @@
 body {
-    color: #aaa;
+    color: #fff;
     background-color: #272b30;
-}
-
-.wrapper {
-    padding:10px 12px;
 }
 
 .chat_channel_form {
@@ -12,7 +8,23 @@ body {
     /*width:100px;*/
 }
 
-.textarea {
-    display: block;
+.textarea, #chat-log, #chat-message-input {
+    /*display: block;*/
     resize: none;
+    background-color: #272b30;
+}
+
+.wrapper_chatmain, .wrapper_chatroom {
+    padding:10px 12px;
+}
+
+#chat-message-submit {
+    margin:5px 0px 0px 220px;
+}
+
+.wrapper_chatroom {
+  display: grid;
+  height: 100%;
+  grid-gap: 0px;
+  grid-template-rows: 20% 20% 60%;
 }
