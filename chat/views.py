@@ -31,6 +31,8 @@ def chat_home(request, team_id):
 
 def chat_room(request, team_id, room_name):
     user_name = str(request.user.username)
+    # print("-"*100, request.user.username, "------")
+    # print("-"*10, request.user)
     this_team = get_this_team_from_team_id(team_id)
     room_name_json = this_team.team_name + room_name
     if request.method == "POST":
