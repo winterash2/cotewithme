@@ -190,7 +190,8 @@ def post_detail(request, team_id, post_id):
         comment_post.created_date = timezone.now()
         comment_post.save()
     comment_post_form = CommentPostForm()
-    comments_post = CommentPost.objects.filter(post_no=post_id).order_by('-created_date')
+    comments_post = CommentPost.objects.filter(
+        post_no=post_id).order_by('-created_date')
 
     return render(request, 'board/post_detail.html', {
         'joined_teams': joined_teams,
@@ -353,8 +354,6 @@ def problem_with_code_sub(request, team_id, problem_number, codes_string, code_i
     for code_number in codes_number_list:
         codes_string = codes_string + "&" + str(code_number)
     return redirect('problem_with_code', team_id, problem_number, codes_string)
-
-
 
 
 def delete_comment_problem(request, team_id, problem_number, codes_string, comment_problem_id):
