@@ -2,37 +2,62 @@
 
 {% block problem_code_area %}
 
-<div>
-  <a type="button" class="btn btn-primary" href="{% url 'post_edit' this_team.id post.id %}">수정</a>
-  <a type="button" class="btn btn-primary" href="{% url 'post_delete' this_team.id post.id %}">삭제</a>
-  {% if post.published_date %}
-    <div class="date">
-    {{ post.created_date }}
+    <div style="padding-top: 3%">
+        {% if post.published_date %}
+            <div class="date" style="float: right; margin-right: 7%; padding-top: 2%">
+                {{ post.created_date }}
+            </div>
+        {% endif %}
+        <div class="my_code_category">
+            <p style="font-weight: bold; font-size: 32px">{{ post.title }}</p>
+        </div>
+        <hr style="border: solid 2px; margin-left: 6%; margin-right: 7%">
+        <div class="code_or_boad" style="height: 100%">
+            {{ post.content|linebreaksbr }}
+        </div>
+        <div style="margin-right: 8%; margin-top: 3px; float: right">
+            <a type="button" class="btn btn-primary" href="{% url 'post_edit' this_team.id post.id %}">수정</a>
+            <a type="button" class="btn btn-primary" href="{% url 'post_delete' this_team.id post.id %}">삭제</a>
+        </div>
+
+
     </div>
-  {% endif %}
-  <h1>{{ post.title }}</h1>
-  <p>{{ post.content|linebreaksbr }}</p>
-</div>
 
-<div>
-  <form method="post">
-    {% csrf_token %}
-    {{comment_post_form}}
-    <button type="submit" class="save btn btn-primary">댓글 작성</button>
-  </form>
-</div>
 
-<div>
-  {% for comment in comments_post %}
-      <div class="comment">
-        <div class="date">{{ comment.created_date }}</div>
-        <strong>{{ comment.author }}</strong>
-        <p>{{ comment.content|linebreaks }}</p>
-        <a class="btn btn-default" href="{% url 'delete_comment_post' team_id=this_team.id post_id=post.id comment_id=comment.id %}">댓글 삭제</a>
-      </div>
-    {% empty %}
-      <p>No comments here yet :(</p>
-    {% endfor %}
-</div>
+
+
+    <div style="margin-top: 5%;">
+        <form method="post">
+            {% csrf_token %}
+            {{comment_post_form}}
+            <span>
+                <button type="submit" class="save btn btn-primary" style="float: right; margin-right: 8%;">댓글 작성</button>
+            </span>
+        </form>
+    </div>
+
+
+        <div style="margin-left: 7%; margin-top: 5%;">
+        <p style="font-weight: bold; font-size: 32px">댓글</p>
+    </div>
+    <hr style="border: solid 2px; margin-left: 6%; margin-right: 7%">
+
+    <div class="post_comment_list">
+        {% for comment in comments_post %}
+            <div class="comment" style="margin-top: 3%; padding:2% 2% 4%; background-color: #3a3f44;">
+                <div class="date">{{ comment.created_date }}</div>
+                <p style="font-size: 20px"><strong>{{ comment.author }}</strong></p>
+                <p>{{ comment.content|linebreaks }}</p>
+                <a style="float: right; " class="btn btn-default" href="{% url 'delete_comment_post' team_id=this_team.id post_id=post.id comment_id=comment.id %}">댓글 삭제</a>
+            </div>
+        {% empty %}
+            <p>No comments here yet :(</p>
+        {% endfor %}
+    </div>
+
+
+
+
+
 
 {% endblock %}

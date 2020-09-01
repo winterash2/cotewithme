@@ -272,3 +272,48 @@ td, th {
   background-color: #3a3f44;
   border-color: white;
 }
+
+#problem-comment-content {
+  margin-top: 15px;
+  width: 90%;
+  margin-left: 3%;
+  color: white;
+  background-color: #3a3f44;
+  border-color: white;
+}
+
+#post-comment-content {
+  margin-top: 15px;
+  width: 85%;
+  margin-left: 7%;
+  color: white;
+  background-color: #3a3f44;
+  border-color: white;
+}
+
+.comment_list {
+  margin-top: 3%;
+  width: 90%;
+  margin-left: 3%;
+  color: white;
+  border-color: white;
+}
+
+.post_comment_list {
+  margin-top: 3%;
+  margin-right: 8%;
+  margin-left: 7%;
+  color: white;
+  border-color: white;
+}
+.code_or_boad {
+  padding: 15px;
+  margin-top: 15px;
+  width: 85%;
+  height: 600px;
+  margin-left: 7%;
+  color: white;
+  background-color: #3a3f44;
+  border-color: white;
+
+}
