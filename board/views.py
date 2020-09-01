@@ -95,7 +95,6 @@ def team_home(request, team_id):
             team_no__exact=this_team, created_date__lte=timezone.now()).order_by('-created_date')
         paginator = Paginator(posts, 2)
         page = request.GET.get('page')
-
         try:
             posts = paginator.page(page)
         except PageNotAnInteger:
@@ -136,6 +135,7 @@ def team_home(request, team_id):
             'teammates': teammates,
             'codes_my': codes_my,
             'codes_teammates': codes_teammates,
+            'user':request.user,
         })
     else:
         return redirect('main_page')

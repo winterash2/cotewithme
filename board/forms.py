@@ -25,6 +25,18 @@ class CreateTeamForm(forms.Form):
 
 
 class PostForm(forms.ModelForm):
+    title = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(attrs={'size': '200'}))
+    content = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                'cols':200,
+                'row':500,
+                'color':'black'
+            }
+        )
+    )
     class Meta:
         model = Post
         fields = ('title', 'content', )

@@ -43,10 +43,11 @@
             {% endif %}
         </span>
     </div>
-    </table>
 
+    </table>
+    <br>
     <h3>내가 최근에 푼 문제</h3>
-    <table border="1">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>문제 번호</th>
@@ -79,9 +80,9 @@
             </div>
         </tbody>
     </table> <!-- class code_my-->
-
+    <br>
     <h3>팀원들이 최근에 푼 문제</h3>
-    <table border="1">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>문제 번호</th>
@@ -120,10 +121,13 @@
 {% endblock %}
 
 {% block teammate_area %}
+
     {% for teammate in teammates %}
-    <table>
-        <tr>{{teammate.username}}</tr>
-        <tr> 이름: {{teammate.first_name}} {{teammate.last_name}}</tr>
-    </table>
+        <div class="panel panel-default" style="width: 100%; align-content: center">
+          <div class="panel-heading">{{ teammate }}</div>
+          <div class="panel-body">{{teammate.first_name}} {{teammate.last_name}} <br> {{ teammate.email }}</div>
+        </div>
     {% endfor %}
+
+
 {% endblock %}
