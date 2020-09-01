@@ -135,7 +135,7 @@ def team_home(request, team_id):
             'teammates': teammates,
             'codes_my': codes_my,
             'codes_teammates': codes_teammates,
-            'user':request.user,
+            'user': request.user,
         })
     else:
         return redirect('main_page')
@@ -179,6 +179,7 @@ def post_detail(request, team_id, post_id):
     this_team = get_this_team_from_team_id(team_id)
     teammates = get_teammates(request, team_id)
     post = get_object_or_404(Post, id=post_id)
+
     return render(request, 'board/post_detail.html', {
         'joined_teams': joined_teams,
         'this_team': this_team,
@@ -319,3 +320,9 @@ def problem_with_code_add(request, team_id, problem_number, codes_string, code_n
         for code_number in codes_number_list:
             codes_string = codes_string + "&" + str(code_number)
         return redirect('problem_with_code', team_id, problem_number, codes_string)
+
+
+def delete_comment_problem(request, team_id, problem_number, codes_string, comment_problem_id):
+    comment_problem = get_object_or_404(CommentProblem, id=comment_problem_id)
+    comment_problem.delete()
+    return redirect('problem_with_code', team_id, problem_number, codes_string)
