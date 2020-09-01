@@ -1,18 +1,9 @@
 {% extends 'board/base_team.html' %}
 
-{% block team_select_area %}
-{% endblock %}
-
 {% block problem_code_area %}
-    <table>
-        <form method="post" class="post-form">
-            {% csrf_token %}
-            {{ post_form.as_p }}
-            <button type="submit" class="save btn btn-primary">저장</button>
-        </form>
-    </table>
-
-{% endblock %}
-
-{% block teammate_area %}
+    <form method="post">
+        {% csrf_token %}
+        {{ post_form }}
+        <button style="float: right;" type="submit" class="save btn btn-primary">저장</button>
+    </form>
 {% endblock %}

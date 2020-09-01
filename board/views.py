@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 from django.utils import timezone
@@ -74,6 +74,7 @@ def team_leave(request, team_id):
     return redirect('main_page')
 
 
+@login_required
 def team_delete(request, team_id):
     team = Team.objects.filter(id=team_id)
     team.delete()
@@ -81,7 +82,6 @@ def team_delete(request, team_id):
 
 
 @login_required
-# TODO ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 def team_home(request, team_id):
     check_user_is_joined = JoinedTeam.objects.filter(
         user_no__exact=request.user, team_no__exact=team_id)
@@ -91,10 +91,10 @@ def team_home(request, team_id):
         joined_teams = get_joined_teams(request)
 
         # 게시판 pagination
-        posts = Post.objects.filter(team_no__exact=this_team, created_date__lte=timezone.now()).order_by('created_date')
+        posts = Post.objects.filter(
+            team_no__exact=this_team, created_date__lte=timezone.now()).order_by('-created_date')
         paginator = Paginator(posts, 2)
         page = request.GET.get('page')
-
         try:
             posts = paginator.page(page)
         except PageNotAnInteger:
@@ -105,7 +105,7 @@ def team_home(request, team_id):
         # 내가 푼 코드 pagination
         codes_my = Code.objects.filter(
             user_no__exact=request.user).order_by('-created_date')
-        codes_my_paginator = Paginator(codes_my,2)
+        codes_my_paginator = Paginator(codes_my, 2)
         codes_my_page = request.GET.get('codes_my_page')
         try:
             codes_my = codes_my_paginator.page(codes_my_page)
@@ -120,13 +120,13 @@ def team_home(request, team_id):
         codes_teammates_paginator = Paginator(codes_teammates, 2)
         codes_teammates_page = request.GET.get('codes_teammates_page')
         try:
-            codes_teammates = codes_teammates_paginator.page(codes_teammates_page)
+            codes_teammates = codes_teammates_paginator.page(
+                codes_teammates_page)
         except PageNotAnInteger:
             codes_teammates = codes_teammates_paginator.page(1)
         except EmptyPage:
-            codes_teammates = codes_teammates_paginator.page(codes_teammates_paginator.num_pages)
-
-
+            codes_teammates = codes_teammates_paginator.page(
+                codes_teammates_paginator.num_pages)
 
         return render(request, 'board/team_home.html', {
             'this_team': this_team,
@@ -135,20 +135,20 @@ def team_home(request, team_id):
             'teammates': teammates,
             'codes_my': codes_my,
             'codes_teammates': codes_teammates,
-
+            'user':request.user,
         })
     else:
         return redirect('main_page')
 
 
+@login_required
 def post_new(request, team_id):
+    joined_teams = get_joined_teams(request)
     this_team = get_this_team_from_team_id(team_id)
+    teammates = get_teammates(request, team_id)
     if request.method == "POST":
         post_form = PostForm(request.POST)
         if post_form.is_valid():
-            check_user_is_joined = JoinedTeam.objects.filter(
-                user_no__exact=request.user, team_no__exact=team_id)
-            this_team = check_user_is_joined[0].team_no
             post = post_form.save(commit=False)
             post.team_no = this_team
             post.author = request.user
@@ -158,82 +158,85 @@ def post_new(request, team_id):
             return redirect('team_home', this_team.id)
         else:
             return render(request, 'board/post_new.html', {
+                'joined_teams': joined_teams,
                 'post_form': post_form,
                 'this_team': this_team,
+                'teammates': teammates,
             })
     else:
         post_form = PostForm()
     return render(request, 'board/post_new.html', {
+        'joined_teams': joined_teams,
         'post_form': post_form,
         'this_team': this_team,
+        'teammates': teammates,
     })
 
 
+@login_required
+def post_detail(request, team_id, post_id):
+    joined_teams = get_joined_teams(request)
+    this_team = get_this_team_from_team_id(team_id)
+    teammates = get_teammates(request, team_id)
+    post = get_object_or_404(Post, id=post_id)
+    return render(request, 'board/post_detail.html', {
+        'joined_teams': joined_teams,
+        'this_team': this_team,
+        'teammates': teammates,
+        'post': post,
+    })
+
+
+@login_required
+def post_edit(request, team_id, post_id):
+    joined_teams = get_joined_teams(request)
+    this_team = get_this_team_from_team_id(team_id)
+    teammates = get_teammates(request, team_id)
+    if request.method == 'GET':
+        post = Post.objects.get(id=post_id)
+        post_form = PostForm(instance=post)
+    elif request.method == "POST":
+        post_form = PostForm(request.POST)
+        if post_form.is_valid():
+            post = Post.objects.get(id=post_id)
+            post.title = post_form.cleaned_data['title']
+            post.content = post_form.cleaned_data['content']
+            post.save()
+            return redirect('post_detail', this_team.id, post_id)
+        else:
+            return render(request, 'board/post_edit.html', {
+                'joined_teams': joined_teams,
+                'post_form': post_form,
+                'this_team': this_team,
+                'teammates': teammates,
+            })
+    return render(request, 'board/post_edit.html', {
+        'joined_teams': joined_teams,
+        'post_form': post_form,
+        'this_team': this_team,
+        'teammates': teammates,
+    })
+
+
+@login_required
+def post_delete(request, team_id, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    post.delete()
+    return redirect('team_home', team_id)
+
+
+@login_required
 def redirect_problem_home(request, team_id):
     problem_number = request.GET['problem_number']
     return redirect('problem_home', team_id, problem_number)
 
 
+@login_required
 def problem_home(request, team_id, problem_number):
     return redirect('problem_with_code', team_id, problem_number, '0')
 
-    problem = get_problem_from_boj(problem_number)
-    joined_teams = get_joined_teams(request)
-    this_team = get_this_team_from_team_id(team_id)
 
-    # comment
-    comment_problem_form = CommentProblemForm()
-    comments_problem = CommentProblem.objects.filter(
-        team_no__exact=this_team, problem__exact=problem_number)
-    teammates = get_teammates(request, team_id)
-    codes_teammate = Code.objects.filter(
-        problem_no__exact=problem_number, user_no__in=teammates, display__exact=True).order_by('-created_date')
-
-    # code
-    codes = Code.objects.filter(
-        problem_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
-    if not codes:
-        code_form = CodeForm()
-    else:
-        code = codes[0]
-        code_form = CodeForm(instance=code)
-    print("-"*100)
-    if request.method == "GET":
-        pass
-    elif request.method == 'POST' and 'comment' in request.POST:  # submit의 name에 따라 분류
-        print("comment")
-        comment_problem_form = CommentProblemForm(request.POST)
-        if comment_problem_form.is_valid():
-            comment_problem = comment_problem_form.save(commit=False)
-            comment_problem.problem = problem_number
-            comment_problem.team_no = this_team
-            comment_problem.author = request.user
-            comment_problem.created_date = timezone.now()
-            comment_problem.save()
-    elif request.method == 'POST' and 'code' in request.POST:
-        print("code")
-        code_form = CodeForm(request.POST)
-        if code_form.is_valid():
-            code = code_form.save(commit=False)
-            code.problem_no = problem_number
-            code.created_date = timezone.now()
-            code.user_no = request.user
-            code.success = False
-            code.display = True
-            code.save()
-
-    return render(request, 'board/problem_home.html', {
-        'this_team': this_team,
-        'joined_teams': joined_teams,
-        'problem': problem,
-        'comment_problem_form': comment_problem_form,
-        'comments_problem': comments_problem,
-        'codes_teammate': codes_teammate,
-        'code_form': code_form,
-        'codes': codes
-    })
-
-
+@login_required
 def problem_with_code(request, team_id, problem_number, codes_string):
     # 지금 팀 가져오기
     this_team = get_this_team_from_team_id(team_id)
@@ -301,6 +304,7 @@ def problem_with_code(request, team_id, problem_number, codes_string):
     })
 
 
+@login_required
 def problem_with_code_add(request, team_id, problem_number, codes_string, code_number_add):
     codes_number_list = codes_string.split('&')
     if len(codes_number_list) >= 9:
@@ -315,41 +319,3 @@ def problem_with_code_add(request, team_id, problem_number, codes_string, code_n
         for code_number in codes_number_list:
             codes_string = codes_string + "&" + str(code_number)
         return redirect('problem_with_code', team_id, problem_number, codes_string)
-
-
-def code_view(request, team_id, problem_number):
-    this_team = get_this_team_from_team_id(team_id)
-    joined_teams = get_joined_teams(request)
-    if request.method == 'POST':
-        code_form = CodeForm(request.POST)
-        if code_form.is_valid():
-            code = code_form.save(commit=False)
-            code.code_no = problem_number
-            code.user_no = request.user
-            code.save()
-        codes = Code.objects.filter(
-            code_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
-    else:
-        codes = Code.objects.filter(
-            code_no__exact=problem_number, user_no__exact=request.user).order_by('-created_date')
-        if not codes:
-            code_form = CodeForm()
-        else:
-            code = codes[0]
-            code_form = CodeForm(instance=code)
-    return render(request, 'board/code_view.html', {
-        'this_team': this_team,
-        'joined_teams': joined_teams,
-        'code_form': code_form,
-        'codes': codes,
-    })
-
-
-def tab(request):
-    this_team = get_this_team_from_team_id(1)
-    joined_teams = get_joined_teams(request)
-
-    return render(request, 'board/tab.html', {
-        'joined_teams': joined_teams,
-        'this_team': this_team,
-    })

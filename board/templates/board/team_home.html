@@ -49,6 +49,7 @@
             </div>
         </div>
 
+<<<<<<< HEAD
         <div>
             <span class="listname">내가 최근에 푼 문제</span>
             <div class="table_area">
@@ -71,6 +72,66 @@
                     </tbody>
                 </table> <!-- class code_my-->
             </div>
+=======
+    <h1 style="font-weight:bolder">{{ this_team.team_name }}</h1>
+    <a class="btn btn-primary btn" href="{% url 'post_new' team_id=this_team.id %}">
+        새 글(게시판)</a>
+
+    <table class="table table-hover">
+    <thead>
+        <tr>
+            <td></td>
+            <td>제목</td>
+            <td>내용</td>
+            <td>게시일</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'post_detail' team_id=this_team.id post_id=post.id %}">{{ post.title }}</a></td>
+                <td>{{ post.content }}</td>
+                <td>{{ post.created_date.date }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <div class="pagination">
+        <span class="step_links">
+            {% if posts.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ posts.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+            </span>
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">next</a>
+                <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+    </table>
+    <br>
+    <h3>내가 최근에 푼 문제</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>문제 번호</th>
+                <th>한 줄 코멘트</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for code in codes_my %}
+            <tr>
+                <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
+                <td>{{code.one_line_comment}}</td>
+                <td>{{code.created_date}}</td>
+            </tr>
+            {% endfor %}
+>>>>>>> 55ef7eeedbee4d423bffe18473db291be0904d3f
             <div class="pagination">
                 <span class="step_links">
                     {% if codes_my.has_previous %}
@@ -86,6 +147,7 @@
                     {% endif %}
                 </span>
             </div>
+<<<<<<< HEAD
         </div>
 
         <div class="">
@@ -112,6 +174,30 @@
                     </tbody>
                 </table> <!-- class code_my-->
             </div>
+=======
+        </tbody>
+    </table> <!-- class code_my-->
+    <br>
+    <h3>팀원들이 최근에 푼 문제</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>문제 번호</th>
+                <th>작성자</th>
+                <th>한 줄 코멘트</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for code in codes_teammates %}
+            <tr>
+                <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
+                <td>{{code.user_no.username }}</td>
+                <td>{{code.one_line_comment}}</td>
+                <td>{{code.created_date}}</td>
+            </tr>
+            {% endfor %}
+>>>>>>> 55ef7eeedbee4d423bffe18473db291be0904d3f
             <div class="pagination">
                 <span class="step_links">
                     {% if codes_teammates.has_previous %}
@@ -132,10 +218,13 @@
 {% endblock %}
 
 {% block teammate_area %}
+
     {% for teammate in teammates %}
-    <table>
-        <tr>{{teammate.username}}</tr>
-        <tr> 이름: {{teammate.first_name}} {{teammate.last_name}}</tr>
-    </table>
+        <div class="panel panel-default" style="width: 100%; align-content: center">
+          <div class="panel-heading">{{ teammate }}</div>
+          <div class="panel-body">{{teammate.first_name}} {{teammate.last_name}} <br> {{ teammate.email }}</div>
+        </div>
     {% endfor %}
+
+
 {% endblock %}
