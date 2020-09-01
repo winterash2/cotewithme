@@ -15,10 +15,10 @@
                 <table class="table">
                 <thead>
                     <tr>
-                        <th style="width:10%"></th>
-                        <th style="width:20%">제목</th>
-                        <th style="width:50%">내용</th>
-                        <th style="width:20%">게시일</th>
+                        <th style="width:15%"></th>
+                        <th style="width:40%">제목</th>
+                        <th style="width:20%">작성자</th>
+                        <th style="width:25%">게시일</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +26,7 @@
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td><a href="{% url 'post_detail' this_team.id post.id %}">{{ post.title }}</a></td>
-                            <td>{{ post.content }}</td>
+                            <td>{{ post.author }}</td>
                             <td>{{ post.created_date.date }}</td>
                         </tr>
                     {% endfor %}
@@ -56,8 +56,8 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th style="width:20%">문제 번호</th>
-                            <th style="width:40%">한 줄 코멘트</th>
+                            <th style="width:15%">문제 번호</th>
+                            <th style="width:60%">한 줄 코멘트</th>
                             <th>작성일</th>
                         </tr>
                     </thead>
@@ -95,10 +95,10 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th style="width:20%">문제 번호</th>
+                            <th style="width:15%">문제 번호</th>
                             <th style="width:40%">한 줄 코멘트</th>
-                            <th style="width:20%">작성일</th>
-                            <th>작성자</th>
+                            <th style="width:20%">작성자</th>
+                            <th style="width:25%">작성일</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,16 +106,13 @@
                         <tr>
                             <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
                             <td>{{code.one_line_comment}}</td>
-                            <td>{{code.created_date}}</td>
                             <td>{{code.user_no.username }}</td>
+                            <td>{{code.created_date}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table> <!-- class code_my-->
             </div>
-{#=======#}
-{#       #}
-{#>>>>>>> 55ef7eeedbee4d423bffe18473db291be0904d3f#}
             <div class="pagination">
                 <span class="step_links">
                     {% if codes_teammates.has_previous %}

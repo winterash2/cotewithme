@@ -7,7 +7,7 @@ body {
 
 .wrapper_top {
   display: grid;
-  grid-gap: 3px;
+  /*grid-gap: 3px;*/
   grid-template-columns: 27% 1fr 27%;
 }
 
@@ -32,8 +32,7 @@ body {
 }
 
 .logo {
-  padding: 9px 0px 0px 0px;
-  text-align: center;
+  padding: 9px 0px 0px 50px;
 }
 
 .logo_detail {
@@ -74,11 +73,15 @@ body {
 
 .wrapper_select {
   display: grid;
+  width: 100%;
+  height: 80%;
   padding: 40px 35px 29px 35px;
-  margin: 0 auto 50px;
-  grid-gap: 50px;
+  grid-template-rows: 30% 15% 15% 45%;
 }
 
+.intro {
+  background-color: #272b30;
+}
 .wrapper_team {
   display: grid;
   height: 100%;

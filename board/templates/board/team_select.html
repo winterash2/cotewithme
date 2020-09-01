@@ -4,20 +4,28 @@
 {% endblock %}
 
 {% block chat_area %}
-    <iframe src="http://localhost:8000/chat" width="296px" height="100%" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
+    <h3 style="padding:0px 20px;">전체 유저 채팅방</h3>
+    <iframe src="http://localhost:8000/chat" width="100%" height="92%" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
 {% endblock %}
 
 {% block problem_code_area %}
     <div class="wrapper_select">
-        <div style="width: 100%">
-            <a style="float: right;" class="btn btn-primary text-center" href="{% url 'team_create' %}">
+        <div class="intro text-center" style="border-bottom: 2px solid #3a3f44;">
+            <h1 >Coding Test With Me</h1>
+            <ui>여럿이 함게 코딩테스트 문제를 풀어보세요.</ui><br>
+            <ui>함께 풀기 위해 팀에 참가하세요.</ui>
+        </div>
+        <div class="text-center" style="margin-top:10px;">
+            <a class="btn btn-primary text-center" href="{% url 'team_create' %}">
                 <span class="glyphicon glyphicon-plus"> 팀 생성</span>
             </a>
-            <a style="float: right;" class="btn btn-primary" href="{% url 'team_join' %}"><span class="glyphicon glyphicon-plus"> 팀 참가</span></a>
+            <a class="btn btn-primary" href="{% url 'team_join' %}">
+                <span class="glyphicon glyphicon-plus"> 팀 참가</span>
+            </a>
         </div>
 
         <div>
-            <h1 style="color:#fff">참가한 팀 목록</h1>
+            <h1>참가한 팀 목록</h1>
         </div>
         <div>
         {% for team in joined_teams %}
