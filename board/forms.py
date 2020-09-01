@@ -50,18 +50,39 @@ class PostForm(forms.ModelForm):
 
 
 class CommentPostForm(forms.ModelForm):
+    content = forms.CharField(
+        label=False,
+        widget=forms.Textarea(
+            attrs={
+                'id': 'post-comment-content',
+                'placeholder': '댓글을 작성해 주세요.',
+                'rows': 3
+            }
+        )
+    )
     class Meta:
         model = CommentPost
         fields = ('content', )
 
 
 class CommentProblemForm(forms.ModelForm):
+    content = forms.CharField(
+        label=False,
+        widget=forms.Textarea(
+            attrs={
+                'id': 'problem-comment-content',
+                'placeholder': '댓글을 작성해 주세요.',
+                'rows':3
+            }
+        )
+    )
     class Meta:
         model = CommentProblem
         fields = ('content', )
 
 
 class CodeForm(forms.ModelForm):
+    # TODO: 꼭 체크해야만 코드 등록되는 거 고치기
     success = forms.BooleanField(
         label='성공여부 ',
     )
