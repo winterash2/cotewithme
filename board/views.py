@@ -180,11 +180,25 @@ def post_detail(request, team_id, post_id):
     teammates = get_teammates(request, team_id)
     post = get_object_or_404(Post, id=post_id)
 
+    if request.method == "GET":
+        pass
+    elif request.method == "POST":
+        comment_post_form = CommentPostForm(request.POST)
+        comment_post = comment_post_form.save(commit=False)
+        comment_post.post_no = Post.objects.get(id=post_id)
+        comment_post.author = request.user
+        comment_post.created_date = timezone.now()
+        comment_post.save()
+    comment_post_form = CommentPostForm()
+    comments_post = CommentPost.objects.filter(post_no=post_id).order_by('-created_date')
+
     return render(request, 'board/post_detail.html', {
         'joined_teams': joined_teams,
         'this_team': this_team,
         'teammates': teammates,
         'post': post,
+        'comment_post_form': comment_post_form,
+        'comments_post': comments_post,
     })
 
 
@@ -247,7 +261,7 @@ def problem_with_code(request, team_id, problem_number, codes_string):
     problem = get_problem_from_boj(problem_number)
     # 문제 댓글들 가져오기
     comments_problem = CommentProblem.objects.filter(
-        team_no__exact=this_team, problem__exact=problem_number)
+        team_no__exact=this_team, problem__exact=problem_number).order_by('-created_date')
     # 내가 작성했던 혹은 새 코드폼 가져오기
     code_form = get_my_code_form(request, problem_number)
     if not code_form:

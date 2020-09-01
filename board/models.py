@@ -29,6 +29,13 @@ class Post(models.Model):
     published_date = models.DateTimeField(default=timezone.now)
 
 
+class CommentPost(models.Model):
+    post_no = models.ForeignKey('Post', on_delete=models.CASCADE)
+    author = models.ForeignKey('auth.User',on_delete=models.CASCADE)
+    content = models.TextField(max_length=300)
+    created_date = models.DateTimeField(default=timezone.now)
+
+
 class CommentProblem(models.Model):
     problem = models.IntegerField()
     team_no = models.ForeignKey('Team', on_delete=models.CASCADE)
