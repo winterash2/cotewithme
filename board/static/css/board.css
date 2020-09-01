@@ -213,3 +213,28 @@ td, th {
   width:460px; padding: 0.50rem 1rem;
   color:black;
 }
+
+#post-title {
+  margin-top: 0px;
+  width: 85%;
+  margin-left: 7%;
+  color: white;
+  background-color: #3a3f44;
+  border-color: white;
+}
+
+#post-content {
+  margin-top: 15px;
+  width: 85%;
+  height: 80%;
+  margin-left: 7%;
+  color: white;
+  background-color: #3a3f44;
+  border-color: white;
+}
+
+.new_post_category {
+  margin-left: 7%;
+  margin-top: 5%;
+}
+
