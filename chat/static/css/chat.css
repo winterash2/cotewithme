@@ -3,14 +3,16 @@ body {
     background-color: #272b30;
 }
 
-.wrapper > div{
-  #background-color: orange;
-  border: 0px black solid;
+.wrapper {
+    padding:10px 12px;
 }
 
-.wrapper {
-  display: grid;
-  height: 100vh;
-  grid-gap: 2px;
-  grid-template-rows: 10% 90%
+.chat_channel_form {
+    padding:10px 12px;
+    /*width:100px;*/
+}
+
+.textarea {
+    display: block;
+    resize: none;
 }
