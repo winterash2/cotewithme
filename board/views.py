@@ -240,6 +240,12 @@ def post_delete(request, team_id, post_id):
     return redirect('team_home', team_id)
 
 
+def delete_comment_post(request, team_id, post_id, comment_id):
+    comment_post = get_object_or_404(CommentPost, id=comment_id)
+    comment_post.delete()
+    return redirect('post_detail', team_id, post_id)
+
+
 @login_required
 def redirect_problem_home(request, team_id):
     problem_number = request.GET['problem_number']
