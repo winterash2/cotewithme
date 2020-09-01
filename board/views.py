@@ -326,12 +326,12 @@ def problem_with_code(request, team_id, problem_number, codes_string):
 
 
 @login_required
-def problem_with_code_add(request, team_id, problem_number, codes_string, code_number_add):
+def problem_with_code_add(request, team_id, problem_number, codes_string, code_id):
     codes_number_list = codes_string.split('&')
     if len(codes_number_list) >= 9:
         return redirect('problem_with_code', team_id, problem_number, codes_string)
     else:
-        codes_number_list.append(str(code_number_add))
+        codes_number_list.append(str(code_id))
         codes_number_list = set(codes_number_list)
         codes_number_list = list(codes_number_list)
         print("codes_number_list = ", codes_number_list)
@@ -340,6 +340,21 @@ def problem_with_code_add(request, team_id, problem_number, codes_string, code_n
         for code_number in codes_number_list:
             codes_string = codes_string + "&" + str(code_number)
         return redirect('problem_with_code', team_id, problem_number, codes_string)
+
+
+def problem_with_code_sub(request, team_id, problem_number, codes_string, code_id):
+    codes_number_list = codes_string.split('&')
+    codes_number_list.remove(str(code_id))
+    codes_number_list = set(codes_number_list)
+    codes_number_list = list(codes_number_list)
+    print("codes_number_list = ", codes_number_list)
+    codes_string = '' + codes_number_list[0]
+    codes_number_list = codes_number_list[1:]
+    for code_number in codes_number_list:
+        codes_string = codes_string + "&" + str(code_number)
+    return redirect('problem_with_code', team_id, problem_number, codes_string)
+
+
 
 
 def delete_comment_problem(request, team_id, problem_number, codes_string, comment_problem_id):
