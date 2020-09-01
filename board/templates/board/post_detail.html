@@ -1,0 +1,17 @@
+{% extends 'board/base_team.html' %}
+
+{% block problem_code_area %}
+
+<div>
+  <a type="button" class="btn btn-primary" href="{% url 'post_edit' this_team.id post.id %}">수정</a>
+  <a type="button" class="btn btn-primary" href="{% url 'post_delete' this_team.id post.id %}">삭제</a>
+  {% if post.published_date %}
+    <div class="date">
+    {{ post.created_date }}
+    </div>
+  {% endif %}
+  <h1>{{ post.title }}</h1>
+  <p>{{ post.content|linebreaksbr }}</p>
+</div>
+
+{% endblock %}
