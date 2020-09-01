@@ -84,16 +84,6 @@
       </section>
     </div>
 
-    <!-- <div class="col-md-12">
-      <section id="limit" style="display:none;">
-          <div class="headline">
-              <h2>제한</h2>
-          </div>
-          <div id="problem_limit" style="font-size:medium; line-height:30px;">
-          </div>
-      </section>
-    </div> -->
-
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-6">
@@ -143,6 +133,7 @@
         <div class="date">{{ comment.created_date }}</div>
         <strong>{{ comment.author }}</strong>
         <p>{{ comment.content|linebreaks }}</p>
+        <a class="btn btn-default" href="{% url 'delete_comment_problem' team_id=this_team.id problem_number=problem.문제번호 codes_string=codes_string comment_problem_id=comment.id %}">댓글 삭제</a>
       </div>
     {% empty %}
       <p>No comments here yet :(</p>
@@ -151,12 +142,19 @@
 
   <div class="tab10_content">
     <form method="POST">
-      <table>
       {% csrf_token %}
-          {{ code_form.as_table }}
-          <!-- view에서 CodeForm(instance=code[0]해줌 -->
-      </table>
-      <button type="submit" name="code" class="save btn-primary">코드 작성</button>
+        <div class="my_code_category">
+            <p style="font-weight: bold; font-size: 32px">코드 작성</p>
+        </div>
+        <hr style="border: solid 2px; margin-left: 6%; margin-right: 7%">
+        <div>
+            {{ code_form }}
+        </div>
+
+        <div style="height: 20px">
+            <button style="float: right; margin-right: 8%" type="submit" name="code" class="save btn btn-primary">코드 작성</button>
+        </div>
+
     </form>
   </div>
 

@@ -18,9 +18,12 @@ urlpatterns = [
     path('team/<int:team_id>/post_detail/<int:post_id>', views.post_detail, name='post_detail'),
     path('team/<int:team_id>/post_edit/<int:post_id>', views.post_edit, name='post_edit'),
     path('team/<int:team_id>/post_delete/<int:post_id>', views.post_delete, name='post_delete'),
+    path('team/<int:team_id>/post_detail/<int:post_id>/delete_comment_post/<int:comment_id>/', views.delete_comment_post, name='delete_comment_post'),
     # solving problem page
     path('team/<int:team_id>/problem/', views.redirect_problem_home, name='redirect_problem_home'),
     path('team/<int:team_id>/problem/<int:problem_number>/', views.problem_home, name='problem_home'),
     path('team/<int:team_id>/problem/<int:problem_number>/code/<str:codes_string>/', views.problem_with_code, name='problem_with_code'),
     path('team/<int:team_id>/problem/<int:problem_number>/code/<str:codes_string>/code_add/<str:code_number_add>', views.problem_with_code_add, name='problem_with_code_add'),
+    path('team/<int:team_id>/problem/<int:problem_number>/code/<str:codes_string>/delete_comment_problem/<int:comment_problem_id>/', views.delete_comment_problem, name='delete_comment_problem'),
+
 ]
