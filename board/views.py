@@ -93,7 +93,7 @@ def team_home(request, team_id):
         # 게시판 pagination
         posts = Post.objects.filter(
             team_no__exact=this_team, created_date__lte=timezone.now()).order_by('-created_date')
-        paginator = Paginator(posts, 2)
+        paginator = Paginator(posts, 5)
         page = request.GET.get('page')
         try:
             posts = paginator.page(page)
@@ -105,7 +105,7 @@ def team_home(request, team_id):
         # 내가 푼 코드 pagination
         codes_my = Code.objects.filter(
             user_no__exact=request.user).order_by('-created_date')
-        codes_my_paginator = Paginator(codes_my, 2)
+        codes_my_paginator = Paginator(codes_my, 5)
         codes_my_page = request.GET.get('codes_my_page')
         try:
             codes_my = codes_my_paginator.page(codes_my_page)
@@ -117,7 +117,7 @@ def team_home(request, team_id):
         # 팀원이 푼 코드 pagination
         codes_teammates = Code.objects.filter(
             user_no__in=teammates).order_by('-created_date')
-        codes_teammates_paginator = Paginator(codes_teammates, 2)
+        codes_teammates_paginator = Paginator(codes_teammates, 5)
         codes_teammates_page = request.GET.get('codes_teammates_page')
         try:
             codes_teammates = codes_teammates_paginator.page(
