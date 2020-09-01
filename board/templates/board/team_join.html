@@ -10,9 +10,9 @@
     <h1>새 팀 참가</h1>
     <form method="POST" class="post-form">
         {% csrf_token %}
-        <table>
+{#        <table>#}
             {{ team_form.as_table }}
-        </table>
+{#        </table>#}
         <button type="submit" class="save btn btn-primary">참가</button>
     </form>
 

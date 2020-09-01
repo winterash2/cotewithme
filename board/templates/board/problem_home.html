@@ -149,10 +149,10 @@
   <div class="tab10_content">
     <form method="POST">
       {% csrf_token %}
-      <table>
+{#      <table>#}
         {{ code_form.as_table }}
         <!-- view에서 CodeForm(instance=code[0]해줌 -->
-      </table>
+{#      </table>#}
       <button type="submit" name="code" class="save btn btn-primary">코드 작성</button>
     </form>
   </div>

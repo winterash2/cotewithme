@@ -52,3 +52,15 @@ class CodeForm(forms.ModelForm):
     class Meta:
         model = Code
         fields = ("one_line_comment", "content", "success", "display", )
+
+        # widgets = {
+        #
+        # }
+        # def __init__(self, *args, **kwargs):
+        #     super(CodeForm, self).__init__( *args, **kwargs)
+        #     self.field['codeform_field'].widgets.attrs.update({
+        #         one_line_comment = models.CharField(max_length=50)
+        #         content = models.TextField()
+        #         success = models.BooleanField(default=False)
+        #         display = models.BooleanField(default=True)
+        #     })
