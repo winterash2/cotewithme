@@ -24,7 +24,7 @@
                     {% for post in posts %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ post.title }}</td>
+                            <td><a href="{% url 'post_detail' this_team.id post.id %}">{{ post.title }}</a></td>
                             <td>{{ post.content }}</td>
                             <td>{{ post.created_date.date }}</td>
                         </tr>
