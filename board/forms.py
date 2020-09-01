@@ -26,14 +26,21 @@ class CreateTeamForm(forms.Form):
 
 class PostForm(forms.ModelForm):
     title = forms.CharField(
+        label=False,
         max_length=150,
-        widget=forms.TextInput(attrs={'size': '200'}))
+        widget=forms.TextInput(
+            attrs={
+                'id':'post-title',
+                'placeholder': '제목을 입력해 주세요.',
+            }
+        )
+    )
     content = forms.CharField(
+        label=False,
         widget=forms.Textarea(
             attrs={
-                'cols':200,
-                'row':500,
-                'color':'black'
+                'id':'post-content',
+                'placeholder':'내용을 입력하세요.'
             }
         )
     )

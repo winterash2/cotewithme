@@ -3,7 +3,15 @@
 {% block problem_code_area %}
     <form method="post">
         {% csrf_token %}
-        {{ post_form }}
-        <button style="float: right;" type="submit" class="save btn btn-primary">저장</button>
+        <div class="new_post_category">
+            <p style="font-weight: bold; font-size: 32px">카페 글 쓰기</p>
+        </div>
+        <hr style="border: solid 2px; margin-left: 6%; margin-right: 7%">
+        <div>
+            {{ post_form }}
+        </div>
+        <div>
+            <button style="float: right; margin-right: 8%" type="submit" class="save btn btn-primary">저장</button>
+        </div>
     </form>
 {% endblock %}
