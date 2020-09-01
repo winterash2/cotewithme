@@ -62,6 +62,25 @@ class CommentProblemForm(forms.ModelForm):
 
 
 class CodeForm(forms.ModelForm):
+    one_line_comment = forms.CharField(
+        label=False,
+        max_length=150,
+        widget=forms.TextInput(
+            attrs={
+                'id': 'code-one-line-comment',
+                'placeholder': '한 줄 코멘트를 입력해주세요.',
+            }
+        )
+    )
+    content = forms.CharField(
+        label=False,
+        widget=forms.Textarea(
+            attrs={
+                'id': 'code-content',
+                'placeholder': '내용을 입력하세요.'
+            }
+        )
+    )
     class Meta:
         model = Code
         fields = ("one_line_comment", "content", "success", "display", )

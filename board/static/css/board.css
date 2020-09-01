@@ -238,3 +238,21 @@ td, th {
   margin-top: 5%;
 }
 
+#code-one-line-comment {
+  margin-top: 0px;
+  width: 85%;
+  margin-left: 7%;
+  color: white;
+  background-color: #3a3f44;
+  border-color: white;
+}
+
+#code-content {
+  margin-top: 15px;
+  width: 85%;
+  height: 80%;
+  margin-left: 7%;
+  color: white;
+  background-color: #3a3f44;
+  border-color: white;
+}
