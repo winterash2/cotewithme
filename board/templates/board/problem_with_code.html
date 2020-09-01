@@ -143,11 +143,15 @@
   <div class="tab10_content">
     <form method="POST">
       {% csrf_token %}
+        <div class="my_code_category">
+            <p style="font-weight: bold; font-size: 32px">코드 작성</p>
+        </div>
+        <hr style="border: solid 2px; margin-left: 6%; margin-right: 7%">
         <div>
             {{ code_form }}
         </div>
 
-        <div>
+        <div style="height: 20px">
             <button style="float: right; margin-right: 8%" type="submit" name="code" class="save btn btn-primary">코드 작성</button>
         </div>
 

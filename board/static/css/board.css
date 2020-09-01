@@ -237,9 +237,12 @@ td, th {
   margin-left: 7%;
   margin-top: 5%;
 }
-
-#code-one-line-comment {
+.my_code_category {
+  margin-left: 7%;
   margin-top: 0px;
+}
+#code-one-line-comment {
+  margin-top: 10px;
   width: 85%;
   margin-left: 7%;
   color: white;
@@ -250,7 +253,7 @@ td, th {
 #code-content {
   margin-top: 15px;
   width: 85%;
-  height: 80%;
+  height: 600px;
   margin-left: 7%;
   color: white;
   background-color: #3a3f44;
