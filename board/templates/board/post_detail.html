@@ -14,4 +14,25 @@
   <p>{{ post.content|linebreaksbr }}</p>
 </div>
 
+<div>
+  <form method="post">
+    {% csrf_token %}
+    {{comment_post_form}}
+    <button type="submit" class="save btn btn-primary">댓글 작성</button>
+  </form>
+</div>
+
+<div>
+  {% for comment in comments_post %}
+      <div class="comment">
+        <div class="date">{{ comment.created_date }}</div>
+        <strong>{{ comment.author }}</strong>
+        <p>{{ comment.content|linebreaks }}</p>
+        <a class="btn btn-default" href="{% url 'delete_comment_post' team_id=this_team.id post_id=post.id comment_id=comment.id %}">댓글 삭제</a>
+      </div>
+    {% empty %}
+      <p>No comments here yet :(</p>
+    {% endfor %}
+</div>
+
 {% endblock %}
