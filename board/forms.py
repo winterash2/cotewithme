@@ -62,6 +62,12 @@ class CommentProblemForm(forms.ModelForm):
 
 
 class CodeForm(forms.ModelForm):
+    success = forms.BooleanField(
+        label='성공여부 ',
+    )
+    display = forms.BooleanField(
+        label='공개여부 '
+    )
     one_line_comment = forms.CharField(
         label=False,
         max_length=150,
@@ -77,22 +83,11 @@ class CodeForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 'id': 'code-content',
-                'placeholder': '내용을 입력하세요.'
+                'placeholder': '내용을 입력하세요.',
+                'col':200
             }
         )
     )
     class Meta:
         model = Code
-        fields = ("one_line_comment", "content", "success", "display", )
-
-        # widgets = {
-        #
-        # }
-        # def __init__(self, *args, **kwargs):
-        #     super(CodeForm, self).__init__( *args, **kwargs)
-        #     self.field['codeform_field'].widgets.attrs.update({
-        #         one_line_comment = models.CharField(max_length=50)
-        #         content = models.TextField()
-        #         success = models.BooleanField(default=False)
-        #         display = models.BooleanField(default=True)
-        #     })
+        fields = ("success", "display", "one_line_comment", "content" )
