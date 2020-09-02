@@ -23,16 +23,16 @@
             <a class="btn btn-primary" href="{% url 'team_join' %}">
                 <span class="glyphicon glyphicon-plus"> 팀 참가</span>
             </a>
+            <hr>
         </div>
-        <div class="text-center" style="margin-top:10px;">
+        <div class="text-center" style="font-size: 10pt;">
+            <br>
+            <ui style="font-size: 30pt;">참가한 팀</ui><br>
         </div>
-        <div class="text-center" style="font-size: 30pt;">
-            <p>참가한 팀</p>
-        </div>
-        <div class="text-center" style="font-size: 30pt;">
+        <div class="text-center" style="font-size: 25pt; padding:30%; padding-top: 10px">
             {% for team in joined_teams %}
-                <a style=" margin-top: 10px; color:#aaa" href="{% url 'team_home' team_id=team.id %}"> {{ team.team_name }} </a>
-                <br>
+                <a style="color:#aaa" href="{% url 'team_home' team_id=team.id %}"> {{ team.team_name }} </a>
+                <hr>
             {% endfor %}
         </div>
     </div>
