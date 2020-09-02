@@ -71,7 +71,7 @@ body {
 .div1 {
   padding:10px 0px;
 }
-.div2 , .div3, .div4 {
+.div3, .div4 {
   overflow:auto;
 }
 .div1 {
