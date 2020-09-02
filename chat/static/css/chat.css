@@ -41,6 +41,7 @@ body {
     grid-template-rows: 12% 15% 70%;
     position:absolute;
 }
+
 .create-room {
     margin-top:-20px;
 }

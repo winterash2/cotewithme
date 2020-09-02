@@ -9,6 +9,7 @@ body {
   display: grid;
   /*grid-gap: 3px;*/
   grid-template-columns: 20% 1fr 20%;
+  height: 70px;
 }
 
 #main_1, #main_3 {
@@ -68,9 +69,11 @@ body {
 }
 
 .div1 {
-  padding:10px 0px
+  padding:10px 0px;
 }
-
+.div1, .div2, .div3, .div4 {
+  overflow:auto;
+}
 .wrapper_base > div {
   border: 1px black solid;
 }
@@ -80,7 +83,7 @@ body {
   width: 100%;
   height: 80%;
   padding: 40px 35px 29px 35px;
-  grid-template-rows: 30% 15% 15% 45%;
+  grid-template-rows: 30% 15% 15% auto;
 }
 
 .intro {
@@ -92,9 +95,9 @@ body {
 .wrapper_teamhome {
   display: grid;
   width: 100%;
-  /*height: 100%;*/
+  height: 80%;
   grid-gap: 0px;
-  grid-template-rows: 7% auto auto auto;
+  grid-template-rows: 50px 1fr;
   padding:0px 30px;
 }
 
@@ -124,7 +127,6 @@ body {
   width:100%;
   margin-top:-10px;
   margin-bottom:20px;
-
   text-align: center;
 }
 
@@ -345,4 +347,12 @@ td, th {
 
 a.text:hover {
   text-decoration: underline;
+}
+
+.wrapper_problem {
+  display:grid;
+  /*grid-gap: 0px;*/
+  /*grid-template-rows: auto auto auto;*/
+  width: 100%;
+  height: 100%;
 }
