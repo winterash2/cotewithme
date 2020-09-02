@@ -64,14 +64,14 @@ body {
   width: 100%;
   height: 92%;
   grid-gap: 2px;
-  grid-template-columns: 50px 300px 1fr 300px;
+  grid-template-columns: 60px 300px 1fr 300px;
   position: absolute;
 }
 
 .div1 {
   padding:10px 0px;
 }
-.div1, .div3, .div4 {
+.div2 , .div3, .div4 {
   overflow:auto;
 }
 .div1 {
@@ -206,8 +206,8 @@ input:checked + label {
 .team_button {
   display: inline-block;
   background-color: #d7d7d7;
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   text-align:center;
   line-height:48px;
@@ -216,7 +216,7 @@ input:checked + label {
   font-size: 15px;
   font-weight: bolder;
   color:black;
-  padding: 0px 0px;
+  margin: 5px;
 }
 
 .my_layout {
