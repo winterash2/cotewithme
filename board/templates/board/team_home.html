@@ -1,139 +1,116 @@
 {% extends 'board/base_team.html' %}
 
+{% block team_select_area %}
+{% endblock %}
+
 {% block problem_code_area %}
     <div class="wrapper_teamhome">
         <div class="teamhome1">{{ this_team.team_name }}</div>
-        <div>
-            <div class="teamhome2">
-                <div>
-                    <ui class="listname">게시판</ui>
-                    <span>
-                        <a class="btn btn-primary btn btn_5" href="{% url 'post_new' team_id=this_team.id %}">새 글(게시판)</a>
-                    </span>
-                </div>
+        <div class="teamhome2">
+            <div>
+                <ui class="listname">게시판</ui>
+                <span>
+                    <a class="btn btn-primary btn btn_5" href="{% url 'post_new' team_id=this_team.id %}">새 글(게시판)</a>
+                </span>
+            </div>
 
-                <div>
-                    <table class="table">
+            <div>
+                <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width:15%"></th>
+                        <th style="width:40%">제목</th>
+                        <th style="width:20%">작성자</th>
+                        <th style="width:25%">게시일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posts %}
+                        <tr>
+                            <td>{{ post.id }}</td>
+                            <td><a class="text" style="font-weight: bold; color:#f5dd5d;" href="{% url 'post_detail' this_team.id post.id %}">{{ post.title }}</a></td>
+                            <td>{{ post.author }}</td>
+                            <td>{{ post.created_date.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+            {# TODO: pagination 한 페이지에 보이는 갯수 5로 바꾸면서 테이블이랑 겹침 수정필요 #}
+            <div class="pagination">
+                <span class="step_links">
+                    {% for i in total_posts_page_num %}
+                        <a style="font-weight: bold; color:white;" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                    {% endfor %}
+                </span>
+            </div>
+        </div>
+        
+        <div class="teamhome3">
+            <div style="margin-bottom:10px">
+                <ui class="listname">내가 최근에 푼 문제</ui>
+            </div>
+            <div>
+                <table class="table">
                     <thead>
                         <tr>
-                            <th style="width:15%"></th>
-                            <th style="width:40%">제목</th>
-                            <th style="width:20%">작성자</th>
-                            <th style="width:25%">게시일</th>
+                            <th style="width:15%">문제 번호</th>
+                            <th style="width:60%">한 줄 코멘트</th>
+                            <th>작성일</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for post in posts %}
-                            <tr>
-                                <td>{{ post.id }}</td>
-                                <td><a class="text" style="font-weight: bold; color:#f5dd5d;" href="{% url 'post_detail' this_team.id post.id %}">{{ post.title }}</a></td>
-                                <td>{{ post.author }}</td>
-                                <td>{{ post.created_date.date }}</td>
-                            </tr>
+                        {% for code in codes_my %}
+                        <tr>
+                            <td><a class="text" style="font-weight: bold; color:#f5dd5d;" href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
+                            <td>{{code.one_line_comment}}</td>
+                            <td>{{code.created_date}}</td>
+                        </tr>
                         {% endfor %}
                     </tbody>
-                    </table>
-                </div>
-                {# TODO: pagination 한 페이지에 보이는 갯수 5로 바꾸면서 테이블이랑 겹침 수정필요 #}
-                <div class="pagination">
-                    <span class="step_links">
-                        {% if posts.has_previous %}
-                            <a class="text" style="background-color: #dddddd; padding:2px; color:black;" href="?page=1">&laquo; first</a>
-                            <a class="text" style="background-color: #dddddd; padding:2px; color:black;" href="?page={{ posts.previous_page_number }}">previous</a>
-                        {% endif %}
-                        <span class="current">
-                            Page {{ posts.number }} of {{ posts.paginator.num_pages }}
-                        </span>
-                        {% if posts.has_next %}
-                            <a style="background-color: #dddddd; padding:2px; color:black;" href="?page={{ posts.next_page_number }}">next</a>
-                            <a style="background-color: #dddddd; padding:2px; color:black;" href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
-                        {% endif %}
-                    </span>
-                </div>
+                </table> <!-- class code_my-->
             </div>
-            
-            <div class="teamhome3">
-                <div style="margin-bottom:10px">
-                    <ui class="listname">내가 최근에 푼 문제</ui>
-                </div>
-                <div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th style="width:15%">문제 번호</th>
-                                <th style="width:60%">한 줄 코멘트</th>
-                                <th>작성일</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for code in codes_my %}
-                            <tr>
-                                <td><a class="text" style="font-weight: bold; color:#f5dd5d;" href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
-                                <td>{{code.one_line_comment}}</td>
-                                <td>{{code.created_date}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table> <!-- class code_my-->
-                </div>
-                <div class="pagination">
-                    <span class="step_links">
-                        {% if codes_my.has_previous %}
-                            <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page=1">&laquo; first</a>
-                            <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page={{ codes_my.previous_page_number }}">previous</a>
-                        {% endif %}
-                        <span class="current">
-                            Page {{ codes_my.number }} of {{ codes_my.paginator.num_pages }}
-                        </span>
-                        {% if codes_my.has_next %}
-                            <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page={{ codes_my.next_page_number }}">next</a>
-                            <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page={{ codes_my.paginator.num_pages }}">last &raquo;</a>
-                        {% endif %}
-                    </span>
-                </div>
+            <div class="pagination">
+                <span class="step_links">
+                    {% for i in total_codes_my_page_num %}
+                        <a style="font-weight: bold; color:white;" href="?codes_my_page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                    {% endfor %}
+                </span>
             </div>
+        </div>
 
-            <div class="teamhome4">
-                <div style="margin-bottom:10px">
-                    <ui class="listname">팀원들이 최근에 푼 문제</ui>
-                </div>
-                <div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th style="width:15%">문제 번호</th>
-                                <th style="width:40%">한 줄 코멘트</th>
-                                <th style="width:20%">작성자</th>
-                                <th style="width:25%">작성일</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for code in codes_teammates %}
-                            <tr>
-                                <td><a class="text" style="font-weight: bold; color:#f5dd5d;" href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
-                                <td>{{code.one_line_comment}}</td>
-                                <td>{{code.user_no.username }}</td>
-                                <td>{{code.created_date}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table> <!-- class code_my-->
-                </div>
-                <div class="pagination">
-                    <span class="step_links">
-                        {% if codes_teammates.has_previous %}
-                            <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page=1">&laquo; first</a>
-                            <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page={{ codes_teammates.previous_page_number }}">previous</a>
-                        {% endif %}
-                        <span class="current">
-                            Page {{ codes_teammates.number }} of {{ codes_teammates.paginator.num_pages }}
-                        </span>
-                        {% if codes_teammates.has_next %}
-                            <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page={{ codes_teammates.next_page_number }}">next</a>
-                            <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page={{ codes_teammates.paginator.num_pages }}">last &raquo;</a>
-                        {% endif %}
-                    </span>
-                </div>
+        <div class="teamhome4">
+            <div style="margin-bottom:10px">
+                <ui class="listname">팀원들이 최근에 푼 문제</ui>
+            </div>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width:15%">문제 번호</th>
+                            <th style="width:40%">한 줄 코멘트</th>
+                            <th style="width:20%">작성자</th>
+                            <th style="width:25%">작성일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for code in codes_teammates %}
+                        <tr>
+                            <td><a class="text" style="font-weight: bold; color:#f5dd5d;" href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
+                            <td>{{code.one_line_comment}}</td>
+                            <td>{{code.user_no.username }}</td>
+                            <td>{{code.created_date}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table> <!-- class code_my-->
+            </div>
+            <div class="pagination">
+                <span class="step_links">
+                    {% for i in total_codes_teammates_page_num %}
+                        <a style="font-weight: bold; color:white;" href="?codes_teammates_page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                    {% endfor %}
+                </span>
             </div>
         </div>
     </div>

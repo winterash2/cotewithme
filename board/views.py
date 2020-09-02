@@ -95,6 +95,12 @@ def team_home(request, team_id):
             team_no__exact=this_team, created_date__lte=timezone.now()).order_by('-created_date')
         paginator = Paginator(posts, 5)
         page = request.GET.get('page')
+        total_posts = posts.count()
+        if total_posts < 5:
+            total_posts_page_num = 1
+        else:
+            total_posts_page_num = int(math.ceil(total_posts / 5))
+
         try:
             posts = paginator.page(page)
         except PageNotAnInteger:
@@ -107,6 +113,12 @@ def team_home(request, team_id):
             user_no__exact=request.user).order_by('-created_date')
         codes_my_paginator = Paginator(codes_my, 5)
         codes_my_page = request.GET.get('codes_my_page')
+        total_codes_my = codes_my.count()
+        if total_codes_my < 5:
+            total_codes_my_page_num = 1
+        else:
+            total_codes_my_page_num = int(math.ceil( total_codes_my / 5))
+
         try:
             codes_my = codes_my_paginator.page(codes_my_page)
         except PageNotAnInteger:
@@ -119,6 +131,11 @@ def team_home(request, team_id):
             user_no__in=teammates).order_by('-created_date')
         codes_teammates_paginator = Paginator(codes_teammates, 5)
         codes_teammates_page = request.GET.get('codes_teammates_page')
+        total_codes_teammates = codes_teammates.count()
+        if total_codes_teammates < 5:
+            total_codes_teammates_page_num = 1
+        else:
+            total_codes_teammates_page_num = int(math.ceil( total_codes_teammates / 5))
         try:
             codes_teammates = codes_teammates_paginator.page(
                 codes_teammates_page)
@@ -136,6 +153,12 @@ def team_home(request, team_id):
             'codes_my': codes_my,
             'codes_teammates': codes_teammates,
             'user': request.user,
+
+            # total pages
+            'total_posts_page_num': range(total_posts_page_num),
+            'total_codes_my_page_num': range(total_codes_my_page_num),
+            'total_codes_teammates_page_num': range(total_codes_teammates_page_num)
+
         })
     else:
         return redirect('main_page')
