@@ -32,7 +32,7 @@
 
     <div class="col-sm-12" id="main_3">
         {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">
+            <a class="logout" href="{% url 'logout' %}">
                 <span class="glyphicon glyphicon-lock" style="padding-top: 7%; margin-left: 10px; float: right; text-align: right; font-size: 18px;">logout</span>
             </a>
             <span class="glyphicon glyphicon-user" style="padding-top: 7%; float: right; text-align: right; font-size: 18px;">{{ user }}</span>
