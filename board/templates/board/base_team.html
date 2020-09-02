@@ -19,12 +19,10 @@
 {% endblock %}
 
 {% block teammate_area %}
-    <div class="div4">
     {% for teammate in teammates %}
          <div class="panel panel-default" style="margin:5%; width: 90%; display: inline-block; align-content: center; background-color: #484e55">
             <div class="panel-heading" style="width: 100%" >{{ teammate }}</div>
          <div class="panel-body">{{teammate.first_name}} {{teammate.last_name}} <br> {{ teammate.email }}</div>
         </div>
     {% endfor %}
-    </div">
 {% endblock %}
