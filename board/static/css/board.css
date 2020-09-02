@@ -8,10 +8,14 @@ body {
 .wrapper_top {
   display: grid;
   /*grid-gap: 3px;*/
-  grid-template-columns: 27% 1fr 27%;
+  grid-template-columns: 20% 1fr 20%;
 }
 
-#main_1, #main_2, #main_3 {
+#main_1, #main_3 {
+  background-color: #3a3f44;
+}
+#main_2 {
+  /*background-color: #573e3e;*/
   background-color: #3a3f44;
 }
 
