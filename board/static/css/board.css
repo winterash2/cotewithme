@@ -68,9 +68,12 @@ body {
 }
 
 .div1 {
-  padding:10px 0px
+  padding:10px 0px;
+  overflow:auto;
 }
-
+.div4 {
+  overflow:auto;
+}
 .wrapper_base > div {
   border: 1px black solid;
 }
@@ -80,7 +83,8 @@ body {
   width: 100%;
   height: 80%;
   padding: 40px 35px 29px 35px;
-  grid-template-rows: 30% 15% 15% 45%;
+  grid-template-rows: 30% 15% 15% auto;
+  overflow:auto;
 }
 
 .intro {
@@ -96,6 +100,7 @@ body {
   grid-gap: 0px;
   grid-template-rows: 7% auto auto auto;
   padding:0px 30px;
+  overflow:auto;
 }
 
 .teamhome1 {
@@ -124,7 +129,6 @@ body {
   width:100%;
   margin-top:-10px;
   margin-bottom:20px;
-
   text-align: center;
 }
 
@@ -344,4 +348,13 @@ td, th {
 
 a.text:hover {
   text-decoration: underline;
+}
+
+.wrapper_problem {
+  display:grid;
+  /*grid-gap: 0px;*/
+  /*grid-template-rows: auto auto auto;*/
+  width: 100%;
+  height: 100%;
+  overflow:auto;
 }
