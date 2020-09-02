@@ -5,7 +5,9 @@
 
 {% block problem_code_area %}
     <div class="wrapper_teamhome">
-        <div class="teamhome1">{{ this_team.team_name }}</div>
+        <div class="teamhome1">
+            <p style="margin-top:10px">{{ this_team.team_name }} </p>
+        </div>
         <div class="teamhome2">
             <div>
                 <ui class="listname">게시판</ui>
@@ -113,6 +115,10 @@
                 </span>
             </div>
         </div>
+        <div>
+            <a class="btn btn-primary" style="margin-top: 3px; float: right;" href="{% url 'team_leave' team_id=this_team.id %}"><span class="glyphicon glyphicon-remove">팀 탈퇴</span></a>
+            <a class="btn btn-primary" style="margin-top: 3px; float: right;" href="{% url 'team_delete' team_id=this_team.id %}"><span class="glyphicon glyphicon-remove">팀 삭제</span></a>
+        </div>
     </div>
 {% endblock %}
 
@@ -121,7 +127,7 @@
     {% for teammate in teammates %}
         <div class="panel panel-default" style="margin:5%; width: 90%; display: inline-block; align-content: center; background-color: #484e55">
             <div class="panel-heading" style="width: 100%" >{{ teammate }}</div>
-        <div class="panel-body">{{teammate.first_name}} {{teammate.last_name}} <br> {{ teammate.email }}</div>
+        <div class="panel-body">{{teammate.last_name}} {{teammate.first_name}} <br> {{ teammate.email }}</div>
         </div>
     {% endfor %}
 

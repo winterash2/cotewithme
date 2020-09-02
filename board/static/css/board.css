@@ -1,3 +1,14 @@
+@import url("fontawesome-all.min.css");
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,100italic,300italic");
+
+body, input, select, textarea {
+  color: rgba(255, 255, 255, 0.75);
+  font-family: "Roboto", Helvetica, sans-serif;
+  font-size: 13pt;
+  font-weight: 100;
+  line-height: 1.75em;
+}
+
 body {
     width:100%;
     height:100%;
@@ -84,9 +95,9 @@ body {
 .wrapper_select {
   display: grid;
   width: 100%;
-  height: 80%;
+  height: 100%;
   padding: 40px 35px 29px 35px;
-  grid-template-rows: 30% 15% 15% auto;
+  grid-template-rows: 340px 40px 70px 1fr ;
 }
 
 .intro {

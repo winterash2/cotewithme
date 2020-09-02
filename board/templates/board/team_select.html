@@ -10,11 +10,13 @@
 {% block problem_code_area %}
     <div class="wrapper_select">
         <div class="intro text-center">
-            <h1 >Coding Test With Me</h1>
-            <ui>여럿이 함께 코딩테스트 문제를 풀어보세요.</ui><br>
-            <ui>함께 풀기 위해 팀에 참가하세요.</ui>
-        </div>
-        <div class="text-center" style="margin-top:10px;">
+            <h1 style="font-size: 50pt;">Coding Test With Me</h1>
+            <br>
+            <ui style="font-size: 20pt;">여럿이 함께 코딩테스트 문제를 풀어보세요.</ui><br>
+            <br>
+            <ui style="font-size: 20pt;">함께 풀기 위해 팀에 참가하세요.</ui>
+            <br>
+            <br>
             <a class="btn btn-primary text-center" href="{% url 'team_create' %}">
                 <span class="glyphicon glyphicon-plus"> 팀 생성</span>
             </a>
@@ -22,18 +24,16 @@
                 <span class="glyphicon glyphicon-plus"> 팀 참가</span>
             </a>
         </div>
-
-        <div>
-            <h1>참가한 팀 목록</h1>
+        <div class="text-center" style="margin-top:10px;">
         </div>
-        <div>
-        {% for team in joined_teams %}
-            <div style="padding-bottom: 5px;">
-                <a class="btn btn-primary btn-sm" style="margin-top: 3px;" href="{% url 'team_leave' team_id=team.id %}"><span class="glyphicon glyphicon-remove">탈퇴 </span></a>
-                <a class="btn btn-primary btn-sm" style="margin-top: 3px;" href="{% url 'team_delete' team_id=team.id %}"><span class="glyphicon glyphicon-remove">삭제 </span></a>
-                <a style="font-size:26px; position: fixed; padding-top:1px; padding-left: 7px; color:#aaa" href="{% url 'team_home' team_id=team.id %}"> {{ team.team_name }} </a>
-            </div>
-        {% endfor %}
+        <div class="text-center" style="font-size: 30pt;">
+            <p>참가한 팀</p>
+        </div>
+        <div class="text-center" style="font-size: 30pt;">
+            {% for team in joined_teams %}
+                <a style=" margin-top: 10px; color:#aaa" href="{% url 'team_home' team_id=team.id %}"> {{ team.team_name }} </a>
+                <br>
+            {% endfor %}
         </div>
     </div>
 
