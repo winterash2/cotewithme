@@ -278,20 +278,21 @@ td, th {
   margin-left: 7%;
   margin-top: 0px;
 }
-#code-one-line-comment {
+
+#code-form{
   margin-top: 10px;
-  width: 85%;
   margin-left: 7%;
+  margin-right: 7%;
+}
+#id_one_line_comment {
+  width: 100%;
   color: white;
   background-color: #3a3f44;
   border-color: white;
 }
 
-#code-content {
-  margin-top: 15px;
-  width: 85%;
-  height: 600px;
-  margin-left: 7%;
+#id_content {
+  width: 100%;
   color: white;
   background-color: #3a3f44;
   border-color: white;

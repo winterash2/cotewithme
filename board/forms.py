@@ -82,19 +82,11 @@ class CommentProblemForm(forms.ModelForm):
 
 
 class CodeForm(forms.ModelForm):
-    # TODO: 꼭 체크해야만 코드 등록되는 거 고치기
-    success = forms.BooleanField(
-        label='성공여부 ',
-    )
-    display = forms.BooleanField(
-        label='공개여부 '
-    )
     one_line_comment = forms.CharField(
         label=False,
         max_length=150,
         widget=forms.TextInput(
             attrs={
-                'id': 'code-one-line-comment',
                 'placeholder': '한 줄 코멘트를 입력해주세요.',
             }
         )
@@ -103,7 +95,6 @@ class CodeForm(forms.ModelForm):
         label=False,
         widget=forms.Textarea(
             attrs={
-                'id': 'code-content',
                 'placeholder': '내용을 입력하세요.',
                 'col':200
             }
@@ -112,3 +103,7 @@ class CodeForm(forms.ModelForm):
     class Meta:
         model = Code
         fields = ("success", "display", "one_line_comment", "content" )
+        labels = {
+            'success': "성공 여부",
+            'display': "공개 여부",
+        }
