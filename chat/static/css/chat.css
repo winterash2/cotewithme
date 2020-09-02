@@ -17,7 +17,7 @@ body {
 
 .chat-log2 {
     width:100%;
-    height:100%;
+    /* height:100%; */
     resize: none;
     background-color: #272b30;
 }
@@ -39,7 +39,7 @@ body {
     padding: 10px 10px;
     grid-template-rows: 50px 15% 1fr;
     position:absolute;
-    overflow:hidden;
+    overflow:scroll;
 }
 
 .chat-list {
@@ -91,4 +91,12 @@ body {
 
 #id_chat_channel_name{
     margin: 3px;
+}
+
+.create-room {
+    height: 100%;
+}
+
+.chat-room {
+    height: 100%;
 }
