@@ -21,16 +21,20 @@
     <div class="col-sm-12" id="main_1">
 {#        <div class="logo"><a class="logo_detail" href="/">CoTeWithME</a></div>#}
         <a href="/">
-            <img class="logo" src="{% static "css/ctwm_logo.png" %}" style="width:90%; height:90%;">
+            <img class="logo1" src="{% static "css/ctwm_logo.png" %}" style="height:90%;">
         </a>
     </div>
-
     <div class="col-sm-12" id="main_2">
+        <a href="https://www.acmicpc.net/" target="_blank">
+            <img class="logo2" src="{% static "css/logo@2x.png" %}" style="height:50%;">
+        </a>
+    </div>
+    <div class="col-sm-12" id="main_3">
         {% block enter_problem_number_area %}
         {% endblock %}
     </div>
 
-    <div class="col-sm-12" id="main_3">
+    <div class="col-sm-12" id="main_4">
         {% if user.is_authenticated %}
             <a href="{% url 'logout' %}">
                 <span class="glyphicon glyphicon-lock" style="padding-top: 7%; margin-left: 10px; float: right; text-align: right; font-size: 18px;">logout</span>

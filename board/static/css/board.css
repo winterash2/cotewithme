@@ -18,11 +18,10 @@ body {
 .wrapper_top {
   display: grid;
   /*grid-gap: 3px;*/
-  grid-template-columns: 20% 1fr 20%;
+  grid-template-columns: 15% 11% 1fr 20%;
   height: 70px;
 }
-
-#main_1, #main_3 {
+#main_1, #main_3, #main_4 {
   background-color: #3a3f44;
 }
 #main_2 {
@@ -46,8 +45,11 @@ body {
   text-decoration: none;
 }
 
-.logo {
+.logo1 {
   margin:3px 0px 0px 0px;
+}
+.logo2 {
+  margin:20px 0px 0px 0px;
 }
 
 /*.logo_detail {*/
