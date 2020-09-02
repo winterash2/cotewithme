@@ -10,14 +10,14 @@ body {
 
 .chat-log1 {
     width:100%;
-    height:95%;
+    height:100%;
     resize: none;
     background-color: #272b30;
 }
 
 .chat-log2 {
     width:100%;
-    height:75%;
+    height:90%;
     resize: none;
     background-color: #272b30;
 }
@@ -28,7 +28,7 @@ body {
     width: 100%;
     height: 100%;
     padding: 30px 12px;
-    grid-template-rows: 5% 95%;
+    grid-template-rows: 60px 1fr;
     position:absolute;
 }
 
@@ -37,14 +37,12 @@ body {
     grid-gap: 0px;
     width: 100%;
     height: 100%;
-    padding: 30px 12px;
-    grid-template-rows: 12% 15% 70%;
+    padding: 10px 10px;
+    grid-template-rows: 50px 15% 1fr;
     position:absolute;
+    overflow:hidden;
 }
 
-.create-room {
-    margin-top:-20px;
-}
 .chat-list {
     overflow:auto;
     padding:10px;
@@ -56,14 +54,15 @@ body {
     color:#aaa;
     float:right;
 }
-.chat-room {
-    margin-top:40px;
-}
 .chat-title {
-    margin-top:-15px;
     color:#aaa;
     font-size:20px;
     text-align:center;
+}
+
+.textarea, #id_chat_channel_name {
+    width:50%;
+    background-color: #272b30;
 }
 
 .textarea, #chat-message-input {
@@ -88,4 +87,8 @@ body {
 
 .btn-primary {
   background-image: linear-gradient(#484e55, #3a3f44 60%, #313539);
+}
+
+#id_chat_channel_name{
+    margin: 3px;
 }
