@@ -8,7 +8,7 @@
 
 {% block problem_code_area %}
     <h1>새 팀 생성</h1>
-    <form method="POST" class="post-form">
+    <form method="POST" class="post-form" style="color:#aaa;">
         {% csrf_token %}
         <table>
             {{ create_team_form.as_table }}

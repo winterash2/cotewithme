@@ -31,7 +31,7 @@
             <div style="padding-bottom: 5px;">
                 <a class="btn btn-primary btn-sm" style="margin-top: 3px;" href="{% url 'team_leave' team_id=team.id %}"><span class="glyphicon glyphicon-remove">탈퇴 </span></a>
                 <a class="btn btn-primary btn-sm" style="margin-top: 3px;" href="{% url 'team_delete' team_id=team.id %}"><span class="glyphicon glyphicon-remove">삭제 </span></a>
-                <a style="font-size:26px; position: fixed; padding-top:1px; padding-left: 7px; color:#aaa" href="{% url 'team_home' team_id=team.id %}"> {{ team.team_name }} </a>
+                <a style="font-size:26px; padding-top:1px; padding-left: 7px; color:#aaa" href="{% url 'team_home' team_id=team.id %}"> {{ team.team_name }} </a>
             </div>
         {% endfor %}
         </div>

@@ -19,7 +19,10 @@
 
 <div class="wrapper_top">
     <div class="col-sm-12" id="main_1">
-        <div class="logo"><a class="logo_detail" href="/">CoTeWithME</a></div>
+{#        <div class="logo"><a class="logo_detail" href="/">CoTeWithME</a></div>#}
+        <a href="/">
+            <img class="logo" src="{% static "css/ctwm_logo.png" %}" style="width:90%; height:90%;">
+        </a>
     </div>
 
     <div class="col-sm-12" id="main_2">
@@ -30,9 +33,9 @@
     <div class="col-sm-12" id="main_3">
         {% if user.is_authenticated %}
             <a href="{% url 'logout' %}">
-                <span class="glyphicon glyphicon-lock" style="padding-top: 3%; margin-left: 10px; float: right; text-align: right; font-size: 18px;">logout</span>
+                <span class="glyphicon glyphicon-lock" style="padding-top: 7%; margin-left: 10px; float: right; text-align: right; font-size: 18px;">logout</span>
             </a>
-            <span class="glyphicon glyphicon-user" style="padding-top: 3%; float: right; text-align: right; font-size: 18px;">{{ user }}</span>
+            <span class="glyphicon glyphicon-user" style="padding-top: 7%; float: right; text-align: right; font-size: 18px;">{{ user }}</span>
 
         {% else %}
             <a href="{% url 'signup' %}" class="top-menu"><span class="glyphicon glyphicon-user">signup</span></a>
