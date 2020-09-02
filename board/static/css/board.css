@@ -341,3 +341,7 @@ td, th {
   border-color: white;
 
 }
+
+a.text:hover {
+  text-decoration: underline;
+}
