@@ -1,7 +1,7 @@
 body {
     width:100%;
     height:100%;
-    color: #aaa;
+    color: #fff;
     background-color: #272b30;
 }
 
@@ -36,12 +36,12 @@ body {
 }
 
 .logo {
-  padding: 9px 0px 0px 50px;
+  padding: 5px 0px 0px 50px;
 }
 
 .logo_detail {
-  color: #fff;
-  font-size: 25px;
+  color: #8396e2;
+  font-size: 28px;
   font-weight: bold;
 }
 
@@ -85,15 +85,29 @@ body {
 
 .intro {
   background-color: #272b30;
+  border-bottom: 2px solid #3a3f44;
+  color:#aaa;
 }
 
-.wrapper_team {
+.wrapper_teamhome {
   display: grid;
   width: 100%;
   /*height: 100%;*/
   grid-gap: 0px;
-  grid-template-rows: 10% auto auto auto;
+  grid-template-rows: 7% auto auto auto;
   padding:0px 30px;
+}
+
+.teamhome1 {
+  font-size:35px;
+  font-weight:bolder;
+  padding:0px 20px;
+  text-align:center;
+  border-bottom: 3px solid #3a3f44;
+}
+.teamhome2, .teamhome3, .teamhome4 {
+  margin-top:20px;
+  border-bottom: 3px solid #3a3f44;
 }
 
 .table {
@@ -118,6 +132,7 @@ body {
   font-size:20px;
   font-weight:bold;
   padding:0px 0px 0px 7px;
+  margin-bottom: 100px;
 }
 
 .key {
@@ -221,8 +236,10 @@ input:checked + label {
 }
 
 .btn_5 {
-  margin: -20px 0px 0px 680px;
+  margin-bottom:5px;
+  float: right;
 }
+
 
 td, th {
   background-color:#3a3f44;
