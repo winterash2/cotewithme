@@ -39,17 +39,9 @@
             {# TODO: pagination 한 페이지에 보이는 갯수 5로 바꾸면서 테이블이랑 겹침 수정필요 #}
             <div class="pagination">
                 <span class="step_links">
-                    {% if posts.has_previous %}
-                        <a class="text" style="background-color: #dddddd; padding:2px; color:black;" href="?page=1">&laquo; first</a>
-                        <a class="text" style="background-color: #dddddd; padding:2px; color:black;" href="?page={{ posts.previous_page_number }}">previous</a>
-                    {% endif %}
-                    <span class="current">
-                        Page {{ posts.number }} of {{ posts.paginator.num_pages }}
-                    </span>
-                    {% if posts.has_next %}
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?page={{ posts.next_page_number }}">next</a>
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
-                    {% endif %}
+                    {% for i in total_posts_page_num %}
+                        <a style="font-weight: bold; color:white;" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                    {% endfor %}
                 </span>
             </div>
         </div>
@@ -80,17 +72,9 @@
             </div>
             <div class="pagination">
                 <span class="step_links">
-                    {% if codes_my.has_previous %}
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page=1">&laquo; first</a>
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page={{ codes_my.previous_page_number }}">previous</a>
-                    {% endif %}
-                    <span class="current">
-                        Page {{ codes_my.number }} of {{ codes_my.paginator.num_pages }}
-                    </span>
-                    {% if codes_my.has_next %}
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page={{ codes_my.next_page_number }}">next</a>
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page={{ codes_my.paginator.num_pages }}">last &raquo;</a>
-                    {% endif %}
+                    {% for i in total_codes_my_page_num %}
+                        <a style="font-weight: bold; color:white;" href="?codes_my_page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                    {% endfor %}
                 </span>
             </div>
         </div>
@@ -123,17 +107,9 @@
             </div>
             <div class="pagination">
                 <span class="step_links">
-                    {% if codes_teammates.has_previous %}
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page=1">&laquo; first</a>
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page={{ codes_teammates.previous_page_number }}">previous</a>
-                    {% endif %}
-                    <span class="current">
-                        Page {{ codes_teammates.number }} of {{ codes_teammates.paginator.num_pages }}
-                    </span>
-                    {% if codes_teammates.has_next %}
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page={{ codes_teammates.next_page_number }}">next</a>
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page={{ codes_teammates.paginator.num_pages }}">last &raquo;</a>
-                    {% endif %}
+                    {% for i in total_codes_teammates_page_num %}
+                        <a style="font-weight: bold; color:white;" href="?codes_teammates_page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                    {% endfor %}
                 </span>
             </div>
         </div>
