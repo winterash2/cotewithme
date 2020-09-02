@@ -4,14 +4,16 @@
 {% endblock %}
 
 {% block problem_code_area %}
-    <div class="wrapper_team">
-        <div style="font-size:35px; font-weight:bolder; padding:0px 20px;">{{ this_team.team_name }}</div>
+    <div class="wrapper_teamhome">
+        <div class="teamhome1">{{ this_team.team_name }}</div>
+        <div class="teamhome2">
+            <div>
+                <ui class="listname">게시판</ui>
+                <span>
+                    <a class="btn btn-primary btn btn_5" href="{% url 'post_new' team_id=this_team.id %}">새 글(게시판)</a>
+                </span>
+            </div>
 
-        <div>
-            <span class="listname" style="margin-bottom: 5px">게시판</span>
-            <span style="float: right">
-                <a class="btn btn-primary btn btn_5" href="{% url 'post_new' team_id=this_team.id %}">새 글(게시판)</a>
-            </span>
             <div>
                 <table class="table">
                 <thead>
@@ -26,7 +28,7 @@
                     {% for post in posts %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td><a href="{% url 'post_detail' this_team.id post.id %}">{{ post.title }}</a></td>
+                            <td><a style="color:#fff; text-decoration: underline;" href="{% url 'post_detail' this_team.id post.id %}">{{ post.title }}</a></td>
                             <td>{{ post.author }}</td>
                             <td>{{ post.created_date.date }}</td>
                         </tr>
@@ -52,8 +54,10 @@
             </div>
         </div>
         
-        <div>
-            <span class="listname">내가 최근에 푼 문제</span>
+        <div class="teamhome3">
+            <div style="margin-bottom:10px">
+                <ui class="listname">내가 최근에 푼 문제</ui>
+            </div>
             <div>
                 <table class="table">
                     <thead>
@@ -66,7 +70,7 @@
                     <tbody>
                         {% for code in codes_my %}
                         <tr>
-                            <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
+                            <td><a style="color:#fff; text-decoration: underline;" href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
                             <td>{{code.one_line_comment}}</td>
                             <td>{{code.created_date}}</td>
                         </tr>
@@ -91,8 +95,10 @@
             </div>
         </div>
 
-        <div>
-            <span class="listname">팀원들이 최근에 푼 문제</span>
+        <div class="teamhome4">
+            <div style="margin-bottom:10px">
+                <ui class="listname">팀원들이 최근에 푼 문제</ui>
+            </div>
             <div>
                 <table class="table">
                     <thead>

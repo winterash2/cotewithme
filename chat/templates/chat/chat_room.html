@@ -16,31 +16,31 @@
   </head>
 
   <body>
-    <div class="wrapper_chatroom">
-      <div class="createroom">
+    <div class="wrapper_chat_room">
+      <div class="create-room">
         {% comment %} <input id="room-name-input" type="text" size="25" />
         <input id="room-name-submit" type="button" value="Enter" /> {% endcomment %}
         <form style="color:#aaa;" method="POST" class="chat_channel_form" value="문제 번호를 입력하세요">
           {% csrf_token %}
           {{ chat_channel_form }}
-          <input style="color:black; float:left;" type="submit" value="채팅방 생성">
+          <input class="btn btn-primary" style="margin-top:5px; float:left;" type="submit" value="채팅방 생성">
         </form>
       </div> <!--form-->
-      <div>
+      <div class="chat-list">
         {% if chat_channel_list %}
           {% for channel in chat_channel_list %}
-            <li>
-              <a href="{% url 'chat_room' this_team.id channel.chat_channel_name %}">{{channel.chat_channel_name}}</a>
-              <a href="{% url 'chat_room_delete' this_team.id channel.chat_channel_name %}">채팅방 삭제</a>
-            </li>
+            <ui>
+              <a class="room-title1" href="{% url 'chat_room' this_team.id channel.chat_channel_name %}"># {{channel.chat_channel_name}}</a>
+              <a class="room-title2" href="{% url 'chat_room_delete' this_team.id channel.chat_channel_name %}">채팅방 삭제</a>
+            </ui><br>
           {% endfor %}
         {% endif %}
       </div>
-      <div>
-          <h3 style="padding-left:10px">채팅방 : {{ room_name }}</h3>
+      <div class="chat-room">
+          <h3 class="chat-title">{{ room_name }}</h3>
           <textarea class="chat-log2" id="chat-log"></textarea><br />
           <input id="chat-message-input" type="text" /><br />
-          <input id="chat-message-submit" type="button" value="Send" />
+          <input class="btn btn-primary" id="chat-message-submit" type="button" value="Send" />
       </div>
     </div>
   </body>
