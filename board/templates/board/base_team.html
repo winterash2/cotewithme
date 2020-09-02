@@ -2,7 +2,7 @@
 
 {% block enter_problem_number_area %}
     <form style="display: flex; padding:17px 0px 0px 0px; justify-content: center; color:black;"
-          action="{% url 'redirect_problem_home' team_id=this_team.id %}" method="get">
+            action="{% url 'redirect_problem_home' team_id=this_team.id %}" method="get">
         <input class="textarea_problem" type="text" name='problem_number' value="문제 번호를 입력하세요" onfocus="this.value=''">
         <input class="btn btn-primary" type="submit" value="확인">
     </form>
@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block chat_area %}
-    <iframe src="http://localhost:8000/team/{{this_team.id}}/chat" width="290px" height="100%" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
+    <iframe src="http://localhost:8000/team/{{this_team.id}}/chat" width="300px" height="100%" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
 {% endblock %}
 
 {% block problem_code_area %}
@@ -20,9 +20,9 @@
 
 {% block teammate_area %}
     {% for teammate in teammates %}
-         <div class="panel panel-default" style="margin:5%; width: 90%; display: inline-block; align-content: center; background-color: #484e55">
+        <div class="panel panel-default" style="margin:5%; width: 90%; display: inline-block; align-content: center; background-color: #484e55">
             <div class="panel-heading" style="width: 100%" >{{ teammate }}</div>
-         <div class="panel-body">{{teammate.first_name}} {{teammate.last_name}} <br> {{ teammate.email }}</div>
+        <div class="panel-body">{{teammate.first_name}} {{teammate.last_name}} <br> {{ teammate.email }}</div>
         </div>
     {% endfor %}
 {% endblock %}
