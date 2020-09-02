@@ -187,9 +187,10 @@
 {% block teammate_area %}
     {% for code in codes_teammate %}
         <div class="panel panel-default" style="margin:5%; width: 90%; display: inline-block; align-content: center; background-color: #484e55">
-            <div class="panel-heading" style="width: 100%; color: #484e55" >{{ code.user_no.username }}</div>
+            <div class="panel-heading" style="width: 100%; color: #484e55" ><b>{{ code.user_no.username }}</b></div>
             <div class="panel-body" style="width: 100%; align-content: center">
-                {{ code.created_date }}<br>
+                {{ code.created_date }}<br><hr>
+                {{ code.one_line_comment }}<br><hr>
                 <a class="code_check" type=button href="{% url 'problem_with_code_add' team_id=this_team.id problem_number=problem.문제번호 codes_string=codes_string code_id=code.id %}">코드 확인</a>
             </div>
         </div>
