@@ -10,6 +10,6 @@ class ChatChannelForm(forms.Form):
         attrs={
           'rows': 1,
           'cols': 20,
-          'placeholder':'생성할 채팅방 이름',
+          'placeholder':'채팅방 이름',
         })
     )

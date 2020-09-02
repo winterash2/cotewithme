@@ -48,10 +48,12 @@
         {% endif %}
       </div>
       <div class="chat-room">
-          <h3 class="chat-title">{{ room_name }}</h3>
-          <textarea class="chat-log2" id="chat-log"></textarea><br />
-          <input id="chat-message-input" type="text" /><br />
-          <input class="btn btn-primary" style="display:none;" id="chat-message-submit" type="button" value="Send" />
+          <div class="chat-title">{{ room_name }}</div>
+          <div>
+            <textarea class="chat-log2" id="chat-log"></textarea><br />
+            <input id="chat-message-input" type="text" /><br />
+            <input class="btn btn-primary" style="display:none;" id="chat-message-submit" type="button" value="Send" />
+          </div>
       </div>
     </div>
   </body>
