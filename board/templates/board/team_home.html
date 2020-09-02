@@ -131,8 +131,8 @@
                         Page {{ codes_teammates.number }} of {{ codes_teammates.paginator.num_pages }}
                     </span>
                     {% if codes_teammates.has_next %}
-                        <a href="?codes_my_page={{ codes_teammates.next_page_number }}">next</a>
-                        <a href="?codes_my_page={{ codes_teammates.codes_teammates_paginator.num_pages }}">last &raquo;</a>
+                        <a href="?codes_teammates_page={{ codes_teammates.next_page_number }}">next</a>
+                        <a href="?codes_teammates_page={{ codes_teammates.codes_teammates_paginator.num_pages }}">last &raquo;</a>
                     {% endif %}
                 </span>
             </div>
