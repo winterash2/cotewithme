@@ -38,8 +38,6 @@ body {
     height: 100%;
     padding: 10px 10px;
     grid-template-rows: 50px 15% 1fr;
-    position:absolute;
-    overflow:scroll;
 }
 
 .chat-list {
