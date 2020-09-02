@@ -70,9 +70,8 @@ body {
 
 .div1 {
   padding:10px 0px;
-  overflow:auto;
 }
-.div4 {
+.div1, .div2, .div3, .div4 {
   overflow:auto;
 }
 .wrapper_base > div {
@@ -85,7 +84,6 @@ body {
   height: 80%;
   padding: 40px 35px 29px 35px;
   grid-template-rows: 30% 15% 15% auto;
-  overflow:auto;
 }
 
 .intro {
@@ -357,5 +355,4 @@ a.text:hover {
   /*grid-template-rows: auto auto auto;*/
   width: 100%;
   height: 100%;
-  overflow:auto;
 }
