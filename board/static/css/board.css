@@ -100,7 +100,6 @@ body {
   grid-gap: 0px;
   grid-template-rows: 7% auto auto auto;
   padding:0px 30px;
-  overflow:auto;
 }
 
 .teamhome1 {
