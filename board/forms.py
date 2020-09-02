@@ -82,13 +82,6 @@ class CommentProblemForm(forms.ModelForm):
 
 
 class CodeForm(forms.ModelForm):
-    # TODO: 꼭 체크해야만 코드 등록되는 거 고치기
-    success = forms.BooleanField(
-        label='성공여부 ',
-    )
-    display = forms.BooleanField(
-        label='공개여부 '
-    )
     one_line_comment = forms.CharField(
         label=False,
         max_length=150,
