@@ -6,12 +6,13 @@
 {% block problem_code_area %}
     <div class="wrapper_team">
         <div style="font-size:35px; font-weight:bolder; padding:0px 20px;">{{ this_team.team_name }}</div>
+
         <div>
             <span class="listname" style="margin-bottom: 5px">게시판</span>
             <span style="float: right">
                 <a class="btn btn-primary btn btn_5" href="{% url 'post_new' team_id=this_team.id %}">새 글(게시판)</a>
             </span>
-            <div class="table_area">
+            <div>
                 <table class="table">
                 <thead>
                     <tr>
@@ -53,7 +54,7 @@
         
         <div>
             <span class="listname">내가 최근에 푼 문제</span>
-            <div class="table_area">
+            <div>
                 <table class="table">
                     <thead>
                         <tr>
@@ -90,9 +91,9 @@
             </div>
         </div>
 
-        <div class="">
+        <div>
             <span class="listname">팀원들이 최근에 푼 문제</span>
-            <div class="table_area">
+            <div>
                 <table class="table">
                     <thead>
                         <tr>
