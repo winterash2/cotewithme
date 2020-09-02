@@ -10,7 +10,7 @@
 {% block problem_code_area %}
     <div class="wrapper_select">
         <div class="intro text-center">
-            <h1 style="font-size: 50pt;">Coding Test With Me</h1>
+            <h1 style="font-size: 50pt;"><b>Coding Test With Me</b></h1>
             <br>
             <ui style="font-size: 20pt;">여럿이 함께 코딩테스트 문제를 풀어보세요.</ui><br>
             <br>
@@ -20,7 +20,7 @@
             <a class="btn btn-primary text-center" href="{% url 'team_create' %}">
                 <span class="glyphicon glyphicon-plus"> 팀 생성</span>
             </a>
-            <a class="btn btn-primary" href="{% url 'team_join' %}">
+            <a class="btn btn-primary" style="background-color: #3a3f44; border-color: #4f4f4f;" href="{% url 'team_join' %}">
                 <span class="glyphicon glyphicon-plus"> 팀 참가</span>
             </a>
             <hr>
@@ -29,6 +29,7 @@
             <br>
             <ui style="font-size: 30pt;">참가한 팀</ui><br>
         </div>
+
         <div class="text-center" style="font-size: 25pt; padding:30%; padding-top: 10px">
             {% for team in joined_teams %}
                 <a style="color:#aaa" href="{% url 'team_home' team_id=team.id %}"> {{ team.team_name }} </a>
