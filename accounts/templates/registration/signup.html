@@ -17,9 +17,11 @@
 </div>
 <div class="container_signup">
     <form class="sign-up" method="POST">
-        {% csrf_token %}
-        {{ signup_form.as_p }}
-        <input type="submit" name="Submit" class="btn btn-primary btn"/>
+        <table>
+            {% csrf_token %}
+            {{ signup_form.as_table }}
+            <input type="submit" name="Submit" class="btn btn-primary btn"/>
+        </table>
     </form>
 </div>
 </body>
