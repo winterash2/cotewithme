@@ -23,7 +23,7 @@
         <form style="color:#aaa;" method="POST" class="chat_channel_form" value="문제 번호를 입력하세요">
           {% csrf_token %}
           {{ chat_channel_form }}
-          <input class="btn btn-primary" style="margin-top:5px; float:left;" type="submit" value="채팅방 생성">
+          <input class="btn btn-primary" style="float:right;" type="submit" value="채팅방 생성">
         </form>
       </div> <!--form-->
       <div class="chat-list">
@@ -40,7 +40,7 @@
           <h3 class="chat-title">{{ room_name }}</h3>
           <textarea class="chat-log2" id="chat-log"></textarea><br />
           <input id="chat-message-input" type="text" /><br />
-          <input class="btn btn-primary" id="chat-message-submit" type="button" value="Send" />
+          <input class="btn btn-primary" style="display:none;" id="chat-message-submit" type="button" value="Send" />
       </div>
     </div>
   </body>

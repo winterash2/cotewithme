@@ -24,7 +24,7 @@
 <div class="container_login">
             <form class="sign-in" method="post" action="{% url 'login' %}">
                 {% csrf_token %}
-                <table class="table table-bordered table-hover text-center" >
+                <table class="table table-bordered text-center" >
                     <tr>
                         <td>{{ form.username.label_tag }}</td><td style="color:black;">{{ form.username }}</td>
                     </tr>
