@@ -8,7 +8,6 @@ class CreateUserForm(UserCreationForm):
     first_name = forms.Textarea()
     last_name = forms.Textarea()
 
-
     class Meta:
         model = User
         fields = ("username", "last_name", "first_name", "email", "password1", "password2")
