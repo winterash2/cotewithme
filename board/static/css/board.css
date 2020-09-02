@@ -383,3 +383,18 @@ a.text:hover {
   width: 100%;
   height: 100%;
 }
+
+.logout {
+  color: #d7d7d7;
+}
+
+.logout:hover {
+  color: #ff3b3b;
+}
+
+.code_check {
+  color: #d7d7d7;
+}
+.code_check:hover {
+  color: #ff999a;
+}
