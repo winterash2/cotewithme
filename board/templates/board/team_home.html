@@ -89,7 +89,7 @@
                     </span>
                     {% if codes_my.has_next %}
                         <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page={{ codes_my.next_page_number }}">next</a>
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page={{ codes_my.codes_my_paginator.num_pages }}">last &raquo;</a>
+                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_my_page={{ codes_my.paginator.num_pages }}">last &raquo;</a>
                     {% endif %}
                 </span>
             </div>
@@ -132,7 +132,7 @@
                     </span>
                     {% if codes_teammates.has_next %}
                         <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page={{ codes_teammates.next_page_number }}">next</a>
-                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page={{ codes_teammates.codes_teammates_paginator.num_pages }}">last &raquo;</a>
+                        <a style="background-color: #dddddd; padding:2px; color:black;" href="?codes_teammates_page={{ codes_teammates.paginator.num_pages }}">last &raquo;</a>
                     {% endif %}
                 </span>
             </div>
