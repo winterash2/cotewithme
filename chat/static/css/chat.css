@@ -30,7 +30,6 @@ body {
     padding: 30px 12px;
     grid-template-rows: 5% 95%;
     position:absolute;
-    overflow:auto;
 }
 
 .wrapper_chat_room {
@@ -41,14 +40,13 @@ body {
     padding: 30px 12px;
     grid-template-rows: 12% 15% 70%;
     position:absolute;
-    overflow:auto;
 }
 
 .create-room {
     margin-top:-20px;
 }
 .chat-list {
-    overflow:scroll;
+    overflow:auto;
     padding:10px;
 }
 .room-title1 {
