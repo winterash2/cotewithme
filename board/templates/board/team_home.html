@@ -112,7 +112,7 @@
                     <tbody>
                         {% for code in codes_teammates %}
                         <tr>
-                            <td><a href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
+                            <td><a style="color:#fff;" href="{% url "problem_home" team_id=this_team.id problem_number=code.problem_no%}">{{code.problem_no}}</a></td>
                             <td>{{code.one_line_comment}}</td>
                             <td>{{code.user_no.username }}</td>
                             <td>{{code.created_date}}</td>
