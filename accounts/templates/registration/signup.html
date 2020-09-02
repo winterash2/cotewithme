@@ -16,12 +16,12 @@
     <h1>회원 가입</h1>
 </div>
 <div class="container_signup">
-    <form class="sign-up" method="POST">
-        <table>
+    <form class="sign-up" method="POST" >
+        <table class="table table-condensed">
             {% csrf_token %}
             {{ signup_form.as_table }}
-            <input type="submit" name="Submit" class="btn btn-primary btn"/>
         </table>
+        <input style="margin-top:-15px; float:right;" type="submit" name="Submit" class="btn btn-primary btn"/>
     </form>
 </div>
 </body>
