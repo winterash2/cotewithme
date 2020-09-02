@@ -37,7 +37,7 @@ body {
 }
 
 .logo {
-  padding: 5px 0px 0px 50px;
+  padding: 15px 0px 0px 50px;
 }
 
 .logo_detail {
@@ -46,9 +46,9 @@ body {
   font-weight: bold;
 }
 
-.col-sm-12 {
-  height: 50px;
-}
+/*.col-sm-12 {*/
+/*  height: 50px;*/
+/*}*/
 
 .top-menu,
 .top-menu:hover,
@@ -251,9 +251,10 @@ td, th {
   border-color: #3a3f44;
 }
 
-.textarea {
-  width:460px; padding: 0.50rem 1rem;
-  color:black;
+.textarea_problem {
+  width:600px; padding: 0.50rem 1rem;
+  color: #fff;
+  background-color: #570000;
 }
 
 #post-title {
