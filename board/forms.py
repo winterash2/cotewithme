@@ -96,7 +96,8 @@ class CodeForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 'placeholder': '내용을 입력하세요.',
-                'col':200
+                'cols': 50,
+                'rows': 35,
             }
         )
     )
