@@ -30,9 +30,9 @@
     <div class="col-sm-12" id="main_3">
         {% if user.is_authenticated %}
             <a href="{% url 'logout' %}">
-                <span class="glyphicon glyphicon-lock" style="margin-top: 10px; margin-left: 10px; float: right; text-align: right; font-size: 24px;">logout</span>
+                <span class="glyphicon glyphicon-lock" style="padding-top: 3%; margin-left: 10px; float: right; text-align: right; font-size: 18px;">logout</span>
             </a>
-            <span class="glyphicon glyphicon-user" style="margin-top: 10px; float: right; text-align: right; font-size: 24px;">{{ user }}</span>
+            <span class="glyphicon glyphicon-user" style="padding-top: 3%; float: right; text-align: right; font-size: 18px;">{{ user }}</span>
 
         {% else %}
             <a href="{% url 'signup' %}" class="top-menu"><span class="glyphicon glyphicon-user">signup</span></a>
