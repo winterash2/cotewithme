@@ -10,14 +10,14 @@ body {
 
 .chat-log1 {
     width:100%;
-    height:100%;
+    height:98%;
     resize: none;
     background-color: #272b30;
 }
 
 .chat-log2 {
     width:100%;
-    height:100%;
+    height:95%;
     resize: none;
     background-color: #272b30;
 }
@@ -39,7 +39,7 @@ body {
     padding: 10px 10px;
     grid-template-rows: 50px 15% 1fr;
     position:absolute;
-    overflow:hidden;
+    overflow:scroll;
 }
 
 .chat-list {
@@ -91,4 +91,12 @@ body {
 
 #id_chat_channel_name{
     margin: 3px;
+}
+
+.chat-room {
+    display: grid;
+    grid-gap: 0px;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 30px 1fr;
 }
