@@ -28,7 +28,7 @@
                     {% for post in posts %}
                         <tr>
                             <td>{{ post.id }}</td>
-                            <td><a style="color:#fff; text-decoration: underline;" href="{% url 'post_detail' this_team.id post.id %}">{{ post.title }}</a></td>
+                            <td><a class="text" style="font-weight: bold; color:#f5dd5d;" href="{% url 'post_detail' this_team.id post.id %}">{{ post.title }}</a></td>
                             <td>{{ post.author }}</td>
                             <td>{{ post.created_date.date }}</td>
                         </tr>
