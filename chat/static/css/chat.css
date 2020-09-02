@@ -8,26 +8,59 @@ body {
     /*width:100px;*/
 }
 
-.textarea, #chat-log, #chat-message-input {
+#chat-log1 {
+    width:100%;
+    height:95%;
+    resize: none;
+    background-color: #272b30;
+}
+
+#chat-log2 {
+    width:100%;
+    height:75%;
+    resize: none;
+    background-color: #272b30;
+}
+
+.wrapper_chatmain {
+    display: grid;
+    grid-gap: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 30px 12px;
+    grid-template-rows: 5% 95%;
+    position:absolute;
+}
+
+.wrapper_chatroom {
+    display: grid;
+    grid-gap: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 30px 12px;
+    grid-template-rows: 10% 15% 75%;
+    position:absolute;
+}
+
+.textarea, #chat-message-input {
     /*display: block;*/
     resize: none;
     background-color: #272b30;
 }
 
-.wrapper_chatmain, .wrapper_chatroom {
-    padding:10px 12px;
+#chat-message-input {
+    width:100%;
+}
+
+.createroom {
+    margin-top:-20px;
 }
 
 #chat-message-submit {
-    margin:5px 0px 0px 220px;
+    /*margin:5px 0px 0px 220px;*/
+    margin-top:5px;
+    float:right;
     border-color: rgba(0, 0, 0, 0.6);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     background-image: linear-gradient(#484e55, #3a3f44 60%, #313539);"
-}
-
-.wrapper_chatroom {
-  display: grid;
-  height: 100%;
-  grid-gap: 0px;
-  grid-template-rows: 20% 20% 60%;
 }
