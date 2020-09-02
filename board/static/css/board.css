@@ -254,7 +254,7 @@ td, th {
 .textarea_problem {
   width:600px; padding: 0.50rem 1rem;
   color: #fff;
-  background-color: #570000;
+  background-color: #4f4f4f;
 }
 
 #post-title {
@@ -264,16 +264,18 @@ td, th {
   color: white;
   background-color: #3a3f44;
   border-color: white;
+  border-radius: 5px;
 }
 
 #post-content {
   margin-top: 15px;
   width: 85%;
-  height: 80%;
+  height: 600px;
   margin-left: 7%;
   color: white;
   background-color: #3a3f44;
   border-color: white;
+  border-radius: 5px;
 }
 
 .new_post_category {
@@ -289,12 +291,14 @@ td, th {
   margin-top: 10px;
   margin-left: 7%;
   margin-right: 7%;
+  border-radius: 5px;
 }
 #id_one_line_comment {
   width: 100%;
   color: white;
   background-color: #3a3f44;
   border-color: white;
+  border-radius: 5px;
 }
 
 #id_content {
@@ -302,6 +306,7 @@ td, th {
   color: white;
   background-color: #3a3f44;
   border-color: white;
+  border-radius: 5px;
 }
 
 #problem-comment-content {
@@ -311,6 +316,7 @@ td, th {
   color: white;
   background-color: #3a3f44;
   border-color: white;
+  border-radius: 5px;
 }
 
 #post-comment-content {
@@ -320,6 +326,7 @@ td, th {
   color: white;
   background-color: #3a3f44;
   border-color: white;
+  border-radius: 5px;
 }
 
 .comment_list {
@@ -351,6 +358,11 @@ td, th {
 
 a.text:hover {
   text-decoration: underline;
+  color: #fff6d2;
+}
+.text {
+  color:#ff999a;
+  font-weight: bold;
 }
 
 .wrapper_problem {
