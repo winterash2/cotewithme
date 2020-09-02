@@ -48,7 +48,7 @@ body {
     margin-top:-20px;
 }
 .chat-list {
-    overflow:auto;
+    overflow:scroll;
     padding:10px;
 }
 .room-title1 {
