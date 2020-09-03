@@ -83,6 +83,10 @@ body {
 .div1 {
   padding:10px 0px;
 }
+.div1, .div2, .div3, .div4 {
+  /* overflow:auto; */
+  height:100%;
+}
 .div3, .div4 {
   overflow:auto;
 }
@@ -361,11 +365,11 @@ td, th {
   padding: 15px;
   margin-top: 15px;
   width: 85%;
-  height: 600px;
+  height: 400px;
   margin-left: 7%;
   color: white;
-  background-color: #3a3f44;
   border-color: white;
+  /* overflow: auto; */
 }
 
 a.text:hover {
@@ -399,3 +403,42 @@ a.text:hover {
 .code_check:hover {
   color: #ff999a;
 }
+
+
+
+blockquote {
+  quotes: none;
+}
+blockquote:before, blockquote:after{
+  content: '';
+  content: none;
+}
+blockquote {
+  border-left: solid 4px rgba(255, 255, 255, 0.3);
+  /* font-style: italic; */
+  white-space:pre;
+  margin: 0 0 2em 0;
+  padding: 0.5em 0 0.5em 2em;
+}
+code {
+  background: rgba(255, 255, 255, 0.075);
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  margin: 0 0.25em;
+  padding: 0.25em 0.65em;
+}
+pre {
+  background: rgba(255, 255, 255, 0.075);
+  color: #ffffff;
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  margin: 0 0 2em 0;
+}
+
+  pre code {
+    display: block;
+    line-height: 1.75em;
+    padding: 1em 1.5em;
+    overflow-x: auto;
+  }
