@@ -3,14 +3,9 @@ body {
     background-color: #272b30;
 }
 
-.jumbotron {
-    background-color: #3a3f44;
+.container_login {
+    margin-top:30px;
 }
-
-.jumbotron > h1 {
-    font-size: 50px;
-}
-
 .sign-in {
     max-width: 500px;
     padding: 40px 29px 29px;
@@ -27,6 +22,10 @@ body {
     border: 1px solid #e5e5e5;
 }
 
+.form-control {
+    background-color:#aaa;
+}
+
 .btn {
     border-color: rgba(0, 0, 0, 0.6);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -34,4 +33,27 @@ body {
 
 .btn-primary {
   background-image: linear-gradient(#484e55, #3a3f44 60%, #313539);
+}
+
+#id_username,
+#id_last_name,
+#id_first_name,
+#id_email,
+#id_password,
+#id_password1,
+#id_password2 {
+    background-color: #aaa;
+    color: #000;
+}
+
+.login_intro {
+    padding:30px 0px;
+  /*background-color: #3a3f44;*/
+    border-bottom: 2px solid #3a3f44;
+    color:#aaa;
+}
+
+.wrapper_login {
+    display:grid;
+    grid-template-rows: 50% 50%;
 }
