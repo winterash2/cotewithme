@@ -15,138 +15,141 @@
   {% endfor %}
 
   <div class="tab0_content">
-    <div class="col-md-12">
-      <div id="result_log"></div>
-    </div>
-
-    <div class="col-md-12">
-      <div class="page-header">
-        <h1>
-          <span class="printable">{{ problem.문제번호 }} - </span>
-          <span id="problem_title">{{ problem.문제제목 }}</span>
-        </h1>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="table-responsive">
-        <table class="table" id="problem-info">
-          <thead>
-            <tr>
-              <th style="width: 16%;">시간 제한</th>
-              <th style="width: 16%;">메모리 제한</th>
-              <th style="width: 17%;">제출</th>
-              <th style="width: 17%;">정답</th>
-              <th style="width: 17%;">맞은 사람</th>
-              <th style="width: 17%;">정답 비율</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{ problem.시간제한 }}</td>
-              <td>{{ problem.메모리제한 }}</td>
-              <td>{{ problem.제출 }}</td>
-              <td>{{ problem.정답 }}</td>
-              <td>{{ problem.맞은사람 }}</td>
-              <td>{{ problem.정답비율 }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <section id="description">
-        <div class="headline">
-          <h2>문제</h2>
-        </div>
-        <div id="problem_description" style="font-size: medium; line-height: 30px;">
-          <p>{{ problem.문제 }}</p>
-        </div>
-      </section>
-    </div>
-    <div class="col-md-12">
-      <section id="input">
-        <div class="headline">
-          <h2>입력</h2>
-        </div>
-        <div id="problem_input" style="font-size: medium; line-height: 30px;">
-          <p>{{ problem.입력 }}</p>
-        </div>
-      </section>
-    </div>
-    <div class="col-md-12">
-      <section id="output">
-        <div class="headline">
-          <h2>출력</h2>
-        </div>
-        <div id="problem_output" style="font-size: medium; line-height: 30px;">
-          <p>{{ problem.출력 }}</p>
-        </div>
-      </section>
-    </div>
-
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-6">
-          <section id="sampleinput1">
-            <div class="headline">
-              <h2>입력 예시</h2>
-            </div>
-            <pre class="sampledata" id="sample-input-1">{% for prob in problem.입력예시 %}{{ prob }}{% endfor %}</pre>
-          </section>
-        </div>
-        <div class="col-md-6">
-          <section id="sampleoutput1">
-            <div class="headline">
-              <h2>출력 예시</h2>
-            </div>
-            <pre class="sampledata" id="sample-output-1">{% for prob in problem.출력예시 %}{{ prob }}{% endfor %}</pre>
-          </section>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-12">
-      <section id="problem_association">
-        <div class="headline">
-          <h2>비슷한 문제</h2>
-        </div>
-        <ul>
-          {% for prob in problem.비슷한문제 %}
-          <li>
-            {{ prob }}
-          </li>
-          {% endfor %}
-        </ul>
-      </section>
-    </div>
-
-
     <div>
-        <form method="POST">
-            {% csrf_token %}
-            {{comment_problem_form}}
-            <span>
-                <button type="submit" name="comment" class="save btn btn-primary" style="background-color: #3a3f44; border-color: #4f4f4f; float: right; margin-right: 7%;">댓글 작성</button>
-            </span>
-        </form>
-    </div>
+      <div class="col-md-12">
+        <div id="result_log"></div>
+      </div>
 
-    {# TODO : 댓글 작성일 기준 내림차순? #}
-    <div style="margin-left: 3%; margin-top: 5%;">
-        <p style="font-weight: bold; font-size: 32px">댓글</p>
-    </div>
-    <hr style="border: solid 2px; margin-left: 2%; margin-right: 6%">
-    <div class="comment_list">
-        {% for comment in comments_problem %}
-            <div class="comment" style="margin-top: 3%; padding:2%; background-color: #3a3f44;">
-                <p style="font-size: 20px"><strong>{{ comment.author }}</strong></p>
-                <p>{{ comment.content|linebreaks }}</p>
-                <span class="date">{{ comment.created_date }}</span>
-                <a class="btn btn-default" style="float: right" href="{% url 'delete_comment_problem' team_id=this_team.id problem_number=problem.문제번호 codes_string=codes_string comment_problem_id=comment.id %}">댓글 삭제</a>
-            </div>
-        {% empty %}
-            <p>No comments here yet :(</p>
-        {% endfor %}
+      <div class="col-md-12">
+        <div class="page-header">
+          <h1>
+            <span class="printable">{{ problem.문제번호 }} - </span>
+            <span id="problem_title">{{ problem.문제제목 }}</span>
+          </h1>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table" id="problem-info">
+            <thead>
+              <tr>
+                <th style="width: 16%;">시간 제한</th>
+                <th style="width: 16%;">메모리 제한</th>
+                <th style="width: 17%;">제출</th>
+                <th style="width: 17%;">정답</th>
+                <th style="width: 17%;">맞은 사람</th>
+                <th style="width: 17%;">정답 비율</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ problem.시간제한 }}</td>
+                <td>{{ problem.메모리제한 }}</td>
+                <td>{{ problem.제출 }}</td>
+                <td>{{ problem.정답 }}</td>
+                <td>{{ problem.맞은사람 }}</td>
+                <td>{{ problem.정답비율 }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <section id="description">
+          <div class="headline">
+            <h2>문제</h2>
+          </div>
+          <div id="problem_description" style="font-size: medium; line-height: 30px;">
+            <p>{{ problem.문제 }}</p>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-12">
+        <section id="input">
+          <div class="headline">
+            <h2>입력</h2>
+          </div>
+          <div id="problem_input" style="font-size: medium; line-height: 30px;">
+            <p>{{ problem.입력 }}</p>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-12">
+        <section id="output">
+          <div class="headline">
+            <h2>출력</h2>
+          </div>
+          <div id="problem_output" style="font-size: medium; line-height: 30px;">
+            <p>{{ problem.출력 }}</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <section id="sampleinput1">
+              <div class="headline">
+                <h2>입력 예시</h2>
+              </div>
+              <pre class="sampledata" id="sample-input-1">{% for prob in problem.입력예시 %}{{ prob }}{% endfor %}</pre>
+            </section>
+          </div>
+          <div class="col-md-6">
+            <section id="sampleoutput1">
+              <div class="headline">
+                <h2>출력 예시</h2>
+              </div>
+              <pre class="sampledata" id="sample-output-1">{% for prob in problem.출력예시 %}{{ prob }}{% endfor %}</pre>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <section id="problem_association">
+          <div class="headline">
+            <h2>비슷한 문제</h2>
+          </div>
+          <ul>
+            {% for prob in problem.비슷한문제 %}
+            <li>
+              {{ prob }}
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+      </div>
+    
+
+
+      <div>
+          <form method="POST">
+              {% csrf_token %}
+              {{comment_problem_form}}
+              <span>
+                  <button type="submit" name="comment" class="save btn btn-primary" style="background-color: #3a3f44; border-color: #4f4f4f; float: right; margin-right: 7%;">댓글 작성</button>
+              </span>
+          </form>
+      </div>
+
+      {# TODO : 댓글 작성일 기준 내림차순? #}
+      <div style="margin-left: 3%; margin-top: 5%;">
+          <p style="font-weight: bold; font-size: 32px">댓글</p>
+      </div>
+      <hr style="border: solid 2px; margin-left: 2%; margin-right: 6%">
+      <div class="comment_list">
+          {% for comment in comments_problem %}
+              <div class="comment" style="margin-top: 3%; padding:2%; background-color: #3a3f44;">
+                  <p style="font-size: 20px"><strong>{{ comment.author }}</strong></p>
+                  <p>{{ comment.content|linebreaks }}</p>
+                  <span class="date">{{ comment.created_date }}</span>
+                  <a class="btn btn-default" style="float: right" href="{% url 'delete_comment_problem' team_id=this_team.id problem_number=problem.문제번호 codes_string=codes_string comment_problem_id=comment.id %}">댓글 삭제</a>
+              </div>
+          {% empty %}
+              <p>No comments here yet :(</p>
+          {% endfor %}
+      </div>
     </div>
   </div>
 
@@ -175,7 +178,7 @@
             </div>
             <hr style="border: solid 2px; margin-left: 6%; margin-right: 7%">
             <div class="code_or_boad">
-                {{code.content}}
+              <pre>{{code.content}}</pre>
             </div>
         </div>
     {% endfor %}

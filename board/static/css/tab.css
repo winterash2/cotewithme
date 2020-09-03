@@ -1,6 +1,7 @@
 #css_tabs {
   font-family: "nanumgothic", "나눔고딕", "malgun gothic", "맑은 고딕", "dotum",
     "돋움", sans-serif;
+  height: 100%;
 }
 
 /* 탭 선택 시 표시할 요소(div) 정의(1번 탭 선택 시 첫 번째 div 요소 표시) */
@@ -109,5 +110,6 @@
   padding: 2em;
   border: 1px solid #ddd;
   width: 100%;
-  height: 100%;
+  height: 96%;
+  overflow: auto;
 }

@@ -41,14 +41,14 @@
         {% if chat_channel_list %}
           {% for channel in chat_channel_list %}
             <ui>
-              <a class="room-title1" href="{% url 'chat_room' this_team.id channel.chat_channel_name %}"># {{channel.chat_channel_name}}</a>
-              <a class="room-title2" href="{% url 'chat_room_delete' this_team.id channel.chat_channel_name %}">채팅방 삭제</a>
+              <a class="room-title1" style="color: #ff999a;" href="{% url 'chat_room' this_team.id channel.chat_channel_name %}"># <b>{{channel.chat_channel_name}}</b></a>
+              <a class="room-title2" href="{% url 'chat_room_delete' this_team.id channel.chat_channel_name %}">삭제</a>
             </ui><br>
           {% endfor %}
         {% endif %}
       </div>
       <div class="chat-room">
-          <div class="chat-title">{{ room_name }}</div>
+          <div class="chat-title" style="color: #fff6d2; font-size:25px"><b>{{ room_name }}</b></div>
           <div>
             <textarea class="chat-log2" id="chat-log"></textarea><br />
             <input id="chat-message-input" type="text" /><br />
