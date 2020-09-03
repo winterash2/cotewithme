@@ -12,32 +12,41 @@
     <link rel="Stylesheet" href="{% static 'css/accounts.css' %}">
 </head>
 <body>
-{% if form.errors %}
-<p>이름과 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
-{% endif %}
+    {% if form.errors %}
+    <p>이름과 비밀번호가 일치하지 않습니다. 다시 시도해주세요.</p>
+    {% endif %}
 
-<div class="jumbotron text-center">
-    <h1>Coding Test With Me!</h1>
-</div>
-
-</div>
-<div class="container_login">
-            <form class="sign-in" method="post" action="{% url 'login' %}">
-                {% csrf_token %}
-                <table class="table table-bordered text-center" >
-                    <tr>
-                        <td>{{ form.username.label_tag }}</td><td style="color:black;">{{ form.username }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ form.password.label_tag }}</td><td style="color:black;">{{ form.password }}</td>
-                    </tr>
-                </table>
-                <input type="submit" value="로그인" class="btn btn-primary btn" />
-                <button onclick = 'location.href = "{% url 'signup' %}"' class="btn btn-primary btn" ><span class="glyphicon glyphicon-user">회원가입</span></button>
-            {#    <input type="hidden" name="next" value="{{ next }}" />#}
-            </form>
-            {#    <a href="{% url 'signup' %}" class="top-menu" ><span class="glyphicon glyphicon-user">signup</span></a>#}
-</div>
-
+    {#<div class="jumbotron text-center">#}
+    {#    <h1>Coding Test With Me!</h1>#}
+    {#</div>#}
+    <div class="wrapper_login">
+        <div class="login_intro text-center">
+             <a href="/">
+                <img class="logo1" src="{% static "css/ctwm_logo_no_background.png" %}" style="height:70%;">
+             </a>
+             <br>
+             <ui style="font-size: 15pt;"> 즐거운 알고리즘 세계에 오신 것을 </ui><br>
+             <br>
+             <ui style="font-size: 15pt;"> 환영합니다 :)</ui>
+             <br>
+        </div>
+        <div class="container_login">
+                <form class="sign-in" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <table class="table table-bordered text-center" >
+                        <tr>
+                            <td>{{ form.username.label_tag }}</td><td style="color:black;">{{ form.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.password.label_tag }}</td><td style="color:black;">{{ form.password }}</td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="로그인" class="btn btn-primary btn" />
+                    <button onclick = 'location.href = "{% url 'signup' %}"' class="btn btn-primary btn" ><span class="glyphicon glyphicon-user">회원가입</span></button>
+                {#    <input type="hidden" name="next" value="{{ next }}" />#}
+                </form>
+                {#    <a href="{% url 'signup' %}" class="top-menu" ><span class="glyphicon glyphicon-user">signup</span></a>#}
+        </div>
+    </div>
 </body>
 </html>
