@@ -398,10 +398,10 @@ a.text:hover {
 }
 
 .code_check {
-  color: #d7d7d7;
+  color: #ff999a;
 }
 .code_check:hover {
-  color: #ff999a;
+  color: #d7d7d7;
 }
 
 

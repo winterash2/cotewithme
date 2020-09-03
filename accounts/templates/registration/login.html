@@ -32,8 +32,8 @@
                         <td>{{ form.password.label_tag }}</td><td style="color:black;">{{ form.password }}</td>
                     </tr>
                 </table>
-                <input type="submit" value="로그인" class="btn btn-primary btn" />
-                <button onclick = 'location.href = "{% url 'signup' %}"' class="btn btn-primary btn" ><span class="glyphicon glyphicon-user">회원가입</span></button>
+                <input type="submit" value="로그인" class="btn btn-primary btn" style="background-color: #3a3f44; border-color: #4f4f4f;"/>
+                <button onclick = 'location.href = "{% url 'signup' %}"' class="btn btn-primary btn" style="background-color: #3a3f44; border-color: #4f4f4f;"><span class="glyphicon glyphicon-user">회원가입</span></button>
             {#    <input type="hidden" name="next" value="{{ next }}" />#}
             </form>
             {#    <a href="{% url 'signup' %}" class="top-menu" ><span class="glyphicon glyphicon-user">signup</span></a>#}
