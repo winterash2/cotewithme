@@ -117,7 +117,7 @@ def team_home(request, team_id):
         if total_codes_my < 5:
             total_codes_my_page_num = 1
         else:
-            total_codes_my_page_num = int(math.ceil( total_codes_my / 5))
+            total_codes_my_page_num = int(math.ceil(total_codes_my / 5))
 
         try:
             codes_my = codes_my_paginator.page(codes_my_page)
@@ -135,7 +135,8 @@ def team_home(request, team_id):
         if total_codes_teammates < 5:
             total_codes_teammates_page_num = 1
         else:
-            total_codes_teammates_page_num = int(math.ceil( total_codes_teammates / 5))
+            total_codes_teammates_page_num = int(
+                math.ceil(total_codes_teammates / 5))
         try:
             codes_teammates = codes_teammates_paginator.page(
                 codes_teammates_page)
@@ -264,6 +265,7 @@ def post_delete(request, team_id, post_id):
     return redirect('team_home', team_id)
 
 
+@login_required
 def delete_comment_post(request, team_id, post_id, comment_id):
     comment_post = get_object_or_404(CommentPost, id=comment_id)
     comment_post.delete()
@@ -366,6 +368,7 @@ def problem_with_code_add(request, team_id, problem_number, codes_string, code_i
         return redirect('problem_with_code', team_id, problem_number, codes_string)
 
 
+@login_required
 def problem_with_code_sub(request, team_id, problem_number, codes_string, code_id):
     codes_number_list = codes_string.split('&')
     codes_number_list.remove(str(code_id))
@@ -379,6 +382,7 @@ def problem_with_code_sub(request, team_id, problem_number, codes_string, code_i
     return redirect('problem_with_code', team_id, problem_number, codes_string)
 
 
+@login_required
 def delete_comment_problem(request, team_id, problem_number, codes_string, comment_problem_id):
     comment_problem = get_object_or_404(CommentProblem, id=comment_problem_id)
     comment_problem.delete()
