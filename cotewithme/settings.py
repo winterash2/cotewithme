@@ -146,3 +146,4 @@ CHANNEL_LAYERS = {
 
 # Iframe 허용
 X_FRAME_OPTIONS = 'ALLOW'
+ALLOWED_HOSTS = ['*']
