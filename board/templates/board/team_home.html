@@ -114,8 +114,8 @@
             </div>
         </div>
         <div>
-            <a class="btn btn-primary" style="margin-top: 3px; float: right;" href="{% url 'team_leave' team_id=this_team.id %}"><span class="glyphicon glyphicon-remove">팀 탈퇴</span></a>
-            <a class="btn btn-primary" style="margin-top: 3px; float: right;" href="{% url 'team_delete' team_id=this_team.id %}"><span class="glyphicon glyphicon-remove">팀 삭제</span></a>
+            <a class="btn btn-primary" style="background-color: #3a3f44; border-color: #4f4f4f; margin-top: 3px; float: right;" href="{% url 'team_leave' team_id=this_team.id %}"><span class="glyphicon glyphicon-remove">팀 탈퇴</span></a>
+            <a class="btn btn-primary" style="background-color: #3a3f44; border-color: #4f4f4f; margin-top: 3px; float: right;" href="{% url 'team_delete' team_id=this_team.id %}"><span class="glyphicon glyphicon-remove">팀 삭제</span></a>
         </div>
     </div>
 {% endblock %}

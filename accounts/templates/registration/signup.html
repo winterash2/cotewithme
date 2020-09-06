@@ -12,6 +12,7 @@
     <link rel="Stylesheet" href="{% static 'css/accounts.css' %}">
 </head>
 <body>
+
 <div class="jumbotron text-center" style="background:#3a3f44;">
     <h1>회원 가입</h1>
 </div>
@@ -21,7 +22,7 @@
             {% csrf_token %}
             {{ signup_form.as_table }}
         </table>
-        <input style="margin-top:-15px; float:right;" type="submit" name="Submit" class="btn btn-primary btn"/>
+        <input class="btn btn-primary btn" style="background-color: #3a3f44; border-color: #4f4f4f;" type="submit" name="Submit" />
     </form>
 </div>
 </body>
