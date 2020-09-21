@@ -346,6 +346,22 @@ td, th {
   border-radius: 5px;
 }
 
+#id_team_name {
+  margin-top: 15px;
+  color: white;
+  background-color: #3a3f44;
+  border-color: white;
+  border-radius: 5px;
+}
+
+#id_created_date{
+  margin-top: 15px;
+  color: white;
+  background-color: #3a3f44;
+  border-color: white;
+  border-radius: 5px;
+}
+
 .comment_list {
   margin-top: 3%;
   width: 90%;
